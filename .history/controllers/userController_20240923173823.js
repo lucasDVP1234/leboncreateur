@@ -73,43 +73,20 @@ exports.setPassword = async (req, res) => {
 
 // Render Account Page
 exports.getAccount = async (req, res) => {
-    try {
-      // Find all campaigns for the logged-in user and populate the creator names
-      const campaigns = await Campaign.find({ userId: req.user._id })
-        .populate('creatorIds', 'name'); // Populate creators' names
-  
-      // Debugging: Log each campaign's creatorIds to inspect their structure
-      campaigns.forEach((campaign) => {
-        console.log('campaign.creatorIds:', campaign.creatorIds);
-      });
-  
-      // Map campaigns to include the creators' names and count of creators
-      const campaignsWithCreators = campaigns.map((campaign) => {
-        let creators = [];
-        if (Array.isArray(campaign.creatorIds)) {
-          // campaign.creatorIds is an array
-          creators = campaign.creatorIds.map((creator) => creator.name);
-        } else if (campaign.creatorIds) {
-          // campaign.creatorIds is a single object
-          creators = [campaign.creatorIds.name];
-        } else {
-          // campaign.creatorIds is undefined or null
-          creators = [];
-        }
-  
-        const creatorCount = creators.length;
-  
-        return {
-          creators: creators.join(', '),
-          creatorCount,
-          status: campaign.status,
-        };
-      });
-  
-      // Render the account page with the campaigns and the user info
-      res.render('account', { campaigns: campaignsWithCreators, user: req.user });
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Error fetching campaigns.');
-    }
-  };
+  try {
+    const campaigns = await Campaign.find({ userId: req.user._id })
+      .populate('creatorId', 'name'); // Populate creator's name
+
+    // Map campaigns to include creator's name directly
+    const campaignsWithCreator = campaigns.map((campaign) => ({
+        creators: campaign.creatorIds.map((creator) => creator.name).join(', '),
+        creatorCount: campaign.creatorIds.length,
+        status: campaign.status,
+    }));
+
+    res.render('account', { campaigns: campaignsWithCreator, user: req.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching campaigns.');
+  }
+};

@@ -104,6 +104,7 @@ exports.getAccount = async (req, res) => {
           creatorCount,
           status: campaign.status,
         };
+    
       });
   
       // Render the account page with the campaigns and the user info

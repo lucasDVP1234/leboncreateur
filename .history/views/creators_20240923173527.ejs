@@ -52,33 +52,34 @@
 
             <!-- Creators Grid -->
             <section class="creators-section">
-                <!-- Add a form around the creators grid -->
-                <form class="choose-creator" action="/campaigns/create" method="POST">
-                  <div class="creators-grid">
+                <form action="/campaigns/create" method="POST"></form>
+                <div class="creators-grid" id="creators-grid">
                     <% creators.forEach(function(creator) { %>
-                      <div class="creator-card">
-                        <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" />
-                        <h3><%= creator.name %></h3>
-                        <p><%= creator.description %></p>
-                        <p>Age: <%= creator.age %></p>
-                        <p>Category: <%= creator.category %></p>
-                        <p>Types: <%= creator.videoTypes.join(', ') %></p>
-                        <!-- Add a checkbox for selecting the creator -->
-                        <label>
-                          <input type="checkbox" name="creatorIds" value="<%= creator._id %>">
-                          Select Creator
-                        </label>
-                      </div>
+                        <div class="creator-card"
+                            data-age="<%= creator.age %>"
+                            data-category="<%= creator.category %>"
+                            data-video-types="<%= creator.videoTypes.join(',') %>">
+                            <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" />
+                            <h3><%= creator.name %></h3>
+                            <p><%= creator.description %></p>
+                            <p>Age: <%= creator.age %></p>
+                            <p>Category: <%= creator.category %></p>
+                            <p>Types: <%= creator.videoTypes.join(', ') %></p>
+                            <label>
+                                <input type="checkbox" name="creatorIds" value="<%= creator._id %>">
+                                Select Creator
+                            </label>
+                        </div>
                     <% }); %>
-                  </div>
-                  <!-- Add the Book button -->
-                  <button type="submit" class="button primary-button">Book Selected Creators</button>
-                </form>
-              </section>
-            </div>
+                </div>
+                <!-- Add the Book button -->
+                <button type="submit" class="button primary-button">Book Selected Creators</button>
+              </form>
+            </section>
           </div>
+        </div>
       
-    <!-- Include the JavaScript file -->
-    <script src="/js/creators.js"></script>
-</body>
-</html>
+        <!-- Include the JavaScript file -->
+        <script src="/js/creators.js"></script>
+      </body>
+    </html>

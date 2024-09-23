@@ -7,9 +7,6 @@ exports.createCampaign = async (req, res) => {
   try {
     let { creatorIds } = req.body;
 
-    // Log to inspect the submitted creatorIds
-    console.log('Submitted creatorIds:', creatorIds);
-
     // Check if at least one creator is selected
     if (!creatorIds || creatorIds.length === 0) {
       return res.send('Please select at least one creator.');
@@ -20,22 +17,27 @@ exports.createCampaign = async (req, res) => {
       creatorIds = [creatorIds]; // If a single creator is selected, make it an array
     }
 
-    console.log('creatorIds:', creatorIds);
-
-    // No need to convert IDs manually; Mongoose will handle casting
-    // Alternatively, if you prefer, you can cast them using mongoose.Types.ObjectId
+    // Convert each creatorId (string) to ObjectId only if valid
+    const creatorObjectIds = creatorIds.map((id) => {
+      // Ensure each id is a valid ObjectId
+      if (mongoose.isValidObjectId(id)) {
+        return mongoose.Types.ObjectId(id);
+      } else {
+        throw new Error(`Invalid ObjectId: ${id}`);
+      }
+    });
 
     // Create a new campaign with the selected creators
     const newCampaign = new Campaign({
       userId: req.user._id,
-      creatorIds: creatorIds, // Use the array of ID strings directly
+      creatorIds: creatorObjectIds, // Use the array of ObjectIds
       status: 'Pending',
     });
 
     await newCampaign.save();
     res.redirect('/account');
   } catch (err) {
-    console.error('Error creating campaign:', err.message);
+    console.error(err);
     res.send(`Error creating campaign: ${err.message}`);
   }
 };

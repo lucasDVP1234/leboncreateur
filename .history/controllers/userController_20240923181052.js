@@ -76,7 +76,7 @@ exports.getAccount = async (req, res) => {
     try {
       // Find all campaigns for the logged-in user and populate the creator names
       const campaigns = await Campaign.find({ userId: req.user._id })
-        .populate('creatorIds', 'name'); // Populate creators' names
+        .populate('creatorIds', 'name'); // Populate creator's name
   
       // Debugging: Log each campaign's creatorIds to inspect their structure
       campaigns.forEach((campaign) => {
@@ -85,22 +85,17 @@ exports.getAccount = async (req, res) => {
   
       // Map campaigns to include the creators' names and count of creators
       const campaignsWithCreators = campaigns.map((campaign) => {
-        let creators = [];
-        if (Array.isArray(campaign.creatorIds)) {
-          // campaign.creatorIds is an array
-          creators = campaign.creatorIds.map((creator) => creator.name);
-        } else if (campaign.creatorIds) {
-          // campaign.creatorIds is a single object
-          creators = [campaign.creatorIds.name];
-        } else {
-          // campaign.creatorIds is undefined or null
-          creators = [];
-        }
+        // Ensure campaign.creatorIds is an array before calling .map()
+        const creators = Array.isArray(campaign.creatorIds)
+          ? campaign.creatorIds.map((creator) => creator.name).join(', ')
+          : 'No creators';
   
-        const creatorCount = creators.length;
+        const creatorCount = Array.isArray(campaign.creatorIds)
+          ? campaign.creatorIds.length
+          : 0;
   
         return {
-          creators: creators.join(', '),
+          creators,
           creatorCount,
           status: campaign.status,
         };

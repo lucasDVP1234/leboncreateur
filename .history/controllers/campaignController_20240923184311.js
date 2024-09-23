@@ -20,8 +20,6 @@ exports.createCampaign = async (req, res) => {
       creatorIds = [creatorIds]; // If a single creator is selected, make it an array
     }
 
-    console.log('creatorIds:', creatorIds);
-
     // No need to convert IDs manually; Mongoose will handle casting
     // Alternatively, if you prefer, you can cast them using mongoose.Types.ObjectId
 

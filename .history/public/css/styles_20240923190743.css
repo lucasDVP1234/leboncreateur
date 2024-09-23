@@ -193,17 +193,11 @@ form {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 12px;
-    max-width: 500px;
+    max-width: auto;
     margin: auto;
 }
 
-form.choose-creator {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 100%;
-    margin: auto;
-}
+.choose-creator
 
 form input {
     background-color: #ffffff;
