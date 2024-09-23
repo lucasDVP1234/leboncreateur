@@ -1,0 +1,17 @@
+<!-- views/partials/header.ejs -->
+<head>
+    <title><%= title %></title>
+    <!-- Include Montserrat Font and CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+
+<!-- In your main templates -->
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/header', { title: 'Page Title' }) %>
+<body>
+    <!-- Page Content -->
+</body>
+</html>

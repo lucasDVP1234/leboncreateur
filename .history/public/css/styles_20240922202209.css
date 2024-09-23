@@ -1,0 +1,130 @@
+/* public/css/styles.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Light gray background */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333333;
+}
+
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+input[type="datetime-local"] {
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.filters select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+/* Creators Grid */
+.creators-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Creator Card Styles */
+.creator-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 15px 0;
+    flex: 1 0 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.creator-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.creator-card h3 {
+    margin: 15px 15px 5px 15px;
+    font-size: 1.2em;
+    color: #333333;
+}
+
+.creator-card p {
+    margin: 5px 15px;
+    color: #666666;
+    font-size: 0.9em;
+}
+
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
+
+.creator-card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+}
+
+.creator-card button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .creator-card {
+        flex: 1 0 46%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .creator-card {
+        flex: 1 0 100%;
+    }
+}

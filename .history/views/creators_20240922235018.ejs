@@ -1,0 +1,79 @@
+<!-- views/creators.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include your head partial or add necessary meta tags -->
+    <title>Choose Creators</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Creators for Your Campaign</h1>
+        <div class="main-content">
+            <!-- Filters Section -->
+            <aside class="filters">
+                <h2>Filters</h2>
+
+                <!-- Age Filter -->
+                <label for="age-filter">Age:</label>
+                <select id="age-filter">
+                    <option value="">All</option>
+                    <option value="18-25">18-25</option>
+                    <option value="26-35">26-35</option>
+                    <option value="36+">36+</option>
+                </select>
+
+                <!-- Category Filter -->
+                <label for="category-filter">Category:</label>
+                <select id="category-filter">
+                    <option value="">All</option>
+                    <% categories.forEach(function(category) { %>
+                        <option value="<%= category %>"><%= category %></option>
+                    <% }); %>
+                </select>
+
+                <!-- Video Type Filter -->
+                <label for="type-filter">Type of Videos:</label>
+                <select id="type-filter">
+                    <option value="">All</option>
+                    <% videoTypes.forEach(function(type) { %>
+                        <option value="<%= type %>"><%= type %></option>
+                    <% }); %>
+                </select>
+
+                <!-- Filter Button -->
+                <button type="button" class="button primary-button" onclick="applyFilters()">Apply Filters</button>
+            </aside>
+
+            <!-- Creators Grid -->
+            <section class="creators-section">
+                <div class="creators-grid" id="creators-grid">
+                    <% creators.forEach(function(creator) { %>
+                        <div class="creator-card"
+                            data-age="<%= creator.age %>"
+                            data-category="<%= creator.category %>"
+                            data-video-types="<%= creator.videoTypes.join(',') %>">
+                            <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" />
+                            <h3><%= creator.name %></h3>
+                            <p><%= creator.description %></p>
+                            <p>Age: <%= creator.age %></p>
+                            <p>Category: <%= creator.category %></p>
+                            <p>Types: <%= creator.videoTypes.join(', ') %></p>
+                            <form action="/book" method="POST">
+                                <input type="hidden" name="creatorId" value="<%= creator._id %>" />
+                                <label for="schedule_<%= creator._id %>">Schedule Date and Time</label>
+                                <input type="datetime-local" id="schedule_<%= creator._id %>" name="schedule" required />
+                                <button type="submit" class="button primary-button">Book</button>
+                            </form>
+                        </div>
+                    <% }); %>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="/js/creators.js"></script>
+</body>
+</html>

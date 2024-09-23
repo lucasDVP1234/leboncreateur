@@ -1,0 +1,42 @@
+/* public/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.creators-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.creator-card {
+    flex: 1 0 21%;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: opacity 0.3s ease;
+}
+
+.creator-card img {
+    width: 100%;
+    height: auto;
+}
+

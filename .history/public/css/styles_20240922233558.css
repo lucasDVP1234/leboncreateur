@@ -1,0 +1,248 @@
+/* Import Montserrat Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #007BFF, #6610f2); /* Blue gradient background */
+    color: #ffffff; /* Default text color set to white */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Input, Select, Button */
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+}
+
+input, select {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+}
+
+input::placeholder {
+    color: #999999;
+}
+
+button {
+    background-color: #0069D9; /* Blue button */
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Links */
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #e2e6ea;
+}
+
+/* Filters */
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.filters select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+/* Creators Grid */
+.creators-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Creator Card Styles */
+.creator-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+    overflow: hidden;
+    margin: 15px 0;
+    flex: 1 0 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    color: #333333;
+}
+
+.creator-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.creator-card h3 {
+    margin: 15px 15px 5px 15px;
+    font-size: 1.4em;
+    color: #007BFF;
+}
+
+.creator-card p {
+    margin: 5px 15px;
+    color: #555555;
+    font-size: 1em;
+}
+
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
+
+.creator-card button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.creator-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .creator-card {
+        flex: 1 0 46%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .creator-card {
+        flex: 1 0 100%;
+    }
+}
+
+/* Logout Button */
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #ffffff;
+    color: #007BFF;
+}
+
+/* Form Styles */
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: auto;
+}
+
+form input {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+}
+
+form button {
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 20px auto;
+    color: #333333;
+}
+
+/* Text and Links */
+p {
+    color: #ffffff;
+    text-align: center;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #e2e6ea;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 20px 0;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.primary-button {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}

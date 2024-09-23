@@ -1,0 +1,20 @@
+<!-- views/account.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Your Account</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <%= user.companyName %></h1>
+        <h2>Your Campaigns</h2>
+        <ul>
+            <% campaigns.forEach(function(campaign) { %>
+                <li>
+                    Campaign with Creator ID <%= campaign.creatorId %> scheduled on <%= campaign.schedule %> - Status: <%= campaign.status %>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
