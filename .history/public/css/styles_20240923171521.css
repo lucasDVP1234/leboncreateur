@@ -233,7 +233,7 @@ a:hover {
 }
 
 .button {
-    display: inline-block;
+    display: flex;
     padding: 12px 24px;
     margin: 20px 0;
     font-size: 1em;
@@ -245,23 +245,11 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-.button-container {
-    display: flex;
-    justify-content: flex-end; /* This moves the button to the right */
-    margin-bottom: 20px; /* Add some spacing below the button */
-}
-
 .primary-button {
     background-color: #007BFF;
+    text-align: right;
     color: #ffffff;
-    padding: 12px 24px;
     border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .primary-button:hover {
