@@ -136,13 +136,6 @@ a:hover {
     color: #333333;
 }
 
-.creator-card label {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-    width: 40%; /* Ensures the label takes full width of its parent */
-}
-
 .creator-card img {
     width: 100%;
     max-height: 300px;
@@ -161,6 +154,10 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
 
 /* Logout Button */

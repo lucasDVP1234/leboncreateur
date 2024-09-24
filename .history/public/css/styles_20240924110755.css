@@ -161,6 +161,10 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
 
 /* Logout Button */

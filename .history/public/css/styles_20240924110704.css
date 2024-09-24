@@ -139,7 +139,7 @@ a:hover {
 .creator-card label {
     display: flex;
     align-items: center;
-    margin: 5px 15px;
+    margin: 5px 5px;
     width: 40%; /* Ensures the label takes full width of its parent */
 }
 
@@ -161,6 +161,10 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
 
 /* Logout Button */

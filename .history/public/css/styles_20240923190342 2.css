@@ -6,12 +6,12 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background: #007BFF; /* Blue gradient background */
+    background: linear-gradient(to bottom right, #007BFF, #6610f2); /* Blue gradient background */
     color: #ffffff; /* Default text color set to white */
 }
 
 .container {
-    width: 95%;
+    width: 90%;
     max-width: 1200px;
     margin: auto;
     padding: 40px 0;
@@ -118,12 +118,6 @@ a:hover {
     gap: 20px;
 }
 
-
-
-
-
-
-
 /* Creator Card Styles */
 .creator-card {
     background-color: #ffffff;
@@ -136,16 +130,9 @@ a:hover {
     color: #333333;
 }
 
-.creator-card label {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-    width: 40%; /* Ensures the label takes full width of its parent */
-}
-
 .creator-card img {
     width: 100%;
-    max-height: 300px;
+    height: auto;
     object-fit: cover;
 }
 
@@ -161,7 +148,26 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
+.creator-card button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.creator-card button:hover {
+    background-color: #0056b3;
+}
 
 /* Logout Button */
 .logout-button {
@@ -187,15 +193,7 @@ form {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 12px;
-    max-width: 500px;
-    margin: auto;
-}
-
-form.choose-creator {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 100%;
+    max-width: auto;
     margin: auto;
 }
 
@@ -310,41 +308,50 @@ a:hover {
     }
 }
 
-
-
-.main-header {
-    background-color: white;
+label {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    border-bottom: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo img {
-    max-height: 70px;
-  }
-  
-  .main-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .main-nav ul li {
-    display: inline-block;
-  }
-  
-  .main-nav ul li a {
-    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
     color: #333;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 10px;
-    transition: color 0.3s ease;
-  }
-  
-  .main-nav ul li a:hover {
-    color: #007BFF;
-  }
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 10px;
+}
+
+/* Hide default checkbox */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* Create a custom checkbox */
+label:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Checked state */
+input[type="checkbox"]:checked + label:before {
+    background-color: #007bff;
+    border-color: #007bff;
+    background-color:  #007bff; 
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Hover effect */
+input[type="checkbox"] + label:before {
+    border-color: #007bff;
+    background-color:  #818f9f; 
+}
+
+input[type="checkbox"]:hover + label:before {
+    border-color: #0056b3;
+}

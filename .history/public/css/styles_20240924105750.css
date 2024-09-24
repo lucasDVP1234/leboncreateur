@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    width: 95%;
+    width: 90%;
     max-width: 1200px;
     margin: auto;
     padding: 40px 0;
@@ -119,7 +119,12 @@ a:hover {
 }
 
 
-
+.creator-card label {
+    display: flex;
+    align-items: center;
+    margin: 5px 15px;
+    width: 30%; /* Ensures the label takes full width of its parent */
+}
 
 
 
@@ -134,13 +139,6 @@ a:hover {
     display: flex;
     flex-direction: column;
     color: #333333;
-}
-
-.creator-card label {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-    width: 40%; /* Ensures the label takes full width of its parent */
 }
 
 .creator-card img {
@@ -161,6 +159,10 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
 
 /* Logout Button */

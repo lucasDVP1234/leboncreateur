@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    width: 95%;
+    width: 90%;
     max-width: 1200px;
     margin: auto;
     padding: 40px 0;
@@ -118,12 +118,6 @@ a:hover {
     gap: 20px;
 }
 
-
-
-
-
-
-
 /* Creator Card Styles */
 .creator-card {
     background-color: #ffffff;
@@ -136,16 +130,9 @@ a:hover {
     color: #333333;
 }
 
-.creator-card label {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-    width: 40%; /* Ensures the label takes full width of its parent */
-}
-
 .creator-card img {
     width: 100%;
-    max-height: 300px;
+    max-height: 100px;
     object-fit: cover;
 }
 
@@ -161,7 +148,26 @@ a:hover {
     font-size: 1em;
 }
 
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
 
+.creator-card button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.creator-card button:hover {
+    background-color: #0056b3;
+}
 
 /* Logout Button */
 .logout-button {
