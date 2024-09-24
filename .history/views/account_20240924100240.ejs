@@ -8,9 +8,17 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <%- include('header') %>
+  <%- include('header') %>
     <div class="container">
         <h1>Welcome, <%= user.companyName %></h1>
+
+        <!-- Logout Button -->
+        <a href="/logout" class="logout-button">Déconnexion</a>
+
+        <!-- Create New Campaign Button -->
+        <div class="button-container">
+            <a href="/creators" class="button primary-button">Create New Campaign</a>
+        </div>
         <!-- Campaigns Section -->
         <div class="card">
             <h2>Your Campaigns</h2>

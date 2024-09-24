@@ -6,7 +6,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background: #007BFF; /* Blue gradient background */
+    background: linear-gradient(to bottom right, #007BFF, #6610f2); /* Blue gradient background */
     color: #ffffff; /* Default text color set to white */
 }
 

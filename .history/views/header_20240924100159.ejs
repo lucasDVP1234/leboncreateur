@@ -1,5 +1,6 @@
 <!-- views/partials/header.ejs -->
 <head>
+    <title><%= title %></title>
     <!-- Include Montserrat Font and CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/css/styles.css">
@@ -11,12 +12,19 @@
     </div>
     <nav class="main-nav">
       <ul>
-        <li><a href="/">Mon compte</a></li>
-        <li><a href="/creators">Créer une campagne</a></li>
-        <li><a href="/">Contact</a></li>
-        <li><a href="/logout">Se déconnecter</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
+<!-- In your main templates -->
 
+<!-- <html lang="en"> --> 
+    <!-- <%- include('partials/header', { title: 'Page Title' }) %> -->
+<!-- <body> -->
+    <!-- Page Content -->
+<!-- </body> -->
+<!-- </html> -->
