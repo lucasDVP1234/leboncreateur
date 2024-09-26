@@ -1,0 +1,26 @@
+<!-- views/account.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Your Account</title>
+    <!-- Include Montserrat Font and CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Provide Campaign Details</h1>
+    <form action="/campaigns/create" method="POST">
+        <div> 
+        <label for="budget">Budget:</label>
+        <input type="number" name="budget" id="budget" required>
+        </div>
+        <div>
+        <label for="campaignDate">Date of Campaign:</label>
+        <input type="date" name="campaignDate" id="campaignDate" required>
+        </div>
+      <button type="submit">Create Campaign</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+    "scripts": {
+      "build:css": "tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css",
+      "watch:css": "tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --watch",
+      
+    }
+  }

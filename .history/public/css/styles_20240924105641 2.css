@@ -1,0 +1,354 @@
+/* Import Montserrat Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #007BFF; /* Blue gradient background */
+    color: #ffffff; /* Default text color set to white */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Input, Select, Button */
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+}
+
+input, select {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+}
+
+input::placeholder {
+    color: #999999;
+}
+
+button {
+    background-color: #0069D9; /* Blue button */
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Links */
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #e2e6ea;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Filters */
+.filters {
+    width: 25%; /* 1/4 of the page */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    color: #333333;
+    margin-right: 20px;
+}
+
+.filters h2 {
+    color: #333333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.filters label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+    color: #333333;
+    font-size: 0.9em;
+}
+
+.filters select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+/* Creators Section */
+.creators-section {
+    width: 75%; /* 3/4 of the page */
+}
+
+/* Creators Grid */
+.creators-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
+    gap: 20px;
+}
+
+
+.creator-card label {
+    display: flex;
+    align-items: left;
+    margin: 5px 15px;
+    width: 30%; /* Ensures the label takes full width of its parent */
+    
+}
+
+.creator-card input[type="checkbox"] {
+    margin-right: 10px; /* Adds space between checkbox and text */
+}
+
+/* Creator Card Styles */
+.creator-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.creator-card img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.creator-card h3 {
+    margin: 15px 15px 5px 15px;
+    font-size: 1.4em;
+    color: #007BFF;
+}
+
+.creator-card p {
+    margin: 5px 15px;
+    color: #555555;
+    font-size: 1em;
+}
+
+.creator-card form {
+    margin: 15px;
+    margin-top: auto;
+}
+
+
+/* Logout Button */
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #ffffff;
+    color: #007BFF;
+}
+
+/* Form Styles */
+form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: auto;
+}
+
+form.choose-creator {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 100%;
+    margin: auto;
+}
+
+form input {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+}
+
+form button {
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 20px auto;
+    color: #333333;
+}
+
+/* Text and Links */
+p {
+    color: #ffffff;
+    text-align: center;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #e2e6ea;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 20px 0;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* This moves the button to the right */
+    margin-bottom: 20px; /* Add some spacing below the button */
+}
+
+.primary-button {
+    background-color: #007BFF;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}
+
+/* Campaigns Table */
+.campaigns-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.campaigns-table th, .campaigns-table td {
+    padding: 12px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    color: #333333;
+}
+
+.campaigns-table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .filters, .creators-section {
+        width: 100%;
+    }
+
+    .creators-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .creators-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+.main-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo img {
+    max-height: 70px;
+  }
+  
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .main-nav ul li {
+    display: inline-block;
+  }
+  
+  .main-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .main-nav ul li a:hover {
+    color: #007BFF;
+  }
