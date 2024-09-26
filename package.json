@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "build:css": "NODE_ENV=production tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --minify",
+        "watch:css": "tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --watch",
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "@tailwindcss/forms": "^0.5.9"
+    }
+}
