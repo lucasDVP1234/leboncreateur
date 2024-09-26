@@ -1,11 +1,8 @@
-// public/js/filters.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-button');
     const ageMinInput = document.getElementById('age-min');
     const ageMaxInput = document.getElementById('age-max');
     const selectedFiltersContainer = document.getElementById('selected-filters-container');
-    const filterForm = document.querySelector('form[action="/creators"]');
 
     let selectedCategories = [];
     let selectedVideoTypes = [];
@@ -94,21 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateSelectedFiltersDisplay();
-
-        // Update hidden inputs before submitting
-        updateHiddenInputs();
-
-        // Submit the form automatically to update results
-        filterForm.submit();
-    }
-
-    // Function to update hidden inputs
-    function updateHiddenInputs() {
-        document.getElementById('selected-categories').value = selectedCategories.join(',');
-        document.getElementById('selected-video-types').value = selectedVideoTypes.join(',');
-        document.getElementById('selected-countries-input').value = selectedCountries.join(',');
-        document.getElementById('selected-age-min').value = selectedAgeMin;
-        document.getElementById('selected-age-max').value = selectedAgeMax;
+        // Optionally, submit the form automatically to update results
+         document.querySelector('form[action="/creators"]').submit();
     }
 
     // Event listener for filter buttons
@@ -169,8 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Before form submission, populate hidden inputs
+    const filterForm = document.querySelector('form[action="/creators"]');
     filterForm.addEventListener('submit', () => {
-        updateHiddenInputs();
+        document.getElementById('selected-categories').value = selectedCategories.join(',');
+        document.getElementById('selected-video-types').value = selectedVideoTypes.join(',');
+        document.getElementById('selected-countries-input').value = selectedCountries.join(',');
+        document.getElementById('selected-age-min').value = selectedAgeMin;
+        document.getElementById('selected-age-max').value = selectedAgeMax;
     });
 
     // Initialize selected filters if any (from URL parameters)

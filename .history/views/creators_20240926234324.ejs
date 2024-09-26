@@ -27,12 +27,12 @@
                 <input type="hidden" name="ageMin" id="selected-age-min" />
                 <input type="hidden" name="ageMax" id="selected-age-max" />
 
-                <div id="filters" class="space-y-6">
+                <div id="filters" class="space-y-5">
                     <!-- Category Filter -->
                     <h3 class="font-semibold mb-2 flex items-center justify-between">Catégorie</h3>
                     <div class="flex flex-wrap gap-2">
                         <% categories.forEach(function(category) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-red-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
+                            <button type="button" class="filter-button px-3 py-1 bg-blue-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
                                 <%= category %>
                             </button>
                         <% }); %>
@@ -74,9 +74,6 @@
         </aside>
         <!-- Main Content -->
         <main class="w-3/4 p-6">
-            <div id="selected-filters-container" class="flex flex-wrap gap-2 mb-4">
-                <!-- Selected filters will be displayed here as bubbles -->
-            </div>
             <h1 class="text-2xl font-bold mb-6">Select Creators for Your Campaign</h1>
             <!-- Add a form around the creators grid -->
             <form action="/campaigns/select" method="POST" class="relative">
@@ -87,7 +84,7 @@
                             <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-full h-48 object-cover">
                             <!-- Portfolio Bubbles -->
                             <div class="flex justify-center -mt-6">
-                                <% creator.portfolioImages.slice(0, 3).forEach(function(image) { %>
+                                <% creator.portfolioImages.slice(0, 2).forEach(function(image) { %>
                                     <div class="bg-white p-1 rounded-full mx-1 shadow-lg">
                                         <img src="<%= image %>" alt="Portfolio Image" class="h-12 w-12 rounded-full object-cover">
                                     </div>
