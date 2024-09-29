@@ -14,9 +14,9 @@
     <div class="flex min-h-screen">
         
         <!-- Sidebar -->
-        <aside class="w-1/4 p-5 shadow sticky top-[4.5rem] h-screen overflow-y-auto">
+        <aside class="w-1/5 p-5 border-r border-gray-300 sticky top-[4.5rem] h-screen overflow-y-auto">
             
-            <h2 class="text-xl font-bold mb-6 flex items-center justify-between">
+            <h2 class="text-xl font-bold mb-6 flex items-center justify-between bg-white rounded shadow p-2">
                 Filtrez vos créateurs         
             </h2>
             <!-- Filter Options -->
@@ -32,7 +32,7 @@
                     <h3 class="font-semibold mb-2 flex items-center justify-between">Catégorie</h3>
                     <div class="flex flex-wrap gap-2">
                         <% categories.forEach(function(category) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-red-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
+                            <button type="button" class="filter-button px-3 py-1 bg-red-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
                                 <%= category %>
                             </button>
                         <% }); %>
@@ -42,7 +42,7 @@
                     <h3 class="font-semibold mb-2 flex items-center justify-between">Type de vidéo</h3>
                     <div class="flex flex-wrap gap-2">
                         <% videoTypes.forEach(function(type) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-green-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= type %>" data-filter-type="Type of Videos">
+                            <button type="button" class="filter-button px-3 py-1 bg-green-500 text-white rounded-full text-sm hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 focus:outline-none" data-filter="<%= type %>" data-filter-type="Type of Videos">
                                 <%= type %>
                             </button>
                         <% }); %>
@@ -61,7 +61,7 @@
                         <h3 class="font-semibold mb-2">Pays</h3>
                         <div class="flex flex-wrap gap-2">
                             <% countries.forEach(function(country) { %>
-                                <button type="button" class="filter-button px-3 py-1 bg-purple-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
+                                <button type="button" class="filter-button px-3 py-1 bg-purple-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
                                     <%= country %>
                                 </button>
                             <% }); %>
@@ -73,15 +73,15 @@
             </div>      
         </aside>
         <!-- Main Content -->
-        <main class="w-3/4">
-            <div class="sticky top-[4.5rem] z-20 bg-gray-100 p-4 shadow">
+        <main class="w-4/5">
+            <div class="sticky top-[4rem] z-20 bg-gray-100 p-4 shadow">
                 <div id="selected-filters-container" class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
                 </div>
-                <h1 class="text-xl font-bold">Séléctionner les créateurs pour votre campagne</h1>
+                <h1 class="text-xl font-bold">Séléctionner les créateurs pour votre campagne<img src="/images/bas.png" alt="Account Icon" class="  inline-block w-8" style="vertical-align: middle"></h1>
             </div>
             <form action="/campaigns/select" method="POST" class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 overflow-y-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-5 overflow-y-auto">
                     <% creators.forEach(function(creator) { %>
                         <div class="creator-card bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
                             <!-- Creator Image -->
