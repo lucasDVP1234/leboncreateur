@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "build": "npm run build:css",
         "build:css": "NODE_ENV=production tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --minify",
         "watch:css": "tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --watch",
         "start": "node app.js"
