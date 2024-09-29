@@ -1,9 +1,9 @@
 <!-- views/creators.ejs -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <!-- Include your head partial or add necessary meta tags -->
-    <title>Choose Creators</title>
+    <title>Choisir ses créateurs - Scalevision</title>
     <!-- Include Montserrat Font and Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -11,12 +11,12 @@
 <body class="bg-gray-100 font-montserrat">
     <%- include('header-login') %>
     <!-- Main Container -->
-    <div class="flex">
+    <div class="flex min-h-screen">
         
         <!-- Sidebar -->
-        <aside class="w-1/4 bg-white p-6 shadow-md">
+        <aside class="w-1/4 p-5 shadow sticky top-[4.5rem] h-screen overflow-y-auto">
             
-            <h2 class="text-xl font-bold mb-4 flex items-center justify-between">
+            <h2 class="text-xl font-bold mb-6 flex items-center justify-between">
                 Filtrez vos créateurs         
             </h2>
             <!-- Filter Options -->
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-semibold mb-2">Country</h3>
+                        <h3 class="font-semibold mb-2">Pays</h3>
                         <div class="flex flex-wrap gap-2">
                             <% countries.forEach(function(country) { %>
                                 <button type="button" class="filter-button px-3 py-1 bg-purple-500 text-white rounded-full text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
@@ -68,19 +68,20 @@
                         </div>
                     </div>
                 <!-- Filter Button -->
-                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded mt-4">Apply Filters</button>
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded mt-4">Filtrer</button>
                 </form>
             </div>      
         </aside>
         <!-- Main Content -->
-        <main class="w-3/4 p-6">
-            <div id="selected-filters-container" class="flex flex-wrap gap-2 mb-4">
-                <!-- Selected filters will be displayed here as bubbles -->
+        <main class="w-3/4">
+            <div class="sticky top-[4.5rem] z-20 bg-gray-100 p-4 shadow">
+                <div id="selected-filters-container" class="flex flex-wrap space-x-2">
+                    <!-- Selected filters will be displayed here as bubbles -->
+                </div>
+                <h1 class="text-xl font-bold">Séléctionner les créateurs pour votre campagne</h1>
             </div>
-            <h1 class="text-2xl font-bold mb-6">Select Creators for Your Campaign</h1>
-            <!-- Add a form around the creators grid -->
             <form action="/campaigns/select" method="POST" class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5 overflow-y-auto">
                     <% creators.forEach(function(creator) { %>
                         <div class="creator-card bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
                             <!-- Creator Image -->
@@ -95,6 +96,7 @@
                                             class="h-12 w-12 rounded-full object-cover portfolio-image"
                                             data-image-url="<%= image %>"
                                             tabindex="0"
+                                            loading="lazy"
             >
                                     </div>
                                 <% }); %>
@@ -103,7 +105,6 @@
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold mb-2"><%= creator.name %></h3>
                                 <p class="text-gray-600 text-sm mb-4"><%= creator.description %></p>
-                                <p class="text-gray-600 text-sm mb-4"><%= creator.country %></p>
                                 <p class="text-gray-600 text-sm mb-4"><%= creator.age %></p>
                                 <!-- Video Types -->
                                 <div class="flex flex-wrap gap-2">

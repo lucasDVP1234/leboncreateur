@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to create a filter bubble element
     function createFilterBubble(value, type) {
         const bubble = document.createElement('div');
-        bubble.className = 'flex items-center px-3 py-1 bg-blue-500 text-white rounded-full text-sm';
+        bubble.className = 'flex items-center px-3 py-1 bg-blue-500 mb-4 text-white rounded-full text-sm';
 
         const span = document.createElement('span');
         span.textContent = value;
