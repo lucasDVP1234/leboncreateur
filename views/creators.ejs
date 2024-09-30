@@ -32,7 +32,7 @@
                     <h3 class="font-semibold mb-2 flex items-center justify-between">Catégorie</h3>
                     <div class="flex flex-wrap gap-2">
                         <% categories.forEach(function(category) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-red-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
+                            <button type="button" class="filter-button shadow px-3 py-1 bg-red-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
                                 <%= category %>
                             </button>
                         <% }); %>
@@ -42,7 +42,7 @@
                     <h3 class="font-semibold mb-2 flex items-center justify-between">Type de vidéo</h3>
                     <div class="flex flex-wrap gap-2">
                         <% videoTypes.forEach(function(type) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-green-500 text-white rounded-full text-sm hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 focus:outline-none" data-filter="<%= type %>" data-filter-type="Type of Videos">
+                            <button type="button" class="filter-button px-3 py-1 bg-green-500 text-white rounded-full text-sm hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 focus:outline-none shadow" data-filter="<%= type %>" data-filter-type="Type of Videos">
                                 <%= type %>
                             </button>
                         <% }); %>
@@ -61,20 +61,20 @@
                         <h3 class="font-semibold mb-2">Pays</h3>
                         <div class="flex flex-wrap gap-2">
                             <% countries.forEach(function(country) { %>
-                                <button type="button" class="filter-button px-3 py-1 bg-purple-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
+                                <button type="button" class="filter-button shadow px-3 py-1 bg-purple-500 text-white rounded-full hover:ring-2 hover:ring-offset-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
                                     <%= country %>
                                 </button>
                             <% }); %>
                         </div>
                     </div>
                 <!-- Filter Button -->
-                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded mt-4">Filtrer</button>
+                    <button type="submit" class="w-full shadow bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded mt-4">Filtrer</button>
                 </form>
             </div>      
         </aside>
         <!-- Main Content -->
         <main class="w-4/5">
-            <div class="sticky top-[4rem] z-20 bg-gray-100 p-4 border-b border-gray-300">
+            <div class="sticky top-[3.5rem] z-20 bg-gray-100 p-4 border-b border-gray-300">
                 <div id="selected-filters-container" class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
                 </div>
