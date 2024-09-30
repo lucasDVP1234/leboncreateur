@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require("connect-mongo");
 const passport = require('passport');
+const path = require('path');
 const routes = require('./routes');
 //const connection = mongoose.createConnection(process.env.MONGODB_URI) 
 
@@ -56,7 +57,7 @@ app.use((err, req, res, next) => {
   });
   
 
-// //Start Server
+//Start Server
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
 //   console.log(`Server started on port ${PORT}`);
