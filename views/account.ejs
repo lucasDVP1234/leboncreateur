@@ -30,11 +30,11 @@
 
             <div class="mb-12">
                 <h3 class="text-2xl font-semibold mb-6 text-center">État de la dernière campagne</h3>
-                <div class="grid grid-cols-4 gap-4 items-center justify-items-center">
+                <div class="grid grid-cols-4 gap-8 items-center justify-items-center">
                     <% if (campaigns.length > 0) { %>
                         <% let lastCampaign = campaigns[campaigns.length - 1]; %>
                         <div class="flex flex-col items-center">
-                            <div class="relative w-20 h-20 rounded-full bg-red-500 <%= (lastCampaign.status === 'Pending') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
+                            <div class="relative mt-11 w-20 h-20 rounded-full bg-red-500 <%= (lastCampaign.status === 'Pending') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
                                 <span class="text-white font-bold text-lg">1</span>
                             </div>
                             <p class="mt-4 text-center">Campagne en attente de validation</p>
