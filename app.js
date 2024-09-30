@@ -2,8 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require("connect-mongo");
 const passport = require('passport');
 const routes = require('./routes');
+//const connection = mongoose.createConnection(process.env.MONGODB_URI) 
 
 require('dotenv').config();
 
@@ -12,19 +14,27 @@ const app = express();
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI);
 
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+const sessionStore = MongoStore.create({
+  client: mongoose.connection.getClient(),
+  dbName: 'Plateforme'
+})
+
+
 // Session Configuration
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.MONGODB_URI,
   resave: false,
   saveUninitialized: false,
+  store: sessionStore,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
-    secure: false, // Set to true if using HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    //secure: process.env.NODE_ENV === 'production', // true if using HTTPS
     httpOnly: true,
   },
 }));
@@ -45,9 +55,9 @@ app.use((err, req, res, next) => {
   
 
 //Start Server
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server started on port ${PORT}`);
-// });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
 
 module.exports = app
