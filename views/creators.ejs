@@ -8,15 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-gray-100 font-montserrat">
+<body class="bg-gray-50 font-montserrat">
     <%- include('header-login') %>
     <!-- Main Container -->
     <div class="flex min-h-screen">
         
         <!-- Sidebar -->
-        <aside class="w-1/5 p-5 border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto">
+        <aside class="w-1/5 p-5 bg-white border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto">
             
-            <h2 class="text-xl font-bold mb-6 flex items-center justify-between bg-white rounded shadow p-2">
+            <h2 class="text-xl font-semibold mb-6 flex items-center justify-between bg-white rounded shadow p-2">
                 Filtrez vos créateurs         
             </h2>
             <!-- Filter Options -->
@@ -74,8 +74,8 @@
         </aside>
         <!-- Main Content -->
         <main class="w-4/5">
-            <div class="sticky top-[4rem] z-20 bg-gray-100 p-4 border-b border-gray-300">
-                <div id="selected-filters-container" class="flex flex-wrap space-x-2">
+            <div class="sticky top-[4rem] z-20 bg-white p-4 border-b border-gray-300">
+                <div id="selected-filters-container " class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
                 </div>
                 <h1 class="text-xl font-bold">Séléctionner les créateurs pour votre campagne<img src="/images/bas.png" alt="Account Icon" class="  inline-block w-8" style="vertical-align: middle"></h1>
@@ -83,7 +83,7 @@
             <form action="/campaigns/select" method="POST" class="relative">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-5 overflow-y-auto">
                     <% creators.forEach(function(creator) { %>
-                        <div class="creator-card bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
+                        <div class="creator-card bg-white hover:bg-gray-50 rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
                             <!-- Creator Image -->
                             <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-full h-48 object-cover">
                             <!-- Portfolio Bubbles -->

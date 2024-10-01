@@ -15,15 +15,21 @@ exports.postSelectCreators = async (req, res, next) => {
     // Ensure creatorIds is an array
     const selectedCreators = Array.isArray(creatorIds) ? creatorIds : [creatorIds];
 
+    const creators = await Creator.find({ _id: { $in: selectedCreators } });
+    console.log(creators)
+
     // Store selected creators in session or pass them to the next view
-    req.session.selectedCreators = selectedCreators;
+    req.session.selectedCreators = creators;
+
+    // Store selected creators in session or pass them to the next view
+    //req.session.selectedCreators = selectedCreators;
 
     if (!user.name || !user.job) {
       // Redirect to the campaign details form if user info is incomplete
-        return res.render('campaignDetails');
-      }
+        return res.render('campaignDetails', { selectedCreators: creators });
+    }
     // Render the campaign details page
-    res.render('campaignDetails_client', { selectedCreators });
+    res.render('campaignDetails_client', { selectedCreators: creators });
   } catch (err) {
     console.error('Error selecting creators:', err.message);
     next(err); // Pass the error to the next middleware (e.g., error handler)

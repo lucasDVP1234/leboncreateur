@@ -82,22 +82,26 @@ exports.getAccount = async (req, res) => {
       }
       // Find all campaigns for the logged-in user and populate the creator names
       const campaigns = await Campaign.find({ userId: req.user._id })
-        .populate('creatorIds', 'name'); // Populate creators' names
+        .populate('creatorIds', 'name profileImage'); // Populate creators' names
   
-      // Debugging: Log each campaign's creatorIds to inspect their structure
-      campaigns.forEach((campaign) => {
-        console.log('campaign.creatorIds:', campaign.creatorIds);
-      });
+      
   
       // Map campaigns to include the creators' names and count of creators
       const campaignsWithCreators = campaigns.map((campaign) => {
         let creators = [];
         if (Array.isArray(campaign.creatorIds)) {
           // campaign.creatorIds is an array
-          creators = campaign.creatorIds.map((creator) => creator.name);
+          creators = campaign.creatorIds.map((creator) => ({
+            name : creator.name, 
+            photo : creator.profileImage
+          }));
+
         } else if (campaign.creatorIds) {
           // campaign.creatorIds is a single object
-          creators = [campaign.creatorIds.name];
+          creators = [{
+            name: campaign.creatorIds.name,
+            photo: campaign.creatorIds.profileImage,
+          }];
         } else {
           // campaign.creatorIds is undefined or null
           creators = [];
@@ -106,13 +110,14 @@ exports.getAccount = async (req, res) => {
         const creatorCount = creators.length;
   
         return {
-          creators: creators.join(', '),
+          creators,
           creatorCount,
           budget: campaign.budget,
           date: campaign.date ? campaign.date.toDateString() : 'N/A',
           status: campaign.status,
         };
       });
+      
   
       // Render the account page with the campaigns and the user info
       res.render('account', { campaigns: campaignsWithCreators, user: req.user });

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Votre compte</title>
     <!-- Include Montserrat Font and Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,104 +22,151 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-montserrat">
+<body class="bg-gray-50 font-montserrat">
     <%- include('header-login') %>
     <div class="container mx-auto px-4 py-12">
-        <div class="bg-white p-8 rounded-lg shadow-md">
-            <h1 class="text-3xl font-semibold mb-4">Bienvenu <%= user.companyName %></h1>
-            <h2 class="text-xl text-gray-700 mb-8">Compte : <%= user.email %></h2>
+        <div class="bg-gray-50 p-10 ">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.companyName %></span></h1>
+            <h2 class="text-lg text-gray-600 mb-8">Compte : <%= user.email %></h2>
 
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-6 text-center">État de la dernière campagne</h3>
-                <div class="grid grid-cols-4 gap-8 items-center justify-items-center">
+            <!-- Campaign Status Section -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold text-center text-gray-700 mb-8">État de la dernière campagne</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <% if (campaigns.length > 0) { %>
                         <% let lastCampaign = campaigns[campaigns.length - 1]; %>
-                        <div class="flex flex-col items-center">
-                            <div class="relative mt-11 w-20 h-20 rounded-full bg-red-500 <%= (lastCampaign.status === 'Pending') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
-                                <span class="text-white font-bold text-lg">1</span>
+                        <!-- Step 1: Pending Validation -->
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                            <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                                <div class="absolute inset-0 bg-red-100 rounded-full flex items-center justify-center <%= (lastCampaign.status === 'Pending') ? 'active-status' : '' %>">
+                                    <span class="text-red-500 font-bold text-xl">1</span>
+                                </div>
                             </div>
-                            <p class="mt-4 text-center">Campagne en attente de validation</p>
+                            <p class="text-center text-gray-700 font-medium">Campagne en attente de validation</p>
                             <% if (lastCampaign.status === 'Pending') { %>
-                                <!-- Début de widget de lien Calendly -->
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<a href="" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block text-center" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/point-avec-lucie?hide_event_type_details=1&hide_gdpr_banner=1'});return false;">Réserver un appel</a>
-<!-- Fin de widget de lien Calendly -->
-        
+                                <!-- Calendly Widget Link -->
+                                <a href="#" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/point-avec-lucie?hide_event_type_details=1&hide_gdpr_banner=1'});return false;">
+                                    Réserver un appel
+                                </a>
+                                <!-- Calendly Scripts -->
+                                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+                                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
                             <% } %>
-                            
                         </div>
                     <% } %>
-            
-                    <!-- Dot 2: En attente des scripts -->
-                    <div class="flex flex-col items-center">
-                        <div class="relative w-20 h-20 rounded-full bg-yellow-500 <%= (campaigns.status === 'waiting_scripts') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
-                            <span class="text-white font-bold text-lg">2</span>
+
+                    <!-- Step 2: Waiting for Scripts -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                            <div class="absolute inset-0 bg-yellow-100 rounded-full <%= (campaigns.status === 'waiting_scripts') ? 'active-status' : '' %> flex items-center justify-center">
+                                <span class="text-yellow-500 font-bold text-xl">2</span>
+                            </div>
                         </div>
-                        <p class="mt-4 text-center">En attente des scripts</p>
+                        <p class="text-center text-gray-700 font-medium">En attente des scripts</p>
                     </div>
-            
-                    <!-- Dot 3: Tournage en cours -->
-                    <div class="flex flex-col items-center">
-                        <div class="relative w-20 h-20 rounded-full bg-blue-500 <%= (campaigns.status === 'shooting_in_progress') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
-                            <span class="text-white font-bold text-lg">3</span>
+
+                    <!-- Step 3: Shooting in Progress -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                            <div class="absolute inset-0 bg-blue-100 rounded-full <%= (campaigns.status === 'shooting_in_progress') ? 'active-status' : '' %> flex items-center justify-center">
+                                <span class="text-blue-500 font-bold text-xl">3</span>
+                            </div>
                         </div>
-                        <p class="mt-4 text-center">Tournage en cours</p>
+                        <p class="text-center text-gray-700 font-medium">Tournage en cours</p>
                     </div>
-            
-                    <!-- Dot 4: Valider les vidéos -->
-                    <div class="flex flex-col items-center">
-                        <div class="relative w-20 h-20 rounded-full bg-green-500 <%= (campaigns.status === 'validate_videos') ? 'active-status' : '' %> flex items-center justify-center shadow-lg">
-                            <span class="text-white font-bold text-lg">4</span>
+
+                    <!-- Step 4: Validate Videos -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                            <div class="absolute inset-0 bg-green-100 rounded-full <%= (campaigns.status === 'validate_videos') ? 'active-status' : '' %> flex items-center justify-center">
+                                <span class="text-green-500 font-bold text-xl">4</span>
+                            </div>
                         </div>
-                        <p class="mt-4 text-center">Valider les vidéos</p>
+                        <p class="text-center text-gray-700 font-medium">Valider les vidéos</p>
                         <% if (campaigns.status === 'validate_videos') { %>
-                            <button class="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Voir les vidéos</button>
+                            <button class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300">
+                                Voir les vidéos
+                            </button>
                         <% } %>
                     </div>
                 </div>
             </div>
 
-            <!-- Campaigns Section -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-6 text-center">Vos campagnes</h3>
+            <div class="mb-16 ">
+                <h3 class="text-2xl font-semibold text-center text-gray-700 mb-8">Vos campagnes</h3>
                 <% if (campaigns.length > 0) { %>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white">
+                        <table class="min-w-full bg-white shadow-md rounded-2xl shadow-lg">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 border-b text-left text-sm font-medium text-gray-500 uppercase">Créateurs</th>
-                                    <th class="px-6 py-3 border-b text-left text-sm font-medium text-gray-500 uppercase">Nombre de créateurs</th>
-                                    <th class="px-6 py-3 border-b text-left text-sm font-medium text-gray-500 uppercase">Budget</th>
-                                    <th class="px-6 py-3 border-b text-left text-sm font-medium text-gray-500 uppercase">Date de la campagne</th>
-                                    <th class="px-6 py-3 border-b text-left text-sm font-medium text-gray-500 uppercase">Status</th>
+                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Créateurs</th>
+                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Nombre de créateurs</th>
+                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Budget</th>
+                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Date de la campagne</th>
+                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Statut</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% campaigns.forEach(function(campaign) { %>
-                                    <tr>
-                                        <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.creators %></td>
-                                        <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.creatorCount %></td>
-                                        <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.budget %></td>
-                                        <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.date %></td>
-                                        <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.status %></td>
-                                    </tr>
+                                  <tr class="hover:bg-gray-50">
+                                    <!-- Créateurs with Profile Images -->
+                                    <td class="px-6 py-4 border-b text-sm text-gray-700">
+                                      <div class="flex items-center space-x-3">
+                                        <% if (campaign.creatorCount > 0) { %>
+                                          <% 
+                                            let displayCreators = Array.isArray(campaign.creators) ? campaign.creators.slice(0, 3) : [];
+                                            let remainingCreators = campaign.creators.length - displayCreators.length;
+                                          %>
+                                          <% displayCreators.forEach(function(creator) { %>
+                                            <img 
+                                              src="<%= creator.photo %>" 
+                                              alt="Créateur <%= creator.name %>" 
+                                              class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
+                                              loading="lazy"
+                                              onerror="this.onerror=null; this.src='/images/default-profile.png'"
+                                            >
+                                          <% }); %>
+                                          <% if (remainingCreators > 0) { %>
+                                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">
+                                              +<%= remainingCreators %>
+                                            </span>
+                                          <% } %>
+                                        <% } else { %>
+                                          <span class="text-gray-500 text-sm">Aucun créateur</span>
+                                        <% } %>
+                                      </div>
+                                    </td>
+                                    <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.creatorCount %></td>
+                                    <td class="px-6 py-4 border-b text-sm text-gray-700">
+                                      <%= new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(campaign.budget) %>
+                                    </td>
+                                    <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.date %></td>
+                                    <td class="px-6 py-4 border-b text-sm text-gray-700 capitalize">
+                                      <%= campaign.status.replace(/_/g, ' ') %>
+                                    </td>
+                                  </tr>
                                 <% }); %>
-                            </tbody>
+                              </tbody>
                         </table>
                     </div>
                 <% } else { %>
-                    <p class="text-gray-600">Vous n'avez pas de campagne prévu.</p>
+                    <p class="text-center text-gray-600">Vous n'avez pas de campagne prévue.</p>
                 <% } %>
             </div>
 
             <!-- Set Password Form -->
-            <div class="bg-gray-50 p-6 rounded-lg">
-                <h2 class="text-2xl font-semibold mb-4">Ajouter un mot de passe</h2>
-                <form action="/set-password" method="POST" class="space-y-4">
-                    <input type="password" name="password" placeholder="New Password" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded">Ajouter un mot de passe</button>
+            <div class="bg-gray-50 p-8 rounded-2xl shadow-inner">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6">Ajouter un mot de passe</h2>
+                <form action="/set-password" method="POST" class="space-y-6">
+                    <div>
+                        <input type="password" name="password" placeholder="Nouveau mot de passe" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                    </div>
+                    <div>
+                        <input type="password" name="confirmPassword" placeholder="Confirmer le mot de passe" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+                        Ajouter un mot de passe
+                    </button>
                 </form>
             </div>
         </div>

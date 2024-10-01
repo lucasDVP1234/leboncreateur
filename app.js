@@ -7,9 +7,9 @@ const passport = require('passport');
 const path = require('path');
 const routes = require('./routes');
 //const connection = mongoose.createConnection(process.env.MONGODB_URI) 
-
-require('dotenv').config();
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const app = express();
 
 // MongoDB Connection
@@ -42,7 +42,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000, // 1 day
     secure: process.env.NODE_ENV === 'production', // true if using HTTPS
     httpOnly: true,
-    sameSite : none,
+    //sameSite : "none",
   },
 }));
 
