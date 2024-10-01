@@ -31,13 +31,13 @@ const sessionStore = MongoStore.create({
 
 // Session Configuration
 app.use(session({
-  secret: process.env.MONGODB_URI,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: sessionStore,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 1 day
-    //secure: process.env.NODE_ENV === 'production', // true if using HTTPS
+    secure: process.env.NODE_ENV === 'production', // true if using HTTPS
     httpOnly: true,
   },
 }));

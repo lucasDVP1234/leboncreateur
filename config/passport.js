@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 module.exports = function(passport) {
+    console.log('Configuring Passport with the following BASE_URL:', process.env.BASE_URL);
+    const callbackURL = `${process.env.BASE_URL}/auth/google/callback`;
+    console.log('Google OAuth Callback URL:', callbackURL);
   // Google Strategy
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
