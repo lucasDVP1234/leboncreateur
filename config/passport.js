@@ -7,7 +7,7 @@ const User = require('../models/User');
 module.exports = function(passport) {
     console.log('Configuring Passport with the following BASE_URL:', process.env.BASE_URL);
     const callbackURL = `${process.env.BASE_URL}/auth/google/callback`;
-    console.log('Google OAuth Callback URL:', callbackURL);
+    console.log('Google OAuth Callback URL ->', callbackURL);
   // Google Strategy
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
@@ -44,7 +44,7 @@ module.exports = function(passport) {
         // Find the user by email
         const user = await User.findOne({ email: email });
         if (!user) {
-          console.log('User not found');
+          console.log('User not foun');
           return done(null, false, { message: 'Incorrect email.' });
         }
 
