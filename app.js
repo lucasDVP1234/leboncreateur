@@ -51,6 +51,11 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  res.locals.currentUrl = req.path;
+  next();
+});
+
 // Routes
 app.use('/', routes);
 
@@ -58,7 +63,7 @@ app.use('/', routes);
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
-  });
+});
   
 
 //Start Server

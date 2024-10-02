@@ -29,74 +29,219 @@
             <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.companyName %></span></h1>
             <h2 class="text-lg text-gray-600 mb-8">Compte : <%= user.email %></h2>
 
+            <!-- New Campaign Status Block -->
+        
+            <!-- New Campaign Status Block -->
+            <% if (campaigns.length > 0) { %>
+                <% let lastCampaign = campaigns[campaigns.length - 1]; %>
+                <div class="mb-8 flex flex-col md:flex-row md:space-x-4">
+                    <!-- Left Box -->
+                    <div class="mb-4 md:mb-0 md:w-1/2 bg-white text-center p-6 rounded-lg shadow-md">
+                        <% if (lastCampaign.status === 'Pending') { %>
+                            <h3 class="text-2xl font-semibold text-blue-600 text-center mb-4">Etape 1</h3>
+                            <h3 class="text-2xl font-semibold text-gray-700 text-center mb-4">Pour valider votre campagne, <br>veuillez réserver un appel</h3>
+                            <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 text-center rounded-md shadow-sm transition duration-300" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/point-avec-lucie?hide_event_type_details=1&hide_gdpr_banner=1'});return false;">
+                                Valider votre campagne
+                            </a>
+                            <!-- Calendly Scripts -->
+                            <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+                            <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+                        <% } else if (lastCampaign.status === 'waiting_scripts') { %>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-4">En attente de vos scripts</h3>
+                            <p class="text-gray-600 mb-4">Veuillez télécharger vos scripts pour continuer.</p>
+                            <a href="/upload-scripts" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md shadow-sm transition duration-300">
+                                Télécharger les scripts
+                            </a>
+                        <% } else if (lastCampaign.status === 'shooting_in_progress') { %>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tournage en cours</h3>
+                            <p class="text-gray-600">Votre campagne est actuellement en cours de tournage. Nous vous informerons lorsque les vidéos seront prêtes pour validation.</p>
+                        <% } else if (lastCampaign.status === 'validate_videos') { %>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Validez vos vidéos</h3>
+                            <p class="text-gray-600 mb-4">Vos vidéos sont prêtes. Veuillez les valider pour procéder à la diffusion.</p>
+                            <a href="/videos" class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-md shadow-sm transition duration-300">
+                                Voir les vidéos
+                            </a>
+                        <% } else { %>
+                            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Statut de la campagne</h3>
+                            <p class="text-gray-600">Votre campagne est actuellement à l'étape : <strong><%= lastCampaign.status.replace(/_/g, ' ') %></strong>.</p>
+                        <% } %>
+                    </div>
+                    <!-- Right Box -->
+                    <div class="md:w-1/2 bg-white p-6 rounded-lg shadow-md flex items-center justify-center">
+                        <% if (lastCampaign.creators && lastCampaign.creators.length > 0) { %>
+                            <div class="flex items-center space-x-4">
+                                <% 
+                                    let displayCreators = Array.isArray(lastCampaign.creators) ? lastCampaign.creators.slice(0, 3) : [];
+                                    let remainingCreators = lastCampaign.creators.length - displayCreators.length;
+                                %>
+                                <% displayCreators.forEach(function(creator) { %>
+                                    <img 
+                                        src="<%= creator.photo %>" 
+                                        alt="Créateur <%= creator.name %>" 
+                                        class="w-24 h-24 rounded-full object-cover border-2 border-white shadow-md"
+                                        loading="lazy"
+                                        onerror="this.onerror=null; this.src='/images/default-profile.png'"
+                                    >
+                                <% }); %>
+                                <% if (remainingCreators > 0) { %>
+                                    <div class="w-24 h-24 rounded-full bg-gray-200 text-gray-600 text-xl font-semibold flex items-center justify-center">
+                                        +<%= remainingCreators %>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                            <p class="text-gray-500 text-sm">Aucun créateur sélectionné.</p>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+            <!-- End of New Campaign Status Block -->
+
             <!-- Campaign Status Section -->
             <div class="mb-16">
                 <h3 class="text-2xl font-semibold text-center text-gray-700 mb-8">État de la dernière campagne</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <% if (campaigns.length > 0) { %>
-                        <% let lastCampaign = campaigns[campaigns.length - 1]; %>
+                <% if (campaigns.length > 0) { %>
+                    <% let lastCampaign = campaigns[campaigns.length - 1]; %>
+                    <% 
+                        let statusOrder = {
+                            'Pending': 1,
+                            'waiting_scripts': 2,
+                            'shooting_in_progress': 3,
+                            'validate_videos': 4
+                        };
+                        let currentStep = statusOrder[lastCampaign.status];
+                    %>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <!-- Step 1: Pending Validation -->
+                        <% let stepNumber = 1; %>
                         <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
                             <div class="relative w-24 h-24 flex items-center justify-center mb-4">
-                                <div class="absolute inset-0 bg-red-100 rounded-full flex items-center justify-center <%= (lastCampaign.status === 'Pending') ? 'active-status' : '' %>">
-                                    <span class="text-red-500 font-bold text-xl">1</span>
-                                </div>
+                                <% if (stepNumber < currentStep) { %>
+                                    <!-- Completed Step -->
+                                    <div class="absolute inset-0 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                <% } else if (stepNumber === currentStep) { %>
+                                    <!-- Active Step -->
+                                    <div class="absolute inset-0 bg-blue-100 rounded-full flex items-center justify-center active-status">
+                                        <span class="text-blue-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } else { %>
+                                    <!-- Upcoming Step -->
+                                    <div class="absolute inset-0 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } %>
                             </div>
                             <p class="text-center text-gray-700 font-medium">Campagne en attente de validation</p>
-                            <% if (lastCampaign.status === 'Pending') { %>
+                            <% if (stepNumber === currentStep && lastCampaign.status === 'Pending') { %>
                                 <!-- Calendly Widget Link -->
                                 <a href="#" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/point-avec-lucie?hide_event_type_details=1&hide_gdpr_banner=1'});return false;">
                                     Réserver un appel
                                 </a>
-                                <!-- Calendly Scripts -->
-                                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-                                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
                             <% } %>
                         </div>
-                    <% } %>
 
-                    <!-- Step 2: Waiting for Scripts -->
-                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
-                            <div class="absolute inset-0 bg-yellow-100 rounded-full <%= (campaigns.status === 'waiting_scripts') ? 'active-status' : '' %> flex items-center justify-center">
-                                <span class="text-yellow-500 font-bold text-xl">2</span>
+                        <!-- Step 2: Waiting for Scripts -->
+                        <% stepNumber = 2; %>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                            <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                                <% if (stepNumber < currentStep) { %>
+                                    <!-- Completed Step -->
+                                    <div class="absolute inset-0 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                <% } else if (stepNumber === currentStep) { %>
+                                    <!-- Active Step -->
+                                    <div class="absolute inset-0 bg-blue-100 rounded-full flex items-center justify-center active-status">
+                                        <span class="text-blue-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } else { %>
+                                    <!-- Upcoming Step -->
+                                    <div class="absolute inset-0 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } %>
                             </div>
+                            <p class="text-center text-gray-700 font-medium">En attente des scripts</p>
+                            <% if (stepNumber === currentStep && lastCampaign.status === 'waiting_scripts') { %>
+                                <a href="/upload-scripts" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300">
+                                    Télécharger les scripts
+                                </a>
+                            <% } %>
                         </div>
-                        <p class="text-center text-gray-700 font-medium">En attente des scripts</p>
-                    </div>
 
-                    <!-- Step 3: Shooting in Progress -->
-                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
-                            <div class="absolute inset-0 bg-blue-100 rounded-full <%= (campaigns.status === 'shooting_in_progress') ? 'active-status' : '' %> flex items-center justify-center">
-                                <span class="text-blue-500 font-bold text-xl">3</span>
+                        <!-- Step 3: Shooting in Progress -->
+                        <% stepNumber = 3; %>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                            <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                                <% if (stepNumber < currentStep) { %>
+                                    <!-- Completed Step -->
+                                    <div class="absolute inset-0 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                <% } else if (stepNumber === currentStep) { %>
+                                    <!-- Active Step -->
+                                    <div class="absolute inset-0 bg-blue-100 rounded-full flex items-center justify-center active-status">
+                                        <span class="text-blue-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } else { %>
+                                    <!-- Upcoming Step -->
+                                    <div class="absolute inset-0 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } %>
                             </div>
+                            <p class="text-center text-gray-700 font-medium">Tournage en cours</p>
                         </div>
-                        <p class="text-center text-gray-700 font-medium">Tournage en cours</p>
-                    </div>
 
-                    <!-- Step 4: Validate Videos -->
-                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-                        <div class="relative w-24 h-24 flex items-center justify-center mb-4">
-                            <div class="absolute inset-0 bg-green-100 rounded-full <%= (campaigns.status === 'validate_videos') ? 'active-status' : '' %> flex items-center justify-center">
-                                <span class="text-green-500 font-bold text-xl">4</span>
+                        <!-- Step 4: Validate Videos -->
+                        <% stepNumber = 4; %>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+                            <div class="relative w-24 h-24 flex items-center justify-center mb-4">
+                                <% if (stepNumber < currentStep) { %>
+                                    <!-- Completed Step -->
+                                    <div class="absolute inset-0 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                <% } else if (stepNumber === currentStep) { %>
+                                    <!-- Active Step -->
+                                    <div class="absolute inset-0 bg-blue-100 rounded-full flex items-center justify-center active-status">
+                                        <span class="text-blue-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } else { %>
+                                    <!-- Upcoming Step -->
+                                    <div class="absolute inset-0 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-500 font-bold text-xl"><%= stepNumber %></span>
+                                    </div>
+                                <% } %>
                             </div>
+                            <p class="text-center text-gray-700 font-medium">Valider les vidéos</p>
+                            <% if (stepNumber === currentStep && lastCampaign.status === 'validate_videos') { %>
+                                <a href="/videos" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300">
+                                    Voir les vidéos
+                                </a>
+                            <% } %>
                         </div>
-                        <p class="text-center text-gray-700 font-medium">Valider les vidéos</p>
-                        <% if (campaigns.status === 'validate_videos') { %>
-                            <button class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-sm transition duration-300">
-                                Voir les vidéos
-                            </button>
-                        <% } %>
                     </div>
-                </div>
+                <% } else { %>
+                    <p class="text-center text-gray-600">Vous n'avez pas de campagne prévue.</p>
+                <% } %>
             </div>
 
-            <div class="mb-16 ">
+            <div class="mb-16">
                 <h3 class="text-2xl font-semibold text-center text-gray-700 mb-8">Vos campagnes</h3>
                 <% if (campaigns.length > 0) { %>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white shadow-md rounded-2xl shadow-lg">
+                    <div class="overflow-x-auto rounded-2xl shadow-md">
+                        <table class="min-w-full bg-white rounded-2xl shadow-md">
                             <thead>
                                 <tr>
                                     <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Créateurs</th>
@@ -155,7 +300,7 @@
             </div>
 
             <!-- Set Password Form -->
-            <div class="bg-gray-50 p-8 rounded-2xl shadow-inner">
+            <div class="bg-white p-8 rounded-2xl shadow-md">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Ajouter un mot de passe</h2>
                 <form action="/set-password" method="POST" class="space-y-6">
                     <div>
