@@ -31,6 +31,7 @@ module.exports = {
   safelist: [
     'ring-2',
     'ring-blue-500',
+    'ring-blue-950',
     // Add other dynamic classes if needed
   ],
 };

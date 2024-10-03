@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (selectedCreators.has(creatorId)) {
               // Deselect creator
               selectedCreators.delete(creatorId);
-              card.classList.remove('ring-2', 'ring-blue-500');
+              card.classList.remove('ring-4', 'ring-blue-500');
               // Remove hidden input
               const input = form.querySelector(`input[type="hidden"][value="${creatorId}"]`);
               if (input) {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
               // Select creator
               selectedCreators.add(creatorId);
-              card.classList.add('ring-2', 'ring-blue-500');
+              card.classList.add('ring-4', 'ring-blue-500');
               // Add hidden input
               const input = document.createElement('input');
               input.type = 'hidden';

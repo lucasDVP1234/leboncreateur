@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedFiltersContainer = document.getElementById('selected-filters-container');
     const filterForm = document.querySelector('form[action="/creators"]');
 
+    let selectedAgeMin = '';
+    let selectedAgeMax = '';
     let selectedCategories = [];
     let selectedVideoTypes = [];
     let selectedCountries = [];
-    let selectedAgeMin = '';
-    let selectedAgeMax = '';
+    
 
     // Function to update selected filters display
     function updateSelectedFiltersDisplay() {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to create a filter bubble element
     function createFilterBubble(value, type) {
         const bubble = document.createElement('div');
-        bubble.className = 'flex items-center px-3 py-1 bg-blue-500 mb-4 text-white rounded-full text-sm';
+        bubble.className = 'flex items-center px-3 py-1 bg-blue-950 mb-4 text-white rounded-full text-sm';
 
         const span = document.createElement('span');
         span.textContent = value;
@@ -119,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Visual feedback for active state
             if (button.classList.contains('active')) {
-                button.classList.add('ring-2', 'ring-offset-2', 'ring-blue-300');
+                button.classList.remove('bg-white', 'text-blue-950');
+                button.classList.add('bg-blue-950', 'text-white');
             } else {
-                button.classList.remove('ring-2', 'ring-offset-2', 'ring-blue-300');
+                button.classList.remove('bg-blue-950', 'text-white');
+                button.classList.add('bg-white', 'text-blue-950');
             }
 
             // Get filter value and type
@@ -215,7 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if ((filterType === 'Category' && selectedCategories.includes(filterValue)) ||
             (filterType === 'Type of Videos' && selectedVideoTypes.includes(filterValue)) ||
             (filterType === 'Country' && selectedCountries.includes(filterValue))) {
-            button.classList.add('active', 'ring-2', 'ring-offset-2', 'ring-blue-300');
+            button.classList.remove('active', 'bg-white', 'text-blue-950');
+            button.classList.add('active', 'bg-blue-950', 'text-white');
         }
     });
 

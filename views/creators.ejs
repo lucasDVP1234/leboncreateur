@@ -14,74 +14,87 @@
     <div class="flex min-h-screen">
         
         <!-- Sidebar -->
-        <aside class="w-1/5 p-5 bg-white border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto">
-            
-            <h2 class="text-xl font-semibold mb-6 flex items-center justify-between bg-white rounded shadow p-2">
-                Filtrez vos créateurs         
-            </h2>
-            <!-- Filter Options -->
+        <aside class="w-1/5 p-4 bg-white border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto">
+            <!-- Form starts here -->
             <form action="/creators" method="GET">
                 <input type="hidden" name="categories" id="selected-categories" />
                 <input type="hidden" name="videoTypes" id="selected-video-types" />
                 <input type="hidden" name="countries" id="selected-countries-input" />
                 <input type="hidden" name="ageMin" id="selected-age-min" />
                 <input type="hidden" name="ageMax" id="selected-age-max" />
-
+        
+                <!-- Header with Rechercher and Filtrer button -->
+                <div class="flex items-center justify-between bg-white rounded shadow p-2 mb-6">
+                    <h2 class="text-lg font-semibold text-blue-950">
+                        Rechercher
+                    </h2>
+                    <button type="submit" class="shadow bg-blue-950 hover:bg-blue-800 text-white font-semibold px-4 py-1 rounded">
+                        Filtrer
+                    </button>
+                </div>
+        
+                <!-- Filter Options -->
                 <div id="filters" class="space-y-6">
                     <!-- Category Filter -->
-                    <h3 class="font-semibold mb-2 flex items-center justify-between">Catégorie</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <% categories.forEach(function(category) { %>
-                            <button type="button" class="filter-button shadow px-3 py-1 bg-red-100 text-red-500 rounded-full hover:ring-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
-                                <%= category %>
-                            </button>
-                        <% }); %>
+                    <div>
+                        <h3 class="font-semibold mb-2 text-blue-950">Catégorie</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <% categories.forEach(function(category) { %>
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= category %>" data-filter-type="Category">
+                                    <%= category %>
+                                </button>
+                            <% }); %>
+                        </div>
                     </div>
                     
                     <!-- Video Type Filter Buttons -->
-                    <h3 class="font-semibold mb-2 flex items-center justify-between">Type de vidéo</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <% videoTypes.forEach(function(type) { %>
-                            <button type="button" class="filter-button px-3 py-1 bg-green-100 text-green-500 rounded-full text-sm hover:ring-2  hover:ring-blue-300 focus:outline-none shadow" data-filter="<%= type %>" data-filter-type="Type of Videos">
-                                <%= type %>
-                            </button>
-                        <% }); %>
-                    </div>
-                    <!-- Age Selector -->
                     <div>
-                        <h3 class="font-semibold mb-2 flex items-center justify-between">Age</h3>
-                        <!-- Age Inputs -->
-                        <div class="flex items-center space-x-2">
-                            <input type="number" id="age-min" class="w-20 px-2 py-1 border rounded" placeholder="Min" min="0" max="100" />
-                            <span>-</span>
-                            <input type="number" id="age-max" class="w-20 px-2 py-1 border rounded" placeholder="Max" min="0" max="100" />
+                        <h3 class="font-semibold mb-2 flex text-blue-950">Type de vidéo</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <% videoTypes.forEach(function(type) { %>
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full text-sm hover:text-white hover:bg-blue-950 focus:outline-none" data-filter="<%= type %>" data-filter-type="Type of Videos">
+                                    <%= type %>
+                                </button>
+                            <% }); %>
                         </div>
                     </div>
+        
+                    <!-- Age Selector -->
                     <div>
-                        <h3 class="font-semibold mb-2">Pays</h3>
+                        <h3 class="font-semibold mb-2 text-blue-950">Age</h3>
+                        <!-- Age Inputs -->
+                        <div class="flex items-center space-x-2">
+                            <input type="number" name="ageMin2" id="age-min" class="w-20 px-2 py-1 border rounded" placeholder="Min" min="0" max="100" value="0" />
+                            <span>-</span>
+                            <input type="number" name="ageMax2" id="age-max" class="w-20 px-2 py-1 border rounded" placeholder="Max" min="0" max="99" value="99" />
+                        </div>
+                    </div>
+        
+                    <!-- Country Filter -->
+                    <div>
+                        <h3 class="font-semibold text-blue-950 mb-2">Pays</h3>
                         <div class="flex flex-wrap gap-2">
                             <% countries.forEach(function(country) { %>
-                                <button type="button" class="filter-button shadow px-3 py-1 bg-purple-100 text-purple-500 rounded-full hover:ring-2 hover:ring-blue-300 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
                                     <%= country %>
                                 </button>
                             <% }); %>
                         </div>
                     </div>
-                <!-- Filter Button -->
-                    <button type="submit" class="w-full shadow bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded mt-4">Filtrer</button>
-                </form>
-            </div>      
+                </div>
+            </form>
+            <!-- Form ends here -->
         </aside>
         <!-- Main Content -->
         <main class="w-4/5">
-            <div class="sticky top-[4rem] z-20 bg-white p-4 border-b border-gray-300">
+            <div class="sticky top-[4rem] z-20 bg-white p-3 border-b border-gray-300">
                 <div id="selected-filters-container" class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
                 </div>
-                <h1 class="text-xl font-semibold">Séléctionner les créateurs pour votre campagne<img src="/images/bas.png" alt="Account Icon" class="  inline-block w-8" style="vertical-align: middle"></h1>
+                <h1 class="text-l text-blue-950 font-semibold">Séléctionner les créateurs pour votre campagne<img src="/images/bas2.png" alt="Account Icon" class="inline-block w-8" style="vertical-align: middle"></h1>
             </div>
             <form action="/campaigns/select" method="POST" class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-5 overflow-y-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-3 overflow-y-auto">
                     <% creators.forEach(function(creator) { %>
                         <div class="creator-card bg-white hover:bg-gray-50 rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
                             <!-- Creator Image -->
@@ -103,7 +116,7 @@
                             </div>
                             <!-- Creator Info -->
                             <div class="p-4">
-                                <h3 class="text-lg font-semibold mb-2"><%= creator.name %></h3>
+                                <h3 class="text-lg font-semibold text-blue-950 mb-2"><%= creator.name %></h3>
                                 <p class="text-gray-600 text-sm mb-4"><%= creator.age %></p>
                                 <div class="flex flex-wrap gap-2 mb-4 ">
                                     
@@ -121,7 +134,7 @@
                     <% }); %>
                 </div>
                 <!-- Finalize Campaign Button -->
-                <button type="submit" id="finalize-campaign-button" class="fixed bottom-4 right-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg hidden">
+                <button type="submit" id="finalize-campaign-button" class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg hidden">
                     Finaliser la campagne
                 </button>
             </form>
