@@ -62,3 +62,43 @@ exports.getCreatorsById = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+exports.getAddCreator = async (req, res) => {
+    try {
+        res.render('addCreator');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+};
+
+  
+exports.postAddCreator = async (req, res) => {
+try {
+    const {
+    name,
+    age,
+    country,
+    profileImage,
+    portfolioImages,
+    videoTypes,
+    } = req.body;
+
+    // Create a new Creator instance
+    const newCreator = new Creator({
+    name,
+    age,
+    country,
+    profileImage,
+    portfolioImages: portfolioImages.split(','), // Assuming comma-separated URLs
+    videoTypes: videoTypes.split(','), // Assuming comma-separated types
+    });
+
+    await newCreator.save();
+
+    res.redirect('/creators'); // Redirect to creators list or wherever appropriate
+} catch (err) {
+    console.error('Error adding creator:', err.message);
+    res.status(500).send('Error adding creator.');
+}
+};

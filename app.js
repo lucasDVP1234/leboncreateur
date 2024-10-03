@@ -7,6 +7,7 @@ const passport = require('passport');
 const path = require('path');
 const routes = require('./routes');
 const Creator = require('./models/Creator');
+const creatorsRoutes = require('./routes/creators');
 //const connection = mongoose.createConnection(process.env.MONGODB_URI) 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -57,6 +58,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Make user object available in all templates
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
+
+
 app.use(async (req, res, next) => {
   res.locals.basket = req.session.basket || [];
   if (res.locals.basket.length > 0) {
@@ -74,6 +83,7 @@ app.use(async (req, res, next) => {
 });
 
 // Routes
+app.use('/creators', creatorsRoutes); 
 app.use('/', routes);
 
 // app.js

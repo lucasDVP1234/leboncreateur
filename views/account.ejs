@@ -27,8 +27,18 @@
     <div class="container mx-auto px-4 py-12">
         <div class="bg-gray-50 p-10 ">
             <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.companyName %></span></h1>
-            <h2 class="text-lg text-gray-600 mb-8">Compte : <%= user.email %></h2>
-
+            <h2 class="text-lg text-gray-600 mb-4">Compte : <%= user.email %></h2>
+            <% if (user && user.role === 'admin') { %>
+                <h2 class="text-lg text-gray-600">Administrateur</h2>
+              <% } %>
+            <% if (user && user.role === 'admin') { %>
+                <div class="mb-4 mt-4">
+                  <a href="/creators/add" class="inline-flex items-center px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
+                    bg-white text-blue-950"><img src="/images/12.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
+                    Ajouter un créateur
+                  </a>
+                </div>
+              <% } %>
             <!-- New Campaign Status Block -->
         
             <!-- New Campaign Status Block -->
