@@ -120,11 +120,20 @@
               
                     <!-- Creator Info -->
                     <div class="p-4">
-                      <!-- Creator Name -->
-                      <a href="/creators/<%= creator._id %>">
-                        <h3 class="text-lg font-semibold text-blue-950 mb-2"><%= creator.name %></h3>
-                      </a>
-              
+                      <!-- Creator Name and Add to Basket Button -->
+                      <div class="flex items-center justify-between mb-2">
+                        <!-- Creator Name -->
+                        <h3 class="text-lg font-semibold text-blue-950"><%= creator.name %></h3>
+                    
+                        <!-- Add to Basket Button -->
+                        <form action="/add-to-campaign" method="POST">
+                          <input type="hidden" name="creatorId" value="<%= creator._id %>">
+                          <button type="submit" class="flex items-center text-sm font-medium rounded-lg transition duration-200 text-blue-950 focus:outline-none">
+                            <img src="/images/panier.png" alt="Ajouter au panier" class="w-6 h-6">
+                          </button>
+                        </form>
+                      </div>
+                    
                       <!-- Creator Age -->
                       <p class="text-gray-600 text-sm mb-4"><%= creator.age %> ans</p>
               
@@ -134,21 +143,19 @@
                       </div>
               
                       <!-- Video Types and Add to Basket Button -->
-                      <div class="flex items-center justify-between">
-                        <!-- Video Types -->
+                      <div class="flex items-center justify-between mb-2">
                         <div class="flex flex-wrap gap-2">
                           <% creator.videoTypes.forEach(function(type) { %>
                             <span class="px-2 py-1 bg-green-100 text-green-500 text-xs rounded-full"><%= type %></span>
                           <% }); %>
                         </div>
-              
-                        <!-- Add to Basket Button -->
-                        <form action="/add-to-campaign" method="POST">
-                          <input type="hidden" name="creatorId" value="<%= creator._id %>">
-                          <button type="submit" class="flex hover:shadow-md items-center text-sm font-medium rounded-lg transition duration-200 text-blue-950 focus:outline-none">
-                            <img src="/images/panier.png" alt="Ajouter au panier" class="w-6 h-6">
-                          </button>
-                        </form>
+                      
+                        <!-- "Voir" Button -->
+                        <div class="flex">
+                          <a href="/creators/<%= creator._id %>" class="flex-inline bg-white shadow-md hover:bg-blue-950 text-blue-950 hover:text-white font-bold py-1 px-4 rounded">
+                            Voir
+                          </a>
+                        </div>
                       </div>
                     </div>
                    
