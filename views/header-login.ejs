@@ -9,7 +9,7 @@
       }
     </style>
   </head>
-  
+  <body>
   <header class="bg-gray-50 sticky top-0 z-50 border-b border-gray-300">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
       <!-- Logo Section -->
@@ -47,6 +47,17 @@
           <img src="/images/15.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
           Créer une campagne
         </a>
+
+        <!-- Basket Icon -->
+      <button id="basket-button" class="relative flex items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm text-blue-950 bg-white hover:ring-2 hover:ring-blue-500 focus:outline-none">
+        <img src="/images/panier.png" alt="Panier" class="w-6 h-6">
+        <% if (basketCreators.length > 0) { %>
+          <!-- Badge showing the number of items -->
+          <span class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+            <%= basketCreators.length %>
+          </span>
+        <% } %>
+      </button>
 
         <!-- Mon compte -->
         <a href="/account" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
@@ -114,4 +125,95 @@
       });
     </script>
   </header>
+  <!-- Basket Overlay -->
+  <div id="basket-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden z-50">
+    <div id="basket-panel" class="absolute right-0 top-0 h-full w-80 bg-white shadow-lg p-4 transform translate-x-full transition-transform duration-300">
+      <!-- Close Button -->
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Votre Panier</h2>
+        <button id="close-basket" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+          <!-- Close Icon -->
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <% if (basketCreators.length > 0) { %>
+        <!-- Display Creators' Profile Images -->
+        <div class="flex items-center mb-4">
+          <% const displayedCreators = basketCreators.slice(0, 3); %>
+          <% displayedCreators.forEach(function(creator, index) { %>
+            <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-10 h-10 rounded-full border-2 border-white -ml-3 <% if (index === 0) { %>ml-0<% } %>">
+          <% }); %>
+          <% if (basketCreators.length > 3) { %>
+            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-sm font-semibold -ml-3">
+              +<%= basketCreators.length - 3 %>
+            </div>
+          <% } %>
+        </div>
+
+        <!-- Scrollable Creators List -->
+        <div class="overflow-y-auto" style="max-height: 60vh;">
+          <ul>
+            <% basketCreators.forEach(function(creator) { %>
+              <li class="mb-4 flex items-center">
+                <!-- Creator's Profile Image -->
+                <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-10 h-10 rounded-full mr-3">
+                <!-- Creator's Name -->
+                <span class="font-medium"><%= creator.name %></span>
+                <!-- Remove Button -->
+                <form action="/remove-from-campaign" method="POST" class="ml-auto">
+                  <input type="hidden" name="creatorId" value="<%= creator._id %>">
+                  <button type="submit" class="text-red-500 hover:text-red-700">
+                    Supprimer
+                  </button>
+                </form>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <!-- Finalize Campaign Button -->
+        <a href="/finaliser-campagne" class="mt-4 block text-center bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+          Finaliser votre campagne
+        </a>
+      <% } else { %>
+        <p class="text-center text-gray-600">Votre panier est vide.</p>
+      <% } %>
+    </div>
+  </div>
+  <script>
+    const basketOverlay = document.getElementById('basket-overlay');
+    const basketPanel = document.getElementById('basket-panel');
+  
+    document.getElementById('basket-button').addEventListener('click', function () {
+      basketOverlay.classList.remove('hidden');
+      setTimeout(function() {
+        basketPanel.classList.remove('translate-x-full');
+      }, 10);
+    });
+  
+    function closeBasket() {
+      basketPanel.classList.add('translate-x-full');
+      setTimeout(function() {
+        basketOverlay.classList.add('hidden');
+      }, 300);
+    }
+  
+    document.getElementById('close-basket').addEventListener('click', function () {
+      closeBasket();
+    });
+  
+    // Close overlay when clicking outside the panel
+    basketOverlay.addEventListener('click', function (e) {
+      if (e.target === basketOverlay) {
+        closeBasket();
+      }
+    });
+  </script>
+  
+
+</body>
   

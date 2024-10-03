@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo");
 const passport = require('passport');
 const path = require('path');
 const routes = require('./routes');
+const Creator = require('./models/Creator');
 //const connection = mongoose.createConnection(process.env.MONGODB_URI) 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -53,6 +54,22 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
   res.locals.currentUrl = req.path;
+  next();
+});
+
+app.use(async (req, res, next) => {
+  res.locals.basket = req.session.basket || [];
+  if (res.locals.basket.length > 0) {
+    try {
+      const creators = await Creator.find({ _id: { $in: res.locals.basket } });
+      res.locals.basketCreators = creators;
+    } catch (err) {
+      console.error(err);
+      res.locals.basketCreators = [];
+    }
+  } else {
+    res.locals.basketCreators = [];
+  }
   next();
 });
 

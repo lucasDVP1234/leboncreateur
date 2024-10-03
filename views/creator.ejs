@@ -55,9 +55,12 @@
                 </div>
                 <!-- Ajouter à ma campagne Button -->
                 <div class="flex justify-center mt-6">
-                    <button class="shadow bg-blue-950 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-full transition duration-300">
+                    <form action="/add-to-campaign" method="POST">
+                      <input type="hidden" name="creatorId" value="<%= creator._id %>">
+                      <button type="submit" class="shadow bg-blue-950 hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-full transition duration-300">
                         Ajouter à ma campagne
-                    </button>
+                      </button>
+                    </form>
                 </div>
             </div>
         </div>

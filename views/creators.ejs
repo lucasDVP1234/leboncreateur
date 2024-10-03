@@ -96,43 +96,66 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-3 overflow-y-auto">
                 <% creators.forEach(function(creator) { %>
-                    <a href="/creators/<%= creator._id %>" class="creator-card bg-white hover:bg-gray-50 rounded-lg shadow-md overflow-hidden relative cursor-pointer" data-creator-id="<%= creator._id %>">
-                        <!-- Creator Image -->
+                  <div class="creator-card bg-white hover:bg-gray-50 rounded-lg shadow-md overflow-hidden relative" data-creator-id="<%= creator._id %>">
+                    <!-- Creator Image -->
+                    <a href="/creators/<%= creator._id %>"> 
                         <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-full h-48 object-cover">
-                        <!-- Portfolio Bubbles -->
-                        <div class="flex justify-center -mt-6">
-                            <% creator.portfolioImages.slice(0, 3).forEach(function(image) { %>
-                                <div class="bg-white p-1 rounded-full mx-1 shadow-lg">
-                                    <img
-                                        src="<%= image %>"
-                                        alt="Portfolio Image"
-                                        class="h-12 w-12 rounded-full object-cover portfolio-image"
-                                        data-image-url="<%= image %>"
-                                        tabindex="0"
-                                        loading="lazy"
-        >
-                                </div>
-                            <% }); %>
-                        </div>
-                        <!-- Creator Info -->
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-blue-950 mb-2"><%= creator.name %></h3>
-                            <p class="text-gray-600 text-sm mb-4"><%= creator.age %></p>
-                            <div class="flex flex-wrap gap-2 mb-4 ">
-                                
-                                <span class="px-2 py-1 bg-blue-100 text-blue-500 text-xs rounded-full"><%= creator.country %></span>
-                                
-                            </div>
-                            <!-- Video Types -->
-                            <div class="flex flex-wrap gap-2">
-                                <% creator.videoTypes.forEach(function(type) { %>
-                                    <span class="px-2 py-1 bg-green-100 text-green-500 text-xs rounded-full"><%= type %></span>
-                                <% }); %>
-                            </div>
-                        </div>
                     </a>
+              
+                    <!-- Portfolio Bubbles -->
+                    <div class="flex justify-center -mt-6">
+                      <% creator.portfolioImages.slice(0, 3).forEach(function(image) { %>
+                        <div class="bg-white p-1 rounded-full mx-1 shadow-lg">
+                          <img
+                            src="<%= image %>"
+                            alt="Portfolio Image"
+                            class="h-12 w-12 rounded-full object-cover portfolio-image"
+                            data-image-url="<%= image %>"
+                            tabindex="0"
+                            loading="lazy"
+                          >
+                        </div>
+                      <% }); %>
+                    </div>
+              
+                    <!-- Creator Info -->
+                    <div class="p-4">
+                      <!-- Creator Name -->
+                      <a href="/creators/<%= creator._id %>">
+                        <h3 class="text-lg font-semibold text-blue-950 mb-2"><%= creator.name %></h3>
+                      </a>
+              
+                      <!-- Creator Age -->
+                      <p class="text-gray-600 text-sm mb-4"><%= creator.age %> ans</p>
+              
+                      <!-- Creator Country -->
+                      <div class="flex flex-wrap items-center gap-2 mb-4">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-500 text-xs rounded-full"><%= creator.country %></span>
+                      </div>
+              
+                      <!-- Video Types and Add to Basket Button -->
+                      <div class="flex items-center justify-between">
+                        <!-- Video Types -->
+                        <div class="flex flex-wrap gap-2">
+                          <% creator.videoTypes.forEach(function(type) { %>
+                            <span class="px-2 py-1 bg-green-100 text-green-500 text-xs rounded-full"><%= type %></span>
+                          <% }); %>
+                        </div>
+              
+                        <!-- Add to Basket Button -->
+                        <form action="/add-to-campaign" method="POST">
+                          <input type="hidden" name="creatorId" value="<%= creator._id %>">
+                          <button type="submit" class="flex hover:shadow-md items-center text-sm font-medium rounded-lg transition duration-200 text-blue-950 focus:outline-none">
+                            <img src="/images/panier.png" alt="Ajouter au panier" class="w-6 h-6">
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                   
+                  </div>
+                
                 <% }); %>
-            </div>
+              </div>
                
         </main>
     </div>

@@ -3,6 +3,91 @@ const Campaign = require('../models/Campaign');
 const Creator = require('../models/Creator');
 const User = require('../models/User'); // Add this line
 
+exports.addToCampaign = async (req, res) => {
+  try {
+    const creatorId = req.body.creatorId;
+
+    // Ensure basket exists in session
+    if (!req.session.basket) {
+      req.session.basket = [];
+    }
+
+    // Add creatorId to basket if not already present
+    if (!req.session.basket.includes(creatorId)) {
+      req.session.basket.push(creatorId);
+    }
+
+    res.redirect('/creators'); // Redirect back to the same page
+  } catch (err) {
+    console.error('Error adding to campaign:', err.message);
+    res.send('Error adding to campaign.');
+  }
+};
+
+exports.finalizeCampaign = async (req, res) => {
+  try {
+    const creatorIds = req.session.basket || [];
+    if (creatorIds.length === 0) {
+      return res.send('Votre panier est vide.');
+    }
+
+    const creators = await Creator.find({ _id: { $in: creatorIds } });
+
+    // Check if user profile is complete
+    const user = await User.findById(req.user._id);
+    if (!user.name || !user.job) {
+      return res.render('campaignDetails', { selectedCreators: creators });
+    }
+
+    res.render('campaignDetails_client', { selectedCreators: creators });
+  } catch (err) {
+    console.error('Error finalizing campaign:', err.message);
+    res.send('Error finalizing campaign.');
+  }
+};
+
+
+exports.postCreateCampaign = async (req, res) => {
+  try {
+    const { name, job, budget, campaignDate } = req.body;
+    const creatorIds = req.session.basket || [];
+    const userId = req.user._id;
+
+    // Update user with name and job
+    await User.findByIdAndUpdate(userId, { name, job });
+
+    // Create new campaign
+    const newCampaign = new Campaign({
+      userId,
+      creatorIds,
+      budget,
+      date: campaignDate,
+      status: 'Pending',
+    });
+
+    await newCampaign.save();
+
+    // Clear basket from session
+    req.session.basket = [];
+
+    res.redirect('/account');
+  } catch (err) {
+    console.error('Error creating campaign:', err.message);
+    res.send('Error creating campaign.');
+  }
+};
+
+// In controllers/campaignController.js
+exports.removeFromCampaign = (req, res) => {
+  const creatorId = req.body.creatorId;
+  if (req.session.basket) {
+    req.session.basket = req.session.basket.filter(id => id !== creatorId);
+  }
+  res.redirect('back');
+};
+
+
+
 
 exports.postSelectCreators = async (req, res, next) => {
   try {
@@ -37,41 +122,41 @@ exports.postSelectCreators = async (req, res, next) => {
 };
 
 
-exports.postCreateCampaign = async (req, res) => {
-  try {
-    const { name, job, budget, campaignDate } = req.body;
-    const creatorIds = req.session.selectedCreators;
-    const userId = req.user._id;
+// exports.postCreateCampaign = async (req, res) => {
+//   try {
+//     const { name, job, budget, campaignDate } = req.body;
+//     const creatorIds = req.session.selectedCreators;
+//     const userId = req.user._id;
 
     
 
-    // Update user with name and job
-    await User.findByIdAndUpdate(userId, { name, job });
-    // if (!userId) {
-    //   // Handle the case where userId is not in the session
-    //   return res.redirect('/signup');
-    // }
+//     // Update user with name and job
+//     await User.findByIdAndUpdate(userId, { name, job });
+//     // if (!userId) {
+//     //   // Handle the case where userId is not in the session
+//     //   return res.redirect('/signup');
+//     // }
 
-    // Create new campaign with budget and date
-    const newCampaign = new Campaign({
-      userId,
-      creatorIds,
-      budget,
-      date: campaignDate,
-      status: 'Pending',
-    });
+//     // Create new campaign with budget and date
+//     const newCampaign = new Campaign({
+//       userId,
+//       creatorIds,
+//       budget,
+//       date: campaignDate,
+//       status: 'Pending',
+//     });
 
-    await newCampaign.save();
+//     await newCampaign.save();
 
-    // Clear selected creators from session
-    req.session.selectedCreators = null;
+//     // Clear selected creators from session
+//     req.session.selectedCreators = null;
 
-    res.redirect('/account');
-  } catch (err) {
-    console.error('Error creating campaign:', err.message);
-    res.send('Error creating campaign.');
-  }
-};
+//     res.redirect('/account');
+//   } catch (err) {
+//     console.error('Error creating campaign:', err.message);
+//     res.send('Error creating campaign.');
+//   }
+// };
 
 // Create Campaign with Selected Creators
 // exports.createCampaign = async (req, res) => {
