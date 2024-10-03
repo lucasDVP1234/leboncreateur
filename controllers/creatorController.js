@@ -46,3 +46,19 @@ exports.getCreators = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+exports.getCreatorsById = async (req, res) => {
+    try {
+        const creatorId = req.params.id;
+        const creator = await Creator.findById(creatorId);
+
+        if (!creator) {
+            return res.status(404).send('Creator not found');
+        }
+
+        res.render('creator', { creator });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+};
