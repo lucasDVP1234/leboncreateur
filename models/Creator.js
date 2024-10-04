@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const creatorSchema = new mongoose.Schema({
     name: String,
     age: Number,
-    category: String,
+    category: [String],
     videoTypes: [String],
     profileImage: String,
     portfolioImages: [String],
