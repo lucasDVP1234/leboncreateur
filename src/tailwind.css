@@ -1,4 +1,38 @@
-/* src/tailwind.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom font family */
+@layer base {
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Custom animations */
+@layer utilities {
+  .animate-scroll {
+    animation: scroll 20s linear infinite linear;
+  }
+  .animate-scroll-creators {
+    animation: scroll-creators 30s linear infinite linear;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-creators {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
