@@ -4,59 +4,13 @@
     <title>Kreators by Scalevision</title>
     <!-- Include Montserrat Font and Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <!-- AOS Animation CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- Custom CSS for animations and styles -->
-    <style>
-    /* Keyframes for scrolling animations */
-    @keyframes scroll {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
-    }
-
-    .animate-scroll {
-        animation: scroll 30s linear infinite;
-    }
-
-    @keyframes scroll-creators {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
-    }
-
-    .animate-scroll-creators {
-        animation: scroll-creators 40s linear infinite;
-    }
-
-    /* Gradient background */
-    .bg-gradient {
-        background: linear-gradient(135deg, #cbd7fa, #f9fafc);
-    }
-
-    /* Shadow effect */
-    .shadow-card {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    /* Rounded images */
-    .rounded-img {
-        border-radius: 20px;
-    }
-    @keyframes textAnimation {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  .animate-text {
-    background-size: 200% 200%;
-    animation: textAnimation 5s ease-in-out infinite;
-  }
-    </style>
+    
+    
 </head>
 <body class="bg-gradient-to-r from-gray-50 to-blue-50 font-montserrat">
     <%- include('header-lp') %>
@@ -65,21 +19,35 @@
 
     <!-- Hero Section with Gradient Background -->
     <main>
-        <section class="mt-10 text-blue-950 min-h-screen flex flex-col items-center justify-center text-center">
+        <section class="mt-16 text-blue-950 min-h-screen flex flex-col items-center justify-center text-center">
             <h1
                 data-aos="fade-up"
-                class="relative text-6xl font-bold mb-6 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg animate-text"
+                class="relative text-6xl font-bold mb-6 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg"
                 >
                 Générer votre campagne<br />
-                <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
-                    de créateur UGC
+                
+                <!-- Parent span with relative positioning and padding -->
+                <span class="relative inline-block px-4 py-2">
+                    
+                    <!-- Background span with white color, rounded corners, and rotation -->
+                    <span class="absolute inset-0 bg-blue-950 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+                    
+                    <!-- Text span positioned above the background -->
+                    <span class="relative font-semibold text-6xl text-white z-10">
+                    de créateur UGC </span>
+                    
                 </span>
-                <span class="font-bold text-transparent bg-clip-text bg-blue-950">
-                    sous 2 semaines
+                
+                <span class="font-bold text-transparent bg-clip-text bg-blue-950"> pour </br></span>
+                <span
+                    id="dynamic-text"
+                    class="font-bold text-transparent bg-clip-text bg-blue-950"
+                    aria-live="polite"
+                >
+                    votre e-commerce
                 </span>
                 <!-- Decorative underline with relief effect -->
-                
-            </h1>
+                </h1>
           
               <!-- Colonnes Sans/Avec -->
             <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col md:flex-row md:space-x-10 space-y-8 md:space-y-0">
@@ -89,19 +57,33 @@
                   
                   <div class="space-y-4">
                     <!-- Item 1 Sans -->
-                    <div class="flex items-center">
-                      <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-red-200 to-red-400 text-gray-700 mr-4">
-                        &minus;
-                      </span>
-                      <p class="text-lg md:text-base whitespace-nowrap">Gérer les créateurs UGC</p>
+                    <div class="flex items-center text-center">
+                        <span class="relative inline-block px-2 py-1 mr-2">
+                    
+                            <!-- Background span with white color, rounded corners, and rotation -->
+                            <span class="absolute inset-0 bg-red-500 transform -rotate-2 rounded-lg z-0 drop-shadow-lg"></span>
+                            
+                            <!-- Text span positioned above the background -->
+                            <span class="relative font-semibold text-lg text-white z-10">
+                            Sans</span>
+                            
+                        </span>
+                      <p class="text-lg font-semibold md:text-base whitespace-nowrap">Gérer les créateurs UGC</p>
                     </div>
                     
                     <!-- Item 2 Sans -->
-                    <div class="flex items-center">
-                      <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-red-200 to-red-400 text-gray-700 mr-4">
-                        &minus;
-                      </span>
-                      <p class="text-lg md:text-base whitespace-nowrap">faire les scripts</p>
+                    <div class="flex items-center text-center">
+                        <span class="relative inline-block px-2 py-1 mr-2">
+                    
+                            <!-- Background span with white color, rounded corners, and rotation -->
+                            <span class="absolute inset-0 bg-red-500 transform -rotate-2 rounded-lg z-0 drop-shadow-lg"></span>
+                            
+                            <!-- Text span positioned above the background -->
+                            <span class="relative font-semibold text-lg text-white z-10">
+                            Sans</span>
+                            
+                        </span>
+                      <p class="text-lg font-semibold md:text-base whitespace-nowrap">faire les scripts</p>
                     </div>
                   </div>
                 </div>
@@ -112,18 +94,32 @@
                   <div class="space-y-4">
                     <!-- Item 1 Avec -->
                     <div class="flex items-center">
-                      <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-blue-400 to-teal-400 text-white mr-4">
-                        &plus;
-                      </span>
-                      <p class="text-lg md:text-base whitespace-nowrap">modifications illimitées</p>
+                        <span class="relative inline-block px-2 py-1 mr-2">
+                    
+                            <!-- Background span with white color, rounded corners, and rotation -->
+                            <span class="absolute inset-0 bg-blue-500 transform -rotate-2 rounded-lg z-0 drop-shadow-lg"></span>
+                            
+                            <!-- Text span positioned above the background -->
+                            <span class="relative font-semibold text-lg text-white z-10">
+                            Avec</span>
+                            
+                        </span>
+                      <p class="text-lg font-semibold md:text-base whitespace-nowrap">modifications illimitées</p>
                     </div>
                     
                     <!-- Item 2 Avec -->
                     <div class="flex items-center">
-                      <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-blue-400 to-teal-400 text-white mr-4">
-                        &plus;
-                      </span>
-                      <p class="text-lg md:text-base whitespace-nowrap">script originaux</p>
+                        <span class="relative inline-block px-2 py-1 mr-2">
+                    
+                            <!-- Background span with white color, rounded corners, and rotation -->
+                            <span class="absolute inset-0 bg-blue-500 transform -rotate-2 rounded-lg z-0 drop-shadow-lg"></span>
+                            
+                            <!-- Text span positioned above the background -->
+                            <span class="relative font-semibold text-lg text-white z-10">
+                            Avec</span>
+                            
+                        </span>
+                      <p class="text-lg font-semibold md:text-base whitespace-nowrap">script originaux</p>
                     </div>
                   </div>
                 </div>
@@ -133,7 +129,7 @@
             <button 
             data-aos="fade-up" 
             data-aos-delay="300" 
-            class="bg-blue-950 text-white font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 mt-8"
+            class="bg-blue-950 text-white font-semibold py-3 px-8 rounded-full mt-8"
             >
             Découvrir les créateurs
             </button>
@@ -153,24 +149,25 @@
             </div>
             
         </section>
-
+        
         <!-- Logos Section with Scrolling Animation -->
         <section class="mt-8 py-6">
             <div class="w-1/2 mx-auto">
+                <p data-aos="fade-up" class="text-l font-bold text-center text-blue-950 mb-4 mt-4">+200 marques partenaires et +2000 Campagnes UGC produites</p>
                 <div class="grid grid-cols-3 gap-8 md:grid-cols-3">
                     <!-- Logos Row 1 (3 Logos) -->
-                    <img src="/images/kreator.png" alt="Brand 1" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
-                    <img src="/images/kreator.png" alt="Brand 2" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
-                    <img src="/images/kreator.png" alt="Brand 3" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 1" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 2" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 3" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
                     
                 </div>
                 <div class="grid grid-cols-4 gap-8 md:grid-cols-4">
                 
                     <!-- Logos Row 2 (4 Logos) -->
-                    <img src="/images/kreator.png" alt="Brand 4" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
-                    <img src="/images/kreator.png" alt="Brand 5" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
-                    <img src="/images/kreator.png" alt="Brand 6" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
-                    <img src="/images/kreator.png" alt="Brand 7" class="w-40 h-auto mx-auto" data-aos="fade-left" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 4" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 5" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 6" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/images/kreator.png" alt="Brand 7" class="w-40 h-auto mx-auto" data-aos="fade-up" data-aos-delay="700">
                 </div>
             </div>
         </section>
@@ -178,17 +175,24 @@
         <section class="mt-8 text-center">
             <h2
                 data-aos="fade-up"
-                class="relative text-5xl font-bold mb-3 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg animate-text"
+                class="relative text-5xl font-bold mb-3 text-blue-950 drop-shadow-lg animate-text"
                 >
                 Des créateurs
-                <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
-                    EXCLUSIF
+                <span class="relative inline-block px-4 py-2">
+                    
+                    <!-- Background span with white color, rounded corners, and rotation -->
+                    <span class="absolute inset-0 bg-blue-950 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+                    
+                    <!-- Text span positioned above the background -->
+                    <span class="relative font-semibold text-5xl text-white z-10">
+                    Exclusifs </span>
+                    
                 </span>
                 
                 <!-- Decorative underline with relief effect -->
                 
             </h2>
-            <p data-aos="fade-up" data-aos-delay="200" class="text-l mb-8 mt-4">+300 Créateurs exclusif formés par l'agence Scalevision</p>
+            <p data-aos="fade-up" class="text-l mb-8 mt-4">+300 Créateurs exclusif formés par l'agence Scalevision</p>
 
             <!-- Scrolling Creator Images -->
             <div class="w-full overflow-hidden relative mt-8 md:mt-0" data-aos="fade-left">
@@ -227,8 +231,15 @@
                 class="relative text-5xl font-bold mb-6 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg animate-text"
                 >
                 Une agence<br />
-                <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
-                    50% Digital 50% Humain
+                <span class="relative inline-block px-4 py-2">
+                    
+                    <!-- Background span with white color, rounded corners, and rotation -->
+                    <span class="absolute inset-0 bg-blue-950 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+                    
+                    <!-- Text span positioned above the background -->
+                    <span class="relative font-semibold text-5xl text-white z-10">
+                    50% Digital 50% Humain</span>
+                    
                 </span>
                 
                 <!-- Decorative underline with relief effect -->
@@ -347,18 +358,18 @@
             <div class="w-full md:w-2/3 overflow-hidden relative mt-8 md:mt-0" data-aos="fade-left">
                 <div class="flex animate-scroll-creators">
                     <!-- Creator Images -->
-                    <img src="/images/lucas.png" alt="Creator 1" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 2"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lucas.png" alt="Creator 3" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 4"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lucas.png" alt="Creator 5" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 6"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lucas.png" alt="Creator 1" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 2"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lucas.png" alt="Creator 3" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 4"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lucas.png" alt="Creator 5" class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
-                    <img src="/images/lisa.png" alt="Creator 6"  class="w-60 h-60 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 1" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 2"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 3" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 4"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 5" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 6"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 1" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 2"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 3" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 4"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lucas.png" alt="Creator 5" class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
+                    <img src="/images/lisa.png" alt="Creator 6"  class="w-65 h-65 object-cover mx-4 rounded-img shadow-card">
                 </div>
             </div>
         </section>
@@ -370,8 +381,15 @@
                 class="relative text-5xl font-bold mb-3 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg animate-text"
                 >
                 Comparez nos
-                <span class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
-                    Solutions
+                <span class="relative inline-block px-4 py-2">
+                    
+                    <!-- Background span with white color, rounded corners, and rotation -->
+                    <span class="absolute inset-0 bg-blue-950 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+                    
+                    <!-- Text span positioned above the background -->
+                    <span class="relative font-semibold text-5xl text-white z-10">
+                    Solution </span>
+                    
                 </span>
                 
                 <!-- Decorative underline with relief effect -->
@@ -492,6 +510,7 @@
 
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="/js/textchange.js"></script>
     <script>
     AOS.init({
         duration: 800,

@@ -7,18 +7,67 @@
   .font-montserrat {
     font-family: 'Montserrat', sans-serif;
   }
+  .font-caveat {
+    font-family: 'Caveat', 'cursive';
+  }
 }
 
-/* Custom animations */
+/* Custom animations and utilities */
 @layer utilities {
+  /* Scrolling Animations */
   .animate-scroll {
-    animation: scroll 20s linear infinite linear;
+    animation: scroll 20s linear infinite;
   }
   .animate-scroll-creators {
-    animation: scroll-creators 30s linear infinite linear;
+    animation: scroll-creators 30s linear infinite;
+  }
+
+  /* Fade-Down Transition Classes */
+  .fade-down-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  .fade-down-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .fade-down-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-down-exit-active {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  /* Gradient Background */
+  .bg-gradient {
+    background: linear-gradient(135deg, #cbd7fa, #f9fafc);
+  }
+
+  /* Shadow Effect */
+  .shadow-card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Rounded Images */
+  .rounded-img {
+    border-radius: 20px;
+  }
+
+  /* Text Animation */
+  .animate-text {
+    background-size: 200% 200%;
+    animation: textAnimation 5s ease-in-out infinite;
   }
 }
 
+/* Keyframes Definitions */
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -34,5 +83,14 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes textAnimation {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
