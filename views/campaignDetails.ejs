@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Account</title>
+    <title>Compléter votre profil</title>
     <!-- Include Montserrat Font and Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -14,13 +14,13 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
-    <%- include('header') %>
+    <%- include('header-login') %>
 
     <!-- Main Container -->
     <div class="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-lg bg-white shadow-xl rounded-2xl p-8">
             <!-- Page Title -->
-            <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Détaillez votre campagne</h1>
+            <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Compléter votre profil</h1>
 
             <!-- Campaign Details Form -->
             <form action="/campaigns/create" method="POST" class="space-y-6">
@@ -29,7 +29,7 @@
                     <label for="name" class="block text-sm font-medium text-gray-700">Votre nom</label>
                     <input type="text" name="name" id="name" required 
                         class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" 
-                        placeholder="Enter your full name">
+                        placeholder="Nom, Prénom">
                 </div>
 
                 <!-- Your Job Title -->
@@ -37,7 +37,7 @@
                     <label for="job" class="block text-sm font-medium text-gray-700">Votre profession</label>
                     <input type="text" name="job" id="job" required 
                         class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" 
-                        placeholder="Enter your job title">
+                        placeholder="Poste dans l'entreprise actuelle">
                 </div>
 
                 <!-- Budget -->
@@ -50,7 +50,7 @@
 
                 <!-- Date of Campaign -->
                 <div>
-                    <label for="campaignDate" class="block text-sm font-medium text-gray-700">Date de Campagne</label>
+                    <label for="campaignDate" class="block text-sm font-medium text-gray-700">Date butoire pour la Campagne</label>
                     <input type="date" name="campaignDate" id="campaignDate" required 
                         class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
                 </div>
@@ -62,8 +62,8 @@
                         <div class="flex flex-wrap -m-2">
                             <% selectedCreators.forEach(function(creator) { %>
                                 <div class="w-24 h-24 m-2 relative">
-                                    <img src="<%= creator.profileImage %>" alt="Profile Image" class="w-full h-full object-cover rounded-full border-2 border-blue-500">
-                                    <span class="absolute bottom-0 right-0 bg-blue-500 text-white text-xs rounded-full px-1">✔️</span>
+                                    <img src="<%= creator.profileImage %>" alt="Profile Image" class="w-full h-full object-cover rounded-full border-2 border-blue-950">
+                                    
                                 </div>
                             <% }); %>
                         </div>
@@ -73,7 +73,7 @@
                 <!-- Submit Button -->
                 <div>
                     <button type="submit" 
-                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        class="w-full flex justify-center py-3 px-4 text-white font-semibold border border-transparent rounded-md shadow-sm text-white bg-blue-950 hover:bg-blue-700 focus:outline-none transition duration-150 ease-in-out">
                         Create Campaign
                     </button>
                 </div>

@@ -99,17 +99,17 @@
                   <div class="creator-card bg-white hover:bg-gray-50 rounded-lg shadow-md overflow-hidden relative" data-creator-id="<%= creator._id %>">
                     <!-- Creator Image -->
                     <a href="/creators/<%= creator._id %>"> 
-                        <img src="<%= creator.profileImage %>" alt="<%= creator.name %>" class="w-full h-48 object-cover">
+                        <img src="<%= creator.portfolioImages %>" alt="<%= creator.name %>" class="w-full h-48 object-cover">
                     </a>
               
                     <!-- Portfolio Bubbles -->
-                    <div class="flex justify-center -mt-6">
+                    <div class="flex justify-center -mt-8">
                       
                         <div class="bg-white p-1 rounded-full mx-1 shadow-lg">
                           <img
                             src="<%= creator.profileImage %>"
                             alt="Portfolio Image"
-                            class="h-12 w-12 rounded-full object-cover portfolio-image"
+                            class="h-16 w-16 rounded-full object-cover portfolio-image"
                             data-image-url="<%= creator.profileImage %>"
                             tabindex="0"
                             loading="lazy"
@@ -119,7 +119,7 @@
                     </div>
               
                     <!-- Creator Info -->
-                    <div class="p-4">
+                    <div class="p-2 -mt-8">
                       <!-- Creator Name and Add to Basket Button -->
                       <div class="flex items-center justify-between mb-2">
                         <!-- Creator Name -->
@@ -135,10 +135,10 @@
                       </div>
                     
                       <!-- Creator Age -->
-                      <p class="text-gray-600 text-sm mb-4"><%= creator.age %> ans</p>
+                      <p class="text-gray-600 text-sm mb-2"><%= creator.age %> ans</p>
               
                       <!-- Creator Country -->
-                      <div class="flex flex-wrap items-center gap-2 mb-4">
+                      <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span class="px-2 py-1 bg-blue-100 text-blue-500 text-xs rounded-full"><%= creator.country %></span>
                       </div>
               

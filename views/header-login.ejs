@@ -28,14 +28,13 @@
       <nav class="hidden md:flex space-x-4">
 
         <!-- Mes créateurs favoris -->
-        <a href="/account" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
-        <% if (currentUrl === '/prefered') { %>
-          bg-white text-blue-950 ring-2 ring-blue-500
-        <% } else { %>
-          text-blue-950 bg-white hover:ring-2 hover:ring-blue-500
-        <% } %>">
-          <img src="/images/12.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-          Mes créateurs favoris
+        <a href="/#" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-950 hover:ring-2 hover:ring-blue-950 rounded-lg transition duration-200 shadow-sm" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+        
+          
+        
+          
+          <img src="/images/demobl.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
+          Démo
         </a>
 
         <!-- Créer une campagne -->
