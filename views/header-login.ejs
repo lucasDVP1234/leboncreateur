@@ -28,7 +28,7 @@
       <nav class="hidden md:flex space-x-4">
 
         <!-- Mes créateurs favoris -->
-        <a href="/#" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-950 hover:ring-2 hover:ring-blue-950 rounded-lg transition duration-200 shadow-sm" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+        <a href="#" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-950 hover:ring-2 hover:ring-blue-950 rounded-lg transition duration-200 shadow-sm" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
         
           
         
@@ -130,7 +130,19 @@
     <div id="basket-panel" class="absolute right-0 top-0 h-full w-80 bg-white shadow-lg p-4 transform translate-x-full transition-transform duration-300">
       <!-- Close Button -->
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Votre Panier</h2>
+        <h2 class="text-xl font-semibold">
+          <span class="relative inline-block px-4 py-1">
+                    
+            <!-- Background span with white color, rounded corners, and rotation -->
+            <span class="absolute inset-0 bg-blue-500 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+            
+            <!-- Text span positioned above the background -->
+            <span class="relative font-semibold text-xl text-white z-10">
+              Vos créateurs</span>
+            
+        </span>
+          
+        </h2>
         <button id="close-basket" class="text-gray-600 hover:text-gray-900 focus:outline-none">
           <!-- Close Icon -->
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,8 +188,8 @@
         </div>
 
         <!-- Finalize Campaign Button -->
-        <a href="/finaliser-campagne" class="mt-4 block text-center bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
-          Finaliser votre campagne
+        <a href="/finaliser-campagne" class="mt-4 block text-center bg-blue-950 shadow-card hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+          Valider vos créateurs
         </a>
       <% } else { %>
         <p class="text-center text-gray-600">Votre panier est vide.</p>

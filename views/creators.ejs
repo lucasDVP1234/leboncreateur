@@ -72,13 +72,32 @@
         
                     <!-- Country Filter -->
                     <div>
-                        <h3 class="font-semibold text-blue-950 mb-2">Pays & Langue</h3>
+                        <h3 class="font-semibold text-blue-950 mb-2">Pays</h3>
                         <div class="flex flex-wrap gap-2">
                             <% countries.forEach(function(country) { %>
                                 <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
                                     <%= country %>
                                 </button>
                             <% }); %>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-blue-950 mb-2">Langue</h3>
+                        <div class="flex flex-wrap gap-2 mb-16">
+                            <% countries.forEach(function(country) { %>
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
+                                    <%= country %>
+                                </button>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-24 border-t border-gray-30">
+                        <h3 class="font-semibold mt-4 text-blue-950 mb-2">Une besoin particulier ?</h3>
+                        <div class="flex flex-wrap gap-2">
+                                <a href="#" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded hover:text-white hover:bg-blue-950 text-sm focus:outline-none" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+                                    Demander une recherche sur-mesure
+                                </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -91,7 +110,22 @@
                 <div id="selected-filters-container" class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
                 </div>
-                <h1 class="text-l text-blue-950 font-semibold">Séléctionner les créateurs pour votre campagne<img src="/images/bas2.png" alt="Account Icon" class="inline-block w-8" style="vertical-align: middle"></h1>
+                
+                <h1 class="relative text-l text-blue-950 font-semibold">
+                  <span class="relative inline-block px-4 py-1 mr-2">
+                    
+                    <!-- Background span with white color, rounded corners, and rotation -->
+                    <span class="absolute inset-0 bg-blue-500 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+                    
+                    <!-- Text span positioned above the background -->
+                    <span class="relative font-semibold text-l text-white z-10">
+                    Étape 1</span>
+                    
+                </span>
+                
+                  Séléctionner les créateurs pour votre campagne<img src="/images/bas2.png" alt="Account Icon" class="inline-block w-8" style="vertical-align: middle">
+                
+                </h1>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-3 overflow-y-auto">
@@ -128,7 +162,7 @@
                         <!-- Add to Basket Button -->
                         <form action="/add-to-campaign" method="POST">
                           <input type="hidden" name="creatorId" value="<%= creator._id %>">
-                          <button type="submit" class="flex items-center text-sm px-2 py-1 font-medium bg-white shadow-md rounded transition duration-200 text-blue-950 focus:outline-none">
+                          <button type="submit" class="flex items-center text-sm px-2 py-1 font-medium transition duration-200 text-blue-950 focus:outline-none">
                             <img src="/images/panier.png" alt="Ajouter au panier" class="w-6 h-6">
                           </button>
                         </form>
@@ -166,6 +200,8 @@
                
         </main>
     </div>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script src="js/filters.js"></script>
     <script src="/js/creatorSelection.js"></script>
 </body>
