@@ -20,6 +20,7 @@
                 <input type="hidden" name="categories" id="selected-categories" />
                 <input type="hidden" name="videoTypes" id="selected-video-types" />
                 <input type="hidden" name="countries" id="selected-countries-input" />
+                <input type="hidden" name="langues" id="selected-langues-input" />
                 <input type="hidden" name="ageMin" id="selected-age-min" />
                 <input type="hidden" name="ageMax" id="selected-age-max" />
         
@@ -84,9 +85,9 @@
                     <div>
                         <h3 class="font-semibold text-blue-950 mb-2">Langue</h3>
                         <div class="flex flex-wrap gap-2 mb-16">
-                            <% countries.forEach(function(country) { %>
-                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= country %>" data-filter-type="Country">
-                                    <%= country %>
+                            <% langues.forEach(function(langue) { %>
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= langue %>" data-filter-type="Langue">
+                                    <%= langue %>
                                 </button>
                             <% }); %>
                         </div>
@@ -94,7 +95,7 @@
                     <div class="absolute bottom-24 border-t border-gray-30">
                         <h3 class="font-semibold mt-4 text-blue-950 mb-2">Une besoin particulier ?</h3>
                         <div class="flex flex-wrap gap-2">
-                                <a href="#" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded hover:text-white hover:bg-blue-950 text-sm focus:outline-none" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+                                <a href="#" class="shadow-md px-3 py-1 bg-white text-blue-950 rounded hover:text-white hover:bg-blue-950 text-sm focus:outline-none" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
                                     Demander une recherche sur-mesure
                                 </a>
                             
@@ -200,8 +201,7 @@
                
         </main>
     </div>
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
     <script src="js/filters.js"></script>
     <script src="/js/creatorSelection.js"></script>
 </body>

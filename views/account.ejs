@@ -26,7 +26,7 @@
     <%- include('header-login') %>
     <div class="container mx-auto px-4 py-12">
         <div class="bg-gray-50 p-10 ">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.companyName %></span></h1>
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.name %></span></h1>
             <h2 class="text-lg text-gray-600 mb-4">Compte : <%= user.email %></h2>
             <% if (user && user.role === 'admin') { %>
                 <h2 class="text-lg text-gray-600">Administrateur</h2>
@@ -47,21 +47,18 @@
                 <div class="mb-8 flex flex-col md:flex-row md:space-x-4">
                     <!-- Left Box -->
                     <div class="mb-4 md:mb-0 md:w-1/2 bg-white text-center p-6 rounded-lg shadow-md">
-                        <% if (lastCampaign.status === 'Pending') { %>
+                        <% if (basketCreators.length > 0 && !lastCampaign.status) { %>
                             <h3 class="text-2xl font-semibold text-blue-600 text-center mb-4">Etape 1</h3>
                             <h3 class="text-2xl font-semibold text-gray-700 text-center mb-4">Pour valider votre campagne, <br>veuillez réserver un appel</h3>
                             <a href="#" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 text-center rounded-md shadow-sm transition duration-300" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/point-avec-lucie?hide_event_type_details=1&hide_gdpr_banner=1'});return false;">
                                 Valider votre campagne
                             </a>
                             <!-- Calendly Scripts -->
-                            <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-                            <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-                        <% } else if (lastCampaign.status === 'waiting_scripts') { %>
+                            
+                        <% } else if (lastCampaign.status === 'En attente des scripts') { %>
                             <h3 class="text-2xl font-semibold text-gray-700 mb-4">En attente de vos scripts</h3>
-                            <p class="text-gray-600 mb-4">Veuillez télécharger vos scripts pour continuer.</p>
-                            <a href="/upload-scripts" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md shadow-sm transition duration-300">
-                                Télécharger les scripts
-                            </a>
+                            <p class="text-gray-600 mb-4">Vos scripts seront prêts sous 7 jours.</p>
+                            
                         <% } else if (lastCampaign.status === 'shooting_in_progress') { %>
                             <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tournage en cours</h3>
                             <p class="text-gray-600">Votre campagne est actuellement en cours de tournage. Nous vous informerons lorsque les vidéos seront prêtes pour validation.</p>
@@ -115,7 +112,7 @@
                     <% 
                         let statusOrder = {
                             'Pending': 1,
-                            'waiting_scripts': 2,
+                            'En attente des scripts': 2,
                             'shooting_in_progress': 3,
                             'validate_videos': 4
                         };
@@ -256,7 +253,6 @@
                                 <tr>
                                     <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Créateurs</th>
                                     <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Nombre de créateurs</th>
-                                    <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Budget</th>
                                     <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Date de la campagne</th>
                                     <th class="px-6 py-4 border-b text-left text-sm font-medium text-gray-500 uppercase">Statut</th>
                                 </tr>
@@ -292,9 +288,6 @@
                                       </div>
                                     </td>
                                     <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.creatorCount %></td>
-                                    <td class="px-6 py-4 border-b text-sm text-gray-700">
-                                      <%= new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(campaign.budget) %>
-                                    </td>
                                     <td class="px-6 py-4 border-b text-sm text-gray-700"><%= campaign.date %></td>
                                     <td class="px-6 py-4 border-b text-sm text-gray-700 capitalize">
                                       <%= campaign.status.replace(/_/g, ' ') %>

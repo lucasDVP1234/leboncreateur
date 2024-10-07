@@ -10,6 +10,7 @@ const creatorSchema = new mongoose.Schema({
     portfolioImages: [String],
     description: String,
     country : String,
+    langue : [String],
 });
 
 module.exports = mongoose.model('Creator', creatorSchema);
