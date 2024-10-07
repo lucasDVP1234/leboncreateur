@@ -85,8 +85,11 @@ exports.createCampaign = async (req, res) => {
 
     // Optional: Flash message to inform the user of success
     //req.flash('success', 'Campaign created successfully.');
-
-    res.redirect('/account');
+    if (!req.user.password){
+      res.render('motdepasse');
+    } else {
+      res.redirect('/account')
+    }
   } catch (err) {
     console.error('Error creating campaign:', err.message);
     // Optional: Flash message to inform the user of the error

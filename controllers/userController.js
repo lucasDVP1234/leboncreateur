@@ -65,7 +65,8 @@ exports.setPassword = async (req, res) => {
     await User.findByIdAndUpdate(req.user._id, { password: hashedPassword });
     console.log('Password updated for user:', req.user._id);
 
-    res.send('Password set successfully. You can now log in with your email and password.');
+    console.log('Password set successfully. You can now log in with your email and password.');
+    res.redirect('/account');
   } catch (err) {
     console.error('Error setting password:', err);
     res.send('Error setting password.');
