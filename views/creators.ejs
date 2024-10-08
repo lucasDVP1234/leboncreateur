@@ -14,7 +14,7 @@
     <div class="flex min-h-screen">
         
         <!-- Sidebar -->
-        <aside class="w-1/5 p-4 bg-white border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto">
+        <aside class="sm:w-1/5 p-4 bg-white border-r border-gray-300 sticky top-[4rem] h-screen overflow-y-auto hidden sm:block">
             <!-- Form starts here -->
             <form action="/creators" method="GET">
                 <input type="hidden" name="categories" id="selected-categories" />
@@ -106,7 +106,7 @@
             <!-- Form ends here -->
         </aside>
         <!-- Main Content -->
-        <main class="w-4/5">
+        <main class="sm:w-4/5 w-5/5">
             <div class="sticky top-[4rem] z-20 bg-white p-3 border-b border-gray-300">
                 <div id="selected-filters-container" class="flex flex-wrap space-x-2">
                     <!-- Selected filters will be displayed here as bubbles -->
