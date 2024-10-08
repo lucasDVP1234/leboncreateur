@@ -85,6 +85,15 @@
         </a>
       </nav>
 
+      <button id="mobile-basket-button" class="relative flex items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm text-blue-950 bg-white hover:ring-2 hover:ring-blue-500 focus:outline-none md:hidden" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/brainstorming?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+        <img src="/images/panier.png" alt="Panier" class="w-6 h-6">
+        <% if (basketCreators.length > 0) { %>
+          <!-- Badge showing the number of items -->
+          <span class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+            <%= basketCreators.length %>
+          </span>
+        <% } %>
+      </button>
   
       <!-- Mobile Menu Button -->
       <div class="md:hidden">
@@ -101,20 +110,27 @@
     <!-- Mobile Menu -->
     <nav id="mobile-menu" class="md:hidden hidden bg-white shadow-sm">
       <div class="px-4 pt-4 pb-3 space-y-1">
-        <a href="/account" class="flex items-center px-4 py-2 text-gray-700 text-sm font-medium hover:bg-blue-50 rounded-lg transition duration-200">
-          <img src="/images/coeur.png" alt="Mes créateurs favoris" class="w-5 h-5 mr-2">
-          Mes créateurs favoris
+        <!-- Demo Button (Optional: Include if needed in mobile menu) -->
+        <a href="#" class="flex items-center px-4 py-2 text-gray-700 text-sm font-medium hover:bg-blue-50 rounded-lg transition duration-200" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+          <img src="/images/demo.png" alt="Démo" class="w-5 h-5 mr-2">
+          Démo
         </a>
+  
+        <!-- Create Campaign -->
         <a href="/creators" class="flex items-center px-4 py-2 text-gray-700 text-sm font-medium hover:bg-blue-50 rounded-lg transition duration-200">
-          <img src="/images/3.png" alt="Créer une campagne" class="w-5 h-5 mr-2">
+          <img src="/images/15.png" alt="Créer une campagne" class="w-5 h-5 mr-2">
           Créer une campagne
         </a>
+  
+        <!-- Account -->
         <a href="/account" class="flex items-center px-4 py-2 text-gray-700 text-sm font-medium hover:bg-blue-50 rounded-lg transition duration-200">
-          <img src="/images/4.png" alt="Mon compte" class="w-5 h-5 mr-2">
+          <img src="/images/11.png" alt="Mon compte" class="w-5 h-5 mr-2">
           Mon compte
         </a>
+  
+        <!-- Logout -->
         <a href="/logout" class="flex items-center px-4 py-2 text-gray-700 text-sm font-medium hover:bg-blue-50 rounded-lg transition duration-200">
-          <img src="/images/2.png" alt="Déconnexion" class="w-5 h-5 mr-2">
+          <img src="/images/10.png" alt="Déconnexion" class="w-5 h-5 mr-2">
           Déconnexion
         </a>
       </div>
