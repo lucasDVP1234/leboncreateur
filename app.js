@@ -8,12 +8,14 @@ const path = require('path');
 const routes = require('./routes');
 const Creator = require('./models/Creator');
 const creatorsRoutes = require('./routes/creators');
+
 //const connection = mongoose.createConnection(process.env.MONGODB_URI) 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 const app = express();
 
+app.use(flash());
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI);
 

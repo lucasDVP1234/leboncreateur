@@ -8,6 +8,7 @@ document.getElementById('basket-button').addEventListener('click', function () {
     }, 10);
 });
 
+
 function closeBasket() {
     basketPanel.classList.add('translate-x-full');
     setTimeout(function() {
