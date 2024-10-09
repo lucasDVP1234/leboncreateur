@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("textchange.js loaded and DOMContentLoaded fired.");
     const dynamicText = document.getElementById("dynamic-text");
     console.log("dynamicText element:", dynamicText);
-    const phrases = ["votre e-commerce", "votre startup", "votre application"];
+    const phrases = ["votre e-commerce", "votre startup", "votre application","générer vos leads", "votre entreprise"];
     let currentPhraseIndex = 0;
     const intervalTime = 3000; // 3 seconds
 

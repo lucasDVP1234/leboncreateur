@@ -65,6 +65,20 @@
     background-size: 200% 200%;
     animation: textAnimation 5s ease-in-out infinite;
   }
+  .text-doubled {
+    position: relative;
+     /* Main text color */
+    
+    text-shadow: -4px -4px 0px rgb(255, 255, 255); /* Slight offset for the 'doubled' effect */
+}
+  .text-doubled-portable {
+    position: relative;
+     /* Main text color */
+    
+    text-shadow: -3px -3px 0px rgb(255, 255, 255); /* Slight offset for the 'doubled' effect */
+}
+  
+  
 }
 
 /* Keyframes Definitions */
