@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const creatorSchema = new mongoose.Schema({
     name: String,
+    genre: String,
     age: Number,
     category: [String],
     videoTypes: [String],

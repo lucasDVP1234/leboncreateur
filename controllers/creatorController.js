@@ -4,7 +4,7 @@ const Creator = require('../models/Creator'); // Ensure this import is present
 
 exports.getCreators = async (req, res) => {
     try {
-        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts } = req.query;
+        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts, genres } = req.query;
 
         // Build query object
         let query = {};
@@ -32,6 +32,9 @@ exports.getCreators = async (req, res) => {
         if (atouts) {
             query.atout = { $in: atouts.split(',') };
         }
+        if (genres) {
+            query.genre = { $in: genres.split(',') };
+        }
 
         // Fetch creators based on query
         const creators = await Creator.find(query);
@@ -42,6 +45,7 @@ exports.getCreators = async (req, res) => {
         const countriesList = await Creator.distinct('country');
         const languesList = await Creator.distinct('langue');
         const atoutsList = await Creator.distinct('atout');
+        const genresList = await Creator.distinct('genre');
 
         res.render('creators', {
             creators,
@@ -50,6 +54,7 @@ exports.getCreators = async (req, res) => {
             countries: countriesList,
             langues: languesList,
             atouts: atoutsList,
+            genres: genresList,
         });
     } catch (err) {
         console.error('Error fetching creators:', err.message);

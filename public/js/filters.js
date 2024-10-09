@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedCountries = [];
     let selectedLangues = [];
     let selectedAtouts = [];
+    let selectedGenres = [];
     
 
     // Function to update selected filters display
@@ -44,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         selectedAtouts.forEach((atout) => {
             const bubble = createFilterBubble(atout, 'Atout');
+            selectedFiltersContainer.appendChild(bubble);
+        });
+        selectedGenres.forEach((genre) => {
+            const bubble = createFilterBubble(genre, 'Genre');
             selectedFiltersContainer.appendChild(bubble);
         });
 
@@ -106,6 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedAtouts = selectedAtouts.filter(item => item !== value);
             const button = document.querySelector(`.filter-button[data-filter="${value}"][data-filter-type="Atout"]`);
             if (button) button.click();
+        } else if (type === 'Genre') {
+            selectedGenres = selectedGenres.filter(item => item !== value);
+            const button = document.querySelector(`.filter-button[data-filter="${value}"][data-filter-type="Genre"]`);
+            if (button) button.click();
         } else if (type === 'Age') {
             selectedAgeMin = '';
             selectedAgeMax = '';
@@ -129,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('selected-countries-input').value = selectedCountries.join(',');
         document.getElementById('selected-langues-input').value = selectedLangues.join(',');
         document.getElementById('selected-atouts-input').value = selectedAtouts.join(',');
+        document.getElementById('selected-genres-input').value = selectedGenres.join(',');
         document.getElementById('selected-age-min').value = selectedAgeMin;
         document.getElementById('selected-age-max').value = selectedAgeMax;
     }
@@ -174,6 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!selectedAtouts.includes(filterValue)) {
                         selectedAtouts.push(filterValue);
                     }
+                } else if (filterType === 'Genre') {
+                    if (!selectedGenres.includes(filterValue)) {
+                        selectedGenres.push(filterValue);
+                    }
                 }
             } else {
                 if (filterType === 'Category') {
@@ -186,6 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     selectedLangues = selectedLangues.filter(item => item !== filterValue);
                 } else if (filterType === 'Atout') {
                     selectedAtouts = selectedAtouts.filter(item => item !== filterValue);
+                } else if (filterType === 'Genre') {
+                    selectedGenres = selectedGenres.filter(item => item !== filterValue);
                 }
             }
 
@@ -240,6 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (params.atouts) {
         selectedAtouts = params.atouts.split(',').filter(Boolean);
     }
+    if (params.genres) {
+        selectedGenres = params.genres.split(',').filter(Boolean);
+    }
     if (params.ageMin) {
         selectedAgeMin = params.ageMin;
         ageMinInput.value = selectedAgeMin;
@@ -258,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (filterType === 'Type of Videos' && selectedVideoTypes.includes(filterValue)) ||
             (filterType === 'Country' && selectedCountries.includes(filterValue)) || 
             (filterType === 'Langue' && selectedLangues.includes(filterValue)) ||
+            (filterType === 'Genre' && selectedGenres.includes(filterValue)) ||
             (filterType === 'Atout' && selectedAtouts.includes(filterValue))) {
             button.classList.remove('active', 'bg-white', 'text-blue-950');
             button.classList.add('active', 'bg-blue-950', 'text-white');
