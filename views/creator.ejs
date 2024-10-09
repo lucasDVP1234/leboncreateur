@@ -10,7 +10,14 @@
 <body class="bg-gray-50 font-montserrat">
     <%- include('header-login') %>
     <!-- Main Content Container -->
-    <div class="max-w-lg mx-auto px-4 py-12">
+    <div class="max-w-xl mx-auto px-10 mt-2 py-12 relative">
+        <a href="/creators" class="absolute top-0 left-0 bg-blue-950 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-800 transition-colors duration-200 flex items-center">
+            <!-- Optional: Add an SVG Icon for the Back Arrow -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            
+        </a>
         <!-- Profile Card with Cover Image -->
         <div class="bg-white rounded-2xl shadow-md overflow-hidden">
             <!-- Cover Image Section -->
@@ -37,16 +44,34 @@
                 <!-- Age and Country -->
                 <div class="flex items-center justify-center space-x-4 mt-2">
                     <p class="text-gray-600 text-lg flex items-center">
-                        <img src="/images/15.png" alt="Âge" class="w-5 h-5 mr-2">
+                        <img src="/images/11.png" alt="Âge" class="w-5 h-5 mr-2">
                         <%= creator.age %> ans
                     </p>
                     <p class="text-gray-600 text-lg flex items-center">
-                        <img src="/images/10.png" alt="Pays" class="w-5 h-5 mr-2">
+                        <img src="/images/monde.png" alt="Pays" class="w-5 h-5 mr-2">
                         <%= creator.country %>
                     </p>
                 </div>
+                <div class="flex items-center justify-center space-x-4 mt-2">
+                    <% creator.category.forEach(function(force) { %>
+                    <p class="text-gray-600 text-l sm:text-lg flex items-center">
+                        <img src="/images/demo.png" alt="Âge" class="w-5 h-5 mr-2">
+                        <%= force %>
+                    </p>
+                    <% }); %>
+                </div>
+               
                 <!-- Description -->
-                <p class="mt-6 text-gray-700 text-center leading-relaxed"><%= creator.description %></p>
+                <p class="mt-2 text-gray-700 text-center leading-relaxed"><%= creator.description %></p>
+                <div class="flex items-center justify-center space-x-4 mt-2">
+                    <% creator.atout.forEach(function(force) { %>
+                    <p class="text-gray-600 text-l sm:text-lg flex items-center">
+                        <img src="/images/plus.png" alt="Âge" class="w-5 h-5 mr-2">
+                        <%= force %>
+                    </p>
+                    <% }); %>
+                </div>
+                
                 <!-- Video Types -->
                 <div class="flex flex-wrap justify-center gap-2 mt-6">
                     <% creator.videoTypes.forEach(function(type) { %>
@@ -64,10 +89,27 @@
                 </div>
             </div>
         </div>
+        <div class="rounded-2xl space-y-6 mt-6">
+            <h2 class="relative text-center text-l text-blue-950 font-semibold">
+                <span class="relative inline-block px-2 py-1">
+                  
+                  <!-- Background span with white color, rounded corners, and rotation -->
+                  <span class="absolute inset-0 bg-blue-500 rounded-lg transform -rotate-2 z-0"></span>
+                  
+                  <!-- Text span positioned above the background -->
+                  <span class="relative font-semibold text-l text-white z-10">
+                  100% des vidéos présentées</span>
+                  
+              </span>
+              
+                ont été produites par Scalevision
+              
+              </h2>
+        </div>
         <div class="bg-white rounded-2xl shadow-md overflow-hidden mt-6">
             <!-- Section Title -->
             <div class="px-6 pt-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Portfolio Vidéos</h2>
+                <h2 class="text-2xl font-semibold text-blue-950 mb-4">Portfolio Vidéos</h2>
             </div>
             <!-- Video Grid -->
             <div class="px-6 pb-6">
