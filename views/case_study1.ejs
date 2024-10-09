@@ -10,7 +10,14 @@
 <body class="bg-gradient-to-r from-gray-50 to-blue-50 font-montserrat">
     <%- include('header-lp') %>
     <!-- Main Content Container -->
-    <div class="max-w-lg mx-auto px-4 py-12">
+    <div class="max-w-lg mx-auto px-4 py-12 relative">
+        <a href="/creators" class="absolute top-0 left-0 bg-blue-950 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-800 transition-colors duration-200 flex items-center">
+            <!-- Optional: Add an SVG Icon for the Back Arrow -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            
+        </a>
         <!-- Profile Card with Cover Image -->
         <div class="bg-white rounded-2xl shadow-md overflow-hidden">
             <!-- Cover Image Section -->
