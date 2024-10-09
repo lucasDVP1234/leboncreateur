@@ -21,6 +21,7 @@
                 <input type="hidden" name="videoTypes" id="selected-video-types" />
                 <input type="hidden" name="countries" id="selected-countries-input" />
                 <input type="hidden" name="langues" id="selected-langues-input" />
+                <input type="hidden" name="atouts" id="selected-atouts-input" />
                 <input type="hidden" name="ageMin" id="selected-age-min" />
                 <input type="hidden" name="ageMax" id="selected-age-max" />
         
@@ -84,10 +85,20 @@
                     </div>
                     <div>
                         <h3 class="font-semibold text-blue-950 mb-2">Langue</h3>
-                        <div class="flex flex-wrap gap-2 mb-16">
+                        <div class="flex flex-wrap gap-2">
                             <% langues.forEach(function(langue) { %>
                                 <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= langue %>" data-filter-type="Langue">
                                     <%= langue %>
+                                </button>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-blue-950 mb-2">Spécial</h3>
+                        <div class="flex flex-wrap gap-2 mb-16">
+                            <% atouts.forEach(function(atout) { %>
+                                <button type="button" class="filter-button shadow-md px-3 py-1 bg-white text-blue-950 rounded-full hover:text-white hover:bg-blue-950 text-sm focus:outline-none" data-filter="<%= atout %>" data-filter-type="Atout">
+                                    <%= atout %>
                                 </button>
                             <% }); %>
                         </div>

@@ -11,6 +11,7 @@ const creatorSchema = new mongoose.Schema({
     description: String,
     country : String,
     langue : [String],
+    atout :[String],
 });
 
 module.exports = mongoose.model('Creator', creatorSchema);

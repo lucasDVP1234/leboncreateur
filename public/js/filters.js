@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedVideoTypes = [];
     let selectedCountries = [];
     let selectedLangues = [];
+    let selectedAtouts = [];
     
 
     // Function to update selected filters display
@@ -39,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display selected langues
         selectedLangues.forEach((langue) => {
             const bubble = createFilterBubble(langue, 'Langue');
+            selectedFiltersContainer.appendChild(bubble);
+        });
+        selectedAtouts.forEach((atout) => {
+            const bubble = createFilterBubble(atout, 'Atout');
             selectedFiltersContainer.appendChild(bubble);
         });
 
@@ -97,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedLangues = selectedLangues.filter(item => item !== value);
             const button = document.querySelector(`.filter-button[data-filter="${value}"][data-filter-type="Langue"]`);
             if (button) button.click();
+        } else if (type === 'Atout') {
+            selectedAtouts = selectedAtouts.filter(item => item !== value);
+            const button = document.querySelector(`.filter-button[data-filter="${value}"][data-filter-type="Atout"]`);
+            if (button) button.click();
         } else if (type === 'Age') {
             selectedAgeMin = '';
             selectedAgeMax = '';
@@ -119,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('selected-video-types').value = selectedVideoTypes.join(',');
         document.getElementById('selected-countries-input').value = selectedCountries.join(',');
         document.getElementById('selected-langues-input').value = selectedLangues.join(',');
+        document.getElementById('selected-atouts-input').value = selectedAtouts.join(',');
         document.getElementById('selected-age-min').value = selectedAgeMin;
         document.getElementById('selected-age-max').value = selectedAgeMax;
     }
@@ -160,6 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!selectedLangues.includes(filterValue)) {
                         selectedLangues.push(filterValue);
                     }
+                } else if (filterType === 'Atout') {
+                    if (!selectedAtouts.includes(filterValue)) {
+                        selectedAtouts.push(filterValue);
+                    }
                 }
             } else {
                 if (filterType === 'Category') {
@@ -170,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     selectedCountries = selectedCountries.filter(item => item !== filterValue);
                 } else if (filterType === 'Langue') {
                     selectedLangues = selectedLangues.filter(item => item !== filterValue);
+                } else if (filterType === 'Atout') {
+                    selectedAtouts = selectedAtouts.filter(item => item !== filterValue);
                 }
             }
 
@@ -221,6 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (params.langues) {
         selectedLangues = params.langues.split(',').filter(Boolean);
     }
+    if (params.atouts) {
+        selectedAtouts = params.atouts.split(',').filter(Boolean);
+    }
     if (params.ageMin) {
         selectedAgeMin = params.ageMin;
         ageMinInput.value = selectedAgeMin;
@@ -238,7 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if ((filterType === 'Category' && selectedCategories.includes(filterValue)) ||
             (filterType === 'Type of Videos' && selectedVideoTypes.includes(filterValue)) ||
             (filterType === 'Country' && selectedCountries.includes(filterValue)) || 
-            (filterType === 'Langue' && selectedLangues.includes(filterValue))) {
+            (filterType === 'Langue' && selectedLangues.includes(filterValue)) ||
+            (filterType === 'Atout' && selectedAtouts.includes(filterValue))) {
             button.classList.remove('active', 'bg-white', 'text-blue-950');
             button.classList.add('active', 'bg-blue-950', 'text-white');
         }

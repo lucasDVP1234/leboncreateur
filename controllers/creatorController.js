@@ -4,7 +4,7 @@ const Creator = require('../models/Creator'); // Ensure this import is present
 
 exports.getCreators = async (req, res) => {
     try {
-        const { categories, videoTypes, ageMin, ageMax, countries, langues } = req.query;
+        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts } = req.query;
 
         // Build query object
         let query = {};
@@ -29,6 +29,9 @@ exports.getCreators = async (req, res) => {
         if (langues) {
             query.langue = { $in: langues.split(',') };
         }
+        if (atouts) {
+            query.atout = { $in: atouts.split(',') };
+        }
 
         // Fetch creators based on query
         const creators = await Creator.find(query);
@@ -38,6 +41,7 @@ exports.getCreators = async (req, res) => {
         const videoTypesList = await Creator.distinct('videoTypes');
         const countriesList = await Creator.distinct('country');
         const languesList = await Creator.distinct('langue');
+        const atoutsList = await Creator.distinct('atout');
 
         res.render('creators', {
             creators,
@@ -45,6 +49,7 @@ exports.getCreators = async (req, res) => {
             videoTypes: videoTypesList,
             countries: countriesList,
             langues: languesList,
+            atouts: atoutsList,
         });
     } catch (err) {
         console.error('Error fetching creators:', err.message);
@@ -86,7 +91,7 @@ try {
     country,
     profileImage,
     portfolioImages,
-    videoTypes,
+    videoTypes
     } = req.body;
 
     // Create a new Creator instance
