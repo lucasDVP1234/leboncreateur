@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo");
 const passport = require('passport');
 const path = require('path');
 const routes = require('./routes');
+const indexRoutes = require('./routes/index');
 const Creator = require('./models/Creator');
 const creatorsRoutes = require('./routes/creators');
 
@@ -68,6 +69,8 @@ app.use((req, res, next) => {
 
 
 
+
+
 app.use(async (req, res, next) => {
   res.locals.basket = req.session.basket || [];
   if (res.locals.basket.length > 0) {
@@ -86,7 +89,7 @@ app.use(async (req, res, next) => {
 
 // Routes
 app.use('/creators', creatorsRoutes); 
-app.use('/', routes);
+app.use('/', indexRoutes);
 
 // app.js
 app.use((err, req, res, next) => {
