@@ -94,9 +94,13 @@ try {
     name,
     age,
     country,
+    langue,
     profileImage,
     portfolioImages,
-    videoTypes
+    videoTypes,
+    category,
+    genre,
+    atout,
     } = req.body;
 
     // Create a new Creator instance
@@ -104,9 +108,13 @@ try {
     name,
     age,
     country,
+    langue,
     profileImage,
+    genre,
     portfolioImages: portfolioImages.split(','), // Assuming comma-separated URLs
     videoTypes: videoTypes.split(','), // Assuming comma-separated types
+    category: category.split(','), // Assuming comma-separated types
+    atout: atout.split(','), // Assuming comma-separated types
     });
 
     await newCreator.save();
@@ -116,4 +124,62 @@ try {
     console.error('Error adding creator:', err.message);
     res.status(500).send('Error adding creator.');
 }
+};
+
+exports.getEditCreator = async (req, res) => {
+    try {
+        const creators = await Creator.find({}, 'name _id');
+
+        // If a creator ID is provided in the query, fetch that creator
+        let creator = null;
+        if (req.query.creatorId) {
+            creator = await Creator.findById(req.query.creatorId);
+        }
+
+        res.render('editCreator', {
+            creators,
+            creator,
+        });
+    } catch (error) {
+        console.error('Error fetching creator for edit:', error.message);
+        res.status(500).send('Server Error');
+    }
+};
+
+exports.postEditCreator = async (req, res) => {
+    try {
+        const creatorId = req.body.creatorId;
+        const {
+            name,
+            age,
+            country,
+            langue,
+            profileImage,
+            portfolioImages,
+            videoTypes,
+            category,
+            genre,
+            atout,
+        } = req.body;
+
+        const updatedData = {
+            name,
+            age,
+            country,
+            langue,
+            profileImage,
+            genre,
+            portfolioImages: portfolioImages.split(',').filter(Boolean),
+            videoTypes: videoTypes.split(',').filter(Boolean),
+            category: category.split(',').filter(Boolean),
+            atout: atout.split(',').filter(Boolean),
+        };
+
+        await Creator.findByIdAndUpdate(creatorId, updatedData);
+
+        res.redirect('/creators'); // Redirect to creators list or wherever appropriate
+    } catch (error) {
+        console.error('Error updating creator:', error.message);
+        res.status(500).send('Error updating creator.');
+    }
 };

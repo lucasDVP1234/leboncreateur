@@ -14,6 +14,9 @@ router.get('/add', isAdmin, creatorController.getAddCreator);
 // Route to handle form submission and add the new creator to the database (POST request)
 router.post('/add', isAdmin, creatorController.postAddCreator);
 
+router.get('/creators/edit', creatorController.getEditCreator);
+
+router.post('/creators/edit', creatorController.postEditCreator);
 
 router.get('/creators', ensureAuthenticated, creatorController.getCreators);
 
