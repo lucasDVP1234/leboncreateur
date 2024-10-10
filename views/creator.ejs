@@ -151,7 +151,7 @@
     <!-- Optional Footer -->
     <!-- Include any necessary scripts -->
     <script>
-        //const creator = <%- JSON.stringify(creator) %>;
+        const creator = <%- JSON.stringify(creator) %>;
         const initialVideos = 6; 
         // Function to start/play the video
         function startVideo(videoId) {
@@ -169,7 +169,7 @@
             if (showMoreButton) {
                 showMoreButton.addEventListener('click', function() {
                     // Fetch all video URLs except the ones already displayed
-                    const allVideos = JSON.stringify(creator.portfolioImages.slice(initialVideos + 1));
+                    const allVideos = creator.videos.slice(0, initialVideos+1);
                     const videoGrid = document.getElementById('video-grid');
                     const currentCount = videoGrid.children.length;
                     const nextVideos = allVideos.slice(currentCount, currentCount + initialVideos);
