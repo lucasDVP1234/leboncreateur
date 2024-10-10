@@ -13,6 +13,7 @@ const creatorSchema = new mongoose.Schema({
     country : String,
     langue : [String],
     atout :[String],
+    videos :[String],
 });
 
 module.exports = mongoose.model('Creator', creatorSchema);

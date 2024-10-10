@@ -101,6 +101,7 @@ try {
     category,
     genre,
     atout,
+    videos,
     } = req.body;
 
     // Create a new Creator instance
@@ -115,6 +116,7 @@ try {
     videoTypes: videoTypes.split(','), // Assuming comma-separated types
     category: category.split(','), // Assuming comma-separated types
     atout: atout.split(','), // Assuming comma-separated types
+    videos: videos.split(','), // Assuming comma-separated types
     });
 
     await newCreator.save();
@@ -160,6 +162,7 @@ exports.postEditCreator = async (req, res) => {
             category,
             genre,
             atout,
+            videos,
         } = req.body;
 
         const updatedData = {
@@ -173,6 +176,7 @@ exports.postEditCreator = async (req, res) => {
             videoTypes: videoTypes.split(',').filter(Boolean),
             category: category.split(',').filter(Boolean),
             atout: atout.split(',').filter(Boolean),
+            videos: videos.split(',').filter(Boolean),
         };
 
         await Creator.findByIdAndUpdate(creatorId, updatedData);

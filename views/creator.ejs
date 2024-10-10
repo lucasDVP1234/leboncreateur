@@ -113,12 +113,12 @@
             </div>
             <!-- Video Grid -->
             <div class="px-6 pb-6">
-                <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                     <% 
                         // Determine how many videos to show initially
                         const initialVideos = 6;
-                        const totalVideos = creator.portfolioImages.length;
-                        const videosToShow = creator.portfolioImages.slice(0, initialVideos); // Assuming first image is cover
+                        const totalVideos = creator.videos.length;
+                        const videosToShow = creator.videos.slice(0, initialVideos); // Assuming first image is cover
                     %>
                     <% videosToShow.forEach(function(videoUrl, index) { %>
                         <div class="bg-gray-100 rounded-lg overflow-hidden shadow">
