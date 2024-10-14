@@ -787,13 +787,13 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script src="/js/textchange.js" defer></script>
     <script>
-    window.addEventListener("load", () => {
-  AOS.init({
-    duration: 800,
-    once: true,
+        document.addEventListener("DOMContentLoaded", function () {
+          AOS.init({
+            duration: 800,
+            once: true,
+          });
         });
-    });
-    </script>
+      </script>
     <%- include('footer') %>
 </body>
 </html>
