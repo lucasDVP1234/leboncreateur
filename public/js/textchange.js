@@ -1,63 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("textchange.js loaded and DOMContentLoaded fired.");
     const dynamicText = document.getElementById("dynamic-text");
-    console.log("dynamicText element:", dynamicText);
-    const phrases = ["votre e-commerce", "votre startup", "votre application","générer vos leads", "votre entreprise"];
+    const phrases = [
+      "votre e-commerce",
+      "votre startup",
+      "votre application",
+      "générer vos leads",
+      "votre entreprise",
+    ];
     let currentPhraseIndex = 0;
     const intervalTime = 3000; // 3 seconds
-
+  
     function changePhrase() {
-        
-        // Add exit classes
-        dynamicText.classList.add("fade-down-exit");
-        
-
-        // Force reflow to ensure the browser recognizes the class addition
-        void dynamicText.offsetWidth;
-
-        // Add exit-active class to trigger the transition
-        dynamicText.classList.add("fade-down-exit-active");
-        
-
-        // Listen for the end of the exit transition
-        dynamicText.addEventListener("transitionend", handleTransitionEnd);
-    }
-
-    function handleTransitionEnd(event) {
-        
-        // Remove exit classes
-        dynamicText.classList.remove("fade-down-exit", "fade-down-exit-active");
-        dynamicText.removeEventListener("transitionend", handleTransitionEnd);
-        
-
+      // Add fade-out class
+      dynamicText.classList.add("fade-out");
+  
+      // After fade-out completes, change the text and fade back in
+      setTimeout(() => {
         // Update the text content
         currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
         dynamicText.textContent = phrases[currentPhraseIndex];
-        
-
-        // Add enter classes
-        dynamicText.classList.add("fade-down-enter");
-        
-
-        // Force reflow to allow the transition to trigger
-        void dynamicText.offsetWidth;
-
-        // Add enter-active class to trigger the transition
-        dynamicText.classList.add("fade-down-enter-active");
-        
-
-        // Listen for the end of the enter transition to clean up classes
-        dynamicText.addEventListener("transitionend", handleEnterTransitionEnd);
+  
+        // Remove fade-out and add fade-in
+        dynamicText.classList.remove("fade-out");
+        dynamicText.classList.add("fade-in");
+  
+        // Remove fade-in class after animation completes
+        setTimeout(() => {
+          dynamicText.classList.remove("fade-in");
+        }, 500); // Duration of fade-in animation
+      }, 500); // Duration of fade-out animation
     }
-
-    function handleEnterTransitionEnd(event) {
-        
-        // Remove enter classes
-        dynamicText.classList.remove("fade-down-enter", "fade-down-enter-active");
-        dynamicText.removeEventListener("transitionend", handleEnterTransitionEnd);
-        
-    }
-
-    // Initial interval to change phrases
+  
+    // Initial call
     setInterval(changePhrase, intervalTime);
-});
+  });
+  

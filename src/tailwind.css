@@ -108,3 +108,35 @@
     background-position: 100% 50%;
   }
 }
+
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animations */
+.fade-out {
+  animation: fadeOutDown 0.5s forwards;
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s forwards;
+}
