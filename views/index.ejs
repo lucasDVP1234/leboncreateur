@@ -12,7 +12,7 @@
     <%- include('header-lp') %>
     <main>
         <section class="mt-6 sm:mt-16 text-blue-950 min-h-screen flex flex-col items-center justify-center text-center">
-            <h1 data-aos="fade-up" class="relative text-4xl sm:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg">
+            <h1 class="relative text-4xl sm:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-blue-950 drop-shadow-lg">
                 Générer votre campagne<br />
               
                 <!-- Simplified dynamic text with a single wrapper -->
@@ -35,7 +35,7 @@
               
             <!-- Floating images -->
             
-            <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col md:flex-row md:space-x-10 space-y-8 md:space-y-0">
+            <div data-aos-delay="200" class="flex flex-col md:flex-row md:space-x-10 space-y-8 md:space-y-0">
                 
                 <!-- Colonne Sans -->
                 <div class="w-1/2 md:w-1/2">
@@ -787,9 +787,11 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script src="/js/textchange.js" defer></script>
     <script>
-    AOS.init({
-        duration: 800,
-        once: true,
+    window.addEventListener("load", () => {
+  AOS.init({
+    duration: 800,
+    once: true,
+        });
     });
     </script>
     <%- include('footer') %>
