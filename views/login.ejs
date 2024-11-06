@@ -67,6 +67,23 @@
                     <input type="password" name="password" id="password" placeholder="Mot de Passe" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out">
                 </div>
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-gray-700 font-medium mb-2">Mot de Passe :</label>
+                    <input type="password" name="password" id="password" placeholder="Mot de Passe" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <div class="text-right">
+                            <a href="#" id="forgot-password-link" class="text-sm text-blue-500 hover:text-blue-700">
+                                Mot de passe oublié ?
+                            </a>
+                        </div>
+                        <!-- Texte supplémentaire caché initialement -->
+                        <div id="forgot-password-text" class="mt-2 text-sm text-gray-600 hidden">
+                            Contactez-nous à <a href="mailto:contact@scalevision.fr" class="text-blue-500 hover:underline">contact@scalevision.fr</a>
+                        </div>
+        
+                </div>
+
 
                 <!-- Submit Button -->
                 <button type="submit"
@@ -103,6 +120,17 @@
         </div>
     </div>
 
-    
+     <!-- Scripts JavaScript -->
+<script>
+// Sélectionner les éléments
+const forgotPasswordLink = document.getElementById('forgot-password-link');
+const forgotPasswordText = document.getElementById('forgot-password-text');
+
+// Fonction pour basculer la visibilité du texte
+forgotPasswordLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    forgotPasswordText.classList.toggle('hidden');
+});
+</script>
 </body>
 </html>
