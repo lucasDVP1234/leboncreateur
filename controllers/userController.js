@@ -23,7 +23,8 @@ exports.postSignup = async (req, res) => {
 
     // Check if passwords match
     if (password !== confirmPassword) {
-      return res.send('Les mots de passe ne correspondent pas.');
+      req.flash('error', 'Les mots de passe sont différents.');
+      return res.redirect('/signup');
     }
     // Hash the password
     const saltRounds = 10;
@@ -33,7 +34,8 @@ exports.postSignup = async (req, res) => {
     // Check if the email already exists
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
-      return res.send('An account with this email already exists. Please log in or use a different email.');
+      req.flash('error', 'Un compte avec cet e-mail existe déjà. Veuillez vous connecter ou utiliser un autre e-mail.');
+      return res.redirect('/signup');
     }
 
     const newUser = new User({
@@ -48,14 +50,15 @@ exports.postSignup = async (req, res) => {
     // Authenticate the user after successful signup
     req.logIn(savedUser, function (err) {
       if (err) {
-        console.error(err);
+        req.flash('error', 'Une erreur est survenue lors de la connexion.');
         return res.redirect('/');
       }
       return res.redirect('/creators');
     });
   } catch (err) {
-    console.error('Error during signup:', err);
-    res.send('An error occurred during signup. Please try again.');
+    console.error('Erreur lors de l\'inscription :', err);
+    req.flash('error', 'Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+    res.redirect('/signup');
   }
 };
 
@@ -77,11 +80,15 @@ exports.setPassword = async (req, res) => {
     await User.findByIdAndUpdate(req.user._id, { password: hashedPassword });
     console.log('Password updated for user:', req.user._id);
 
-    console.log('Password set successfully. You can now log in with your email and password.');
+    
+    req.flash('success', 'Votre mot de passe a bien été changé !');
+    
     res.redirect('/account');
   } catch (err) {
-    console.error('Error setting password:', err);
-    res.send('Error setting password.');
+    console.error('Erreur lors de l\'inscription :', err);
+    req.flash('error', 'Une erreur est survenue lors de votre changement de mot de passe. Veuillez réessayer.');
+    res.redirect('/account');
+    
   }
 };
 
