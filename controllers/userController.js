@@ -18,6 +18,17 @@ exports.postSignup = async (req, res) => {
   try {
     const email = req.body.email.toLowerCase().trim();
     const companyName = req.body.companyName;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      return res.send('Les mots de passe ne correspondent pas.');
+    }
+    // Hash the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
 
     // Check if the email already exists
     const existingUser = await User.findOne({ email: email });
@@ -28,6 +39,7 @@ exports.postSignup = async (req, res) => {
     const newUser = new User({
       email: email,
       companyName: companyName,
+      password: hashedPassword,
     });
 
     const savedUser = await newUser.save();
