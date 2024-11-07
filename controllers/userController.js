@@ -19,13 +19,13 @@ exports.postSignup = async (req, res) => {
     const email = req.body.email.toLowerCase().trim();
     const companyName = req.body.companyName;
     const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
+    // const confirmPassword = req.body.confirmPassword;
 
     // Check if passwords match
-    if (password !== confirmPassword) {
-      req.flash('error', 'Les mots de passe sont différents.');
-      return res.redirect('/signup');
-    }
+    //if (password !== confirmPassword) {
+      //req.flash('error', 'Les mots de passe sont différents.');
+      //return res.redirect('/signup');
+    //}
     // Hash the password
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
