@@ -45,7 +45,7 @@ app.use(session({
   saveUninitialized: false,
   store: sessionStore,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    maxAge: 24 * 60 * 60 * 1000 * 30, // 1 day
     secure: process.env.NODE_ENV === 'production', // true if using HTTPS
     httpOnly: true,
     //sameSite : "none",
