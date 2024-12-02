@@ -145,7 +145,7 @@ exports.getKreatorsById = async (req, res) => {
             return res.status(404).send('Creator not found');
         }
 
-        res.render('creator', { creator });
+        res.render('kreator', { creator });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
