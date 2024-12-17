@@ -46,7 +46,20 @@ exports.postSignup = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    // req.session.userId = savedUser._id.toString();
+    
+    try {
+      const msg = {
+        to: email,
+        from: 'contact@scalevision.fr',
+        templateId: 'd-de0daf39888d4a689abaf6ea32f99c12',
+        
+      };
+      await sgMail.send(msg);
+      console.log('Email sent');
+    } catch (err) {
+      console.error('Erreur lors de l\'envoi de l\'email :', err);
+      req.flash('error', 'Une erreur est survenue lors de l\'envoi de l\'email. Veuillez réessayer.');
+    }
 
     // Authenticate the user after successful signup
     req.logIn(savedUser, function (err) {
@@ -180,7 +193,7 @@ exports.postForgotPassword = async (req, res) => {
     const msg = {
       to: user.email,
       from: 'contact@scalevision.fr',
-      subject: '[Scalevision] - Réinitialisation du mot de passe',
+      subject: '[Kreators] - Réinitialisation du mot de passe',
       text: `Vous recevez cet email parce que vous (ou quelqu'un d'autre) avez demandé la réinitialisation du mot de passe de votre compte.\n\n
       Veuillez cliquer sur le lien suivant, ou copiez-le dans votre navigateur pour compléter le processus dans l'heure qui suit:\n\n
       ${resetURL}\n\n
