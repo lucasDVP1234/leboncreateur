@@ -47,7 +47,7 @@ exports.postSignup = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    
     
     try {
       const msg = {
