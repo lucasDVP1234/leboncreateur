@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const Campaign = require('../models/Campaign'); // Import Campaign
 const Creator = require('../models/Creator'); // Import Creator if needed
 const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Render Signup Page
 exports.getSignup = (req, res) => {
@@ -46,6 +47,7 @@ exports.postSignup = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     
     try {
       const msg = {
