@@ -1,9 +1,10 @@
 // controllers/userController.js
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const crypto = require('crypto');
 const Campaign = require('../models/Campaign'); // Import Campaign
 const Creator = require('../models/Creator'); // Import Creator if needed
-
+const sgMail = require('@sendgrid/mail');
 
 // Render Signup Page
 exports.getSignup = (req, res) => {
@@ -146,3 +147,109 @@ exports.getAccount = async (req, res) => {
       res.status(500).send('Error fetching campaigns.');
     }
   };
+
+  // Render Forgot Password Page
+exports.getForgotPassword = (req, res) => {
+  res.render('forgot');
+};
+
+// Handle Forgot Password Form Submission
+exports.postForgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      req.flash('error', 'Aucun compte trouvé avec cet e-mail.');
+      return res.redirect('/forgot');
+    }
+
+    // Generate reset token
+    const token = crypto.randomBytes(20).toString('hex');
+
+    // Set token and expiration on user
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+
+    const resetURL = `${process.env.BASE_URL}/reset/${token}`;
+
+    // Send the email
+    const msg = {
+      to: user.email,
+      from: 'contact@scalevision.fr',
+      subject: '[Scalevision] - Réinitialisation du mot de passe',
+      text: `Vous recevez cet email parce que vous (ou quelqu'un d'autre) avez demandé la réinitialisation du mot de passe de votre compte.\n\n
+      Veuillez cliquer sur le lien suivant, ou copiez-le dans votre navigateur pour compléter le processus dans l'heure qui suit:\n\n
+      ${resetURL}\n\n
+      Si vous n'avez pas demandé ceci, veuillez ignorer cet email et votre mot de passe restera inchangé.\n`
+  };
+
+  await sgMail.send(msg);
+
+    req.flash('success', 'Un email vous a été envoyé avec les instructions pour réinitialiser votre mot de passe.');
+    res.redirect('/forgot');
+  } catch (err) {
+    console.error('Erreur lors de la demande de réinitialisation du mot de passe:', err);
+    req.flash('error', 'Une erreur est survenue, veuillez réessayer plus tard.');
+    res.redirect('/forgot');
+  }
+};
+
+// Render Reset Password Page
+exports.getResetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const user = await User.findOne({ 
+      resetPasswordToken: token, 
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+    if (!user) {
+      req.flash('error', 'Le lien de réinitialisation du mot de passe est invalide ou a expiré.');
+      return res.redirect('/forgot');
+    }
+    res.render('reset', { token });
+  } catch (err) {
+    console.error(err);
+    req.flash('error', 'Une erreur est survenue.');
+    res.redirect('/forgot');
+  }
+};
+
+// Handle Reset Password Form Submission
+exports.postResetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+      req.flash('error', 'Les mots de passe ne correspondent pas.');
+      return res.redirect('back');
+    }
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      req.flash('error', 'Le lien de réinitialisation du mot de passe est invalide ou a expiré.');
+      return res.redirect('/forgot');
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    req.flash('success', 'Votre mot de passe a été réinitialisé avec succès! Vous pouvez maintenant vous connecter.');
+    res.redirect('/login');
+  } catch (err) {
+    console.error('Erreur lors de la réinitialisation du mot de passe:', err);
+    req.flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+    res.redirect('/forgot');
+  }
+};

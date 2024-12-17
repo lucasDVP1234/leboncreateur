@@ -46,4 +46,11 @@ router.post('/signup', (req, res, next) => {
     next();
 }, userController.postSignup);
 
+router.get('/forgot', userController.getForgotPassword);
+router.post('/forgot', userController.postForgotPassword);
+
+// Reset Password Routes
+router.get('/reset/:token', userController.getResetPassword);
+router.post('/reset/:token', userController.postResetPassword);
+
 module.exports = router;
