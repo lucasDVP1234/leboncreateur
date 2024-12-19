@@ -39,10 +39,19 @@
         Tarif
       </a>
       <!-- Call to Action Buttons -->
-      <a href="#" class="flex items-center transform hover:scale-105 hover:rotate-3 px-4 py-2 text-sm font-medium text-blue-950 bg-white rounded-lg transition duration-200 shadow-sm" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
-        <img src="/images/demo.png" alt="Démo" class="w-6 h-6 mr-1">
-        Démo
-      </a>
+      <a href="#" 
+    class="relative flex items-center transform hover:scale-105 hover:rotate-3 px-4 py-2 text-sm font-medium text-blue-950 bg-white rounded-lg transition duration-200 shadow-sm"
+    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/scalevision/planifier-une-demonstration?hide_event_type_details=0&hide_gdpr_banner=1&text_color=092f6a&primary_color=092f6a'});return false;">
+
+    <img src="/images/demo.png" alt="Démo" class="w-6 h-6 mr-1">
+    Démo
+
+    <!-- Notification badge -->
+    <span 
+      class="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 inline-flex w-4 h-4 bg-red-500 border-2 border-white rounded-full">
+    </span>
+  </a>
+      
       <a href="/signup" class="flex transform hover:scale-105 hover:rotate-3 items-center px-4 py-2 text-sm font-medium text-white bg-blue-950 rounded-lg transition duration-200 shadow-sm">
         <img src="/images/campagne.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
         Créer une campagne
