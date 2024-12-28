@@ -62,6 +62,19 @@ exports.postSignup = async (req, res) => {
       console.error('Erreur lors de l\'envoi de l\'email :', err);
       req.flash('error', 'Une erreur est survenue lors de l\'envoi de l\'email. Veuillez réessayer.');
     }
+    try {
+      const msg = {
+        to: email,
+        from: 'contact@scalevision.fr',
+        templateId: 'd-255935cfaa014329a5055036f4a2ffe4',
+        
+      };
+      await sgMail.send(msg);
+      console.log('Email sent');
+    } catch (err) {
+      console.error('Erreur lors de l\'envoi de l\'email :', err);
+      req.flash('error', 'Une erreur est survenue lors de l\'envoi 2 de l\'email. Veuillez réessayer.');
+    }
 
     // Authenticate the user after successful signup
     req.logIn(savedUser, function (err) {
