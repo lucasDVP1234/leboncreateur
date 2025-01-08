@@ -4,15 +4,22 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const Campaign = require('../models/Campaign'); // Import Campaign
 const Creator = require('../models/Creator'); // Import Creator if needed
+const Createur = require('../models/Createur'); // Import Creator if needed
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Render Signup Page
 exports.getSignup = (req, res) => {
   if (req.isAuthenticated()) {
-    return res.redirect('/account');
+    return res.redirect('/signup');
   }
-  res.render('signup');
+  res.render('creators');
+};
+exports.getSignupCreateur = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/account-createur');
+  }
+  res.render('signup-createur');
 };
 
 // Handle Signup
@@ -49,35 +56,111 @@ exports.postSignup = async (req, res) => {
     const savedUser = await newUser.save();
     
     
-    try {
-      const msg = {
-        to: email,
-        from: 'contact@scalevision.fr',
-        templateId: 'd-de0daf39888d4a689abaf6ea32f99c12',
+    // try {
+    //   const msg = {
+    //     to: email,
+    //     from: 'contact@scalevision.fr',
+    //     templateId: 'd-de0daf39888d4a689abaf6ea32f99c12',
         
-      };
-      await sgMail.send(msg);
-      console.log('Email sent');
-    } catch (err) {
-      console.error('Erreur lors de l\'envoi de l\'email :', err);
-      req.flash('error', 'Une erreur est survenue lors de l\'envoi de l\'email. Veuillez réessayer.');
-    }
-    try {
-      const msg = {
-        to: email,
-        from: 'contact@scalevision.fr',
-        templateId: 'd-255935cfaa014329a5055036f4a2ffe4',
+    //   };
+    //   await sgMail.send(msg);
+    //   console.log('Email sent');
+    // } catch (err) {
+    //   console.error('Erreur lors de l\'envoi de l\'email :', err);
+    //   req.flash('error', 'Une erreur est survenue lors de l\'envoi de l\'email. Veuillez réessayer.');
+    // }
+    // try {
+    //   const msg = {
+    //     to: email,
+    //     from: 'contact@scalevision.fr',
+    //     templateId: 'd-255935cfaa014329a5055036f4a2ffe4',
         
-      };
-      await sgMail.send(msg);
-      console.log('Email sent');
-    } catch (err) {
-      console.error('Erreur lors de l\'envoi de l\'email :', err);
-      req.flash('error', 'Une erreur est survenue lors de l\'envoi 2 de l\'email. Veuillez réessayer.');
-    }
+    //   };
+    //   await sgMail.send(msg);
+    //   console.log('Email sent');
+    // } catch (err) {
+    //   console.error('Erreur lors de l\'envoi de l\'email :', err);
+    //   req.flash('error', 'Une erreur est survenue lors de l\'envoi 2 de l\'email. Veuillez réessayer.');
+    // }
 
     // Authenticate the user after successful signup
-    req.logIn(savedUser, function (err) {
+    req.logIn({savedUser}, function (err) {
+      if (err) {
+        req.flash('error', 'Une erreur est survenue lors de la connexion.');
+        return res.redirect('/');
+      }
+      return res.redirect('/creators');
+    });
+  } catch (err) {
+    console.error('Erreur lors de l\'inscription :', err);
+    req.flash('error', 'Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+    res.redirect('/signup');
+  }
+};
+
+// Handle Signup Createur
+exports.postSignupCreateur = async (req, res) => {
+  try {
+    const email = req.body.email.toLowerCase().trim();
+    const pseudo = req.body.pseudo;
+    const password = req.body.password;
+    // const confirmPassword = req.body.confirmPassword;
+
+    // Check if passwords match
+    //if (password !== confirmPassword) {
+      //req.flash('error', 'Les mots de passe sont différents.');
+      //return res.redirect('/signup');
+    //}
+    // Hash the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+
+    // Check if the email already exists
+    const existingCreateur = await Createur.findOne({ email: email });
+    if (existingCreateur) {
+      req.flash('error', 'Un compte avec cet e-mail existe déjà. Veuillez vous connecter ou utiliser un autre e-mail.');
+      return res.redirect('/signup-createur');
+    }
+
+    const newCreateur = new Createur({
+      email: email,
+      pseudo: pseudo,
+      password: hashedPassword,
+    });
+
+    const savedCreateur = await newCreateur.save();
+    
+    
+    // try {
+    //   const msg = {
+    //     to: email,
+    //     from: 'contact@scalevision.fr',
+    //     templateId: 'd-de0daf39888d4a689abaf6ea32f99c12',
+        
+    //   };
+    //   await sgMail.send(msg);
+    //   console.log('Email sent');
+    // } catch (err) {
+    //   console.error('Erreur lors de l\'envoi de l\'email :', err);
+    //   req.flash('error', 'Une erreur est survenue lors de l\'envoi de l\'email. Veuillez réessayer.');
+    // }
+    // try {
+    //   const msg = {
+    //     to: email,
+    //     from: 'contact@scalevision.fr',
+    //     templateId: 'd-255935cfaa014329a5055036f4a2ffe4',
+        
+    //   };
+    //   await sgMail.send(msg);
+    //   console.log('Email sent');
+    // } catch (err) {
+    //   console.error('Erreur lors de l\'envoi de l\'email :', err);
+    //   req.flash('error', 'Une erreur est survenue lors de l\'envoi 2 de l\'email. Veuillez réessayer.');
+    // }
+
+    // Authenticate the user after successful signup
+    req.logIn({savedCreateur}, function (err) {
       if (err) {
         req.flash('error', 'Une erreur est survenue lors de la connexion.');
         return res.redirect('/');
@@ -125,51 +208,108 @@ exports.setPassword = async (req, res) => {
 exports.getAccount = async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
-      if (!user.name || !user.job) {
+      if (!user.email) {
+      // Redirect to the campaign details form if user info is incomplete
+        return res.redirect('/creators');
+      }
+      // // Find all campaigns for the logged-in user and populate the creator names
+      // const campaigns = await Campaign.find({ userId: req.user._id })
+      //   .populate('creatorIds', 'name profileImage'); // Populate creators' names
+  
+      
+  
+      // // Map campaigns to include the creators' names and count of creators
+      // const campaignsWithCreators = campaigns.map((campaign) => {
+      //   let creators = [];
+      //   if (Array.isArray(campaign.creatorIds)) {
+      //     // campaign.creatorIds is an array
+      //     creators = campaign.creatorIds.map((creator) => ({
+      //       name : creator.name, 
+      //       photo : creator.profileImage
+      //     }));
+
+      //   } else if (campaign.creatorIds) {
+      //     // campaign.creatorIds is a single object
+      //     creators = [{
+      //       name: campaign.creatorIds.name,
+      //       photo: campaign.creatorIds.profileImage,
+      //     }];
+      //   } else {
+      //     // campaign.creatorIds is undefined or null
+      //     creators = [];
+      //   }
+  
+      //   const creatorCount = creators.length;
+  
+      //   return {
+      //     creators,
+      //     creatorCount,
+      //     budget: campaign.budget,
+      //     date: campaign.date ? campaign.date.toDateString() : 'N/A',
+      //     status: campaign.status,
+      //   };
+      // });
+      
+  
+      // Render the account page with the campaigns and the user info
+      //res.render('account', { campaigns: campaignsWithCreators, user: req.user });
+      res.render('account', {user: req.user });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error fetching campaigns.');
+    }
+  };
+
+
+  // Render Account Createur Page
+exports.getAccountCreateur = async (req, res) => {
+    try {
+      const createur = await Createur.findById(req.user._id);
+      if (!createur.pseudo || !createur.email) {
       // Redirect to the campaign details form if user info is incomplete
         return res.redirect('/creators');
       }
       // Find all campaigns for the logged-in user and populate the creator names
-      const campaigns = await Campaign.find({ userId: req.user._id })
-        .populate('creatorIds', 'name profileImage'); // Populate creators' names
+      // const campaigns = await Campaign.find({ userId: req.createur._id })
+      //   .populate('creatorIds', 'name profileImage'); // Populate creators' names
   
       
   
-      // Map campaigns to include the creators' names and count of creators
-      const campaignsWithCreators = campaigns.map((campaign) => {
-        let creators = [];
-        if (Array.isArray(campaign.creatorIds)) {
-          // campaign.creatorIds is an array
-          creators = campaign.creatorIds.map((creator) => ({
-            name : creator.name, 
-            photo : creator.profileImage
-          }));
+      // // Map campaigns to include the creators' names and count of creators
+      // const campaignsWithCreators = campaigns.map((campaign) => {
+      //   let creators = [];
+      //   if (Array.isArray(campaign.creatorIds)) {
+      //     // campaign.creatorIds is an array
+      //     creators = campaign.creatorIds.map((creator) => ({
+      //       name : creator.name, 
+      //       photo : creator.profileImage
+      //     }));
 
-        } else if (campaign.creatorIds) {
-          // campaign.creatorIds is a single object
-          creators = [{
-            name: campaign.creatorIds.name,
-            photo: campaign.creatorIds.profileImage,
-          }];
-        } else {
-          // campaign.creatorIds is undefined or null
-          creators = [];
-        }
+      //   } else if (campaign.creatorIds) {
+      //     // campaign.creatorIds is a single object
+      //     creators = [{
+      //       name: campaign.creatorIds.name,
+      //       photo: campaign.creatorIds.profileImage,
+      //     }];
+      //   } else {
+      //     // campaign.creatorIds is undefined or null
+      //     creators = [];
+      //   }
   
-        const creatorCount = creators.length;
+      //   const creatorCount = creators.length;
   
-        return {
-          creators,
-          creatorCount,
-          budget: campaign.budget,
-          date: campaign.date ? campaign.date.toDateString() : 'N/A',
-          status: campaign.status,
-        };
-      });
+      //   return {
+      //     creators,
+      //     creatorCount,
+      //     budget: campaign.budget,
+      //     date: campaign.date ? campaign.date.toDateString() : 'N/A',
+      //     status: campaign.status,
+      //   };
+      // });
       
   
       // Render the account page with the campaigns and the user info
-      res.render('account', { campaigns: campaignsWithCreators, user: req.user });
+      res.render('account-createur', { createur: req.createur });
     } catch (err) {
       console.error(err);
       res.status(500).send('Error fetching campaigns.');

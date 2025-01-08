@@ -24,6 +24,17 @@ router.get('/login', (req, res, next) => {
     next();
 }, authController.getLogin);
 
+// Local Authentication Routes Createur
+router.get('/login-createur', (req, res, next) => {
+    console.log('GET /login createur');
+    next();
+}, authController.getLoginCreateur);
+
+router.post('/login-createur', (req, res, next) => {
+    console.log('POST /login with body createur:', req.body);
+    next();
+}, authController.postLoginCreateur);
+
 router.post('/login', (req, res, next) => {
     console.log('POST /login with body:', req.body);
     next();
@@ -45,6 +56,17 @@ router.post('/signup', (req, res, next) => {
     console.log('POST /signup with body:', req.body);
     next();
 }, userController.postSignup);
+
+// Signup Createur Routes
+router.get('/signup-createur', (req, res, next) => {
+    console.log('GET /signup-createur');
+    next();
+}, userController.getSignupCreateur);
+
+router.post('/signup-createur', (req, res, next) => {
+    console.log('POST /signup createur with body:', req.body);
+    next();
+}, userController.postSignupCreateur);
 
 router.get('/forgot', userController.getForgotPassword);
 router.post('/forgot', userController.postForgotPassword);

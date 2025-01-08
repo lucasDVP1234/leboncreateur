@@ -8,6 +8,7 @@ const path = require('path');
 const routes = require('./routes');
 const indexRoutes = require('./routes/index');
 const Creator = require('./models/Creator');
+const Createur = require('./models/Createur');
 const creatorsRoutes = require('./routes/creators');
 const flash = require('connect-flash'); 
 

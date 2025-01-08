@@ -22,20 +22,20 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 font-montserrat">
+<body class="bg-gradient-to-r from-white to-orange-50 font-montserrat">
     <%- include('header-login') %>
     <div class="container mx-auto px-4 py-12">
-        <div class="bg-gray-50 p-10 ">
+        <div class="p-10 ">
             <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.name %></span></h1>
             <h2 class="text-lg text-gray-600 mb-4">Compte : <%= user.email %></h2>
             
-                <h2 class="text-lg text-gray-600">Compte Marque</h2>
-              
+                <h2 class="text-lg text-gray-600">Compte Créateur</h2>
+            
             
                 <div class="mb-4 mt-4">
-                  <a href="/creators/add" class="inline-flex items-center mr-2 px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
+                  <a href="/profile-createur" class="inline-flex items-center mr-2 px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
                     bg-white text-blue-950"><img src="/images/plus.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-                    Ajouter un créateur
+                    Modifier sa carte
                   </a>
                   <a href="/creators/edit" class="inline-flex items-center px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
                     bg-white text-blue-950"><img src="/images/11.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
@@ -44,12 +44,11 @@
                 
                   
                 </div>
-              
-
-        
+            
+            
 
             <!-- Set Password Form -->
-            <div class="bg-white w-1/4 p-8 rounded-2xl shadow-md">
+            <div class="bg-white w-1/4 mt-10 items-center p-8 rounded-2xl shadow-md">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Ajouter un mot de passe</h2>
                 <form action="/set-password" method="POST" class="space-y-6">
                     <div>

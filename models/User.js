@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
         unique: true, // Enforce uniqueness
     },
     name: String,
+    surname: String,
+    number: String,
     companyName: {
         type: String,
         required: true,

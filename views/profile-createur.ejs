@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Modifier votre Profil (Createur)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tailwind.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <%- include('header-login') %>
+
+  <!-- Main Container -->
+  <div class="container flex flex-col items-center justify-center mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-8 text-blue-950 drop-shadow-lg text-center">Compléter votre Profil Createur</h1>
+    
+    <!-- Display success or error messages -->
+    <div class="container mx-auto px-4">
+      <% if (success_messages && success_messages.length > 0) { %>
+        <% success_messages.forEach(function(message){ %>
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded my-2">
+            <span><%= message %></span>
+          </div>
+        <% }) %>
+      <% } %>
+      <% if (error_messages && error_messages.length > 0) { %>
+        <% error_messages.forEach(function(message){ %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2">
+            <span><%= message %></span>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+
+    <!-- Form container -->
+    <div class="w-full max-w-lg bg-white shadow-xl rounded-2xl p-8">
+      <!-- 
+        1) Use the "multipart/form-data" enctype to handle file uploads.
+        2) Route => POST /profile-createur (or wherever you handle your update logic).
+      -->
+      <form action="/profile-createur" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <!-- Pseudo -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Pseudo *</label>
+          <input
+            type="text"
+            name="pseudo"
+            value="<%= createur.pseudo %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+            required
+          >
+        </div>
+        
+        <!-- Email (Read-only if you prefer) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            name="email"
+            value="<%= createur.email %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-100"
+            readonly
+          >
+        </div>
+
+        <!-- Numéro de Téléphone -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Numéro de Téléphone</label>
+          <input
+            type="tel"
+            name="number"
+            value="<%= createur.number %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+        </div>
+
+        <!-- Genre -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Genre</label>
+          <select
+            name="genre"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+            <option value="">Choisissez votre genre</option>
+            <option value="Homme" <%= createur.genre === 'Homme' ? 'selected' : '' %>>Homme</option>
+            <option value="Femme" <%= createur.genre === 'Femme' ? 'selected' : '' %>>Femme</option>
+            <option value="Autre" <%= createur.genre === 'Autre' ? 'selected' : '' %>>Autre</option>
+          </select>
+        </div>
+
+        <!-- Âge -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Âge</label>
+          <input
+            type="number"
+            name="age"
+            value="<%= createur.age %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea
+            name="description"
+            rows="4"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          ><%= createur.description %></textarea>
+        </div>
+
+        <!-- Country -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Pays</label>
+          <input
+            type="text"
+            name="country"
+            value="<%= createur.country %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+        </div>
+
+        <!-- Langues -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Langues parlées</label>
+          <!-- 
+            If you want multiple select:
+            <select multiple name="langue[]" class="..."> 
+              ...
+            </select> 
+          -->
+          <input
+            type="text"
+            name="langue"
+            value="<%= createur.langue ? createur.langue.join(', ') : '' %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+            placeholder="Séparez par des virgules, ex: Français, Anglais, Espagnol"
+          >
+        </div>
+
+        <!-- Atouts (similarly could be multi-values) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Atouts</label>
+          <input
+            type="text"
+            name="atout"
+            value="<%= createur.atout ? createur.atout.join(', ') : '' %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+            placeholder="Séparez par des virgules, ex: Drôle, Créatif, ..."
+          >
+        </div>
+
+        <!-- Insta -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Instagram</label>
+          <input
+            type="text"
+            name="insta"
+            value="<%= createur.insta %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+            placeholder="@votrecompte"
+          >
+        </div>
+
+        <!-- Profile Image Upload -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Photo de Profil</label>
+          <% if (createur.profileImage) { %>
+            <!-- Show current image if it exists -->
+            <img
+              src="<%= createur.profileImage %>"
+              alt="Profile Image"
+              class="mt-2 w-24 h-24 object-cover rounded-full border"
+            >
+          <% } %>
+          <input
+            type="file"
+            name="profileImage"
+            accept="image/*"
+            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+          <small class="text-gray-500">Format: JPG, PNG, etc.</small>
+        </div>
+
+        <!-- Portfolio Images (multiple) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Portfolio (images)</label>
+          <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
+            <div class="mt-2 grid grid-cols-3 gap-2">
+              <% createur.portfolioImages.forEach(img => { %>
+                <img
+                  src="<%= img %>"
+                  alt="Portfolio"
+                  class="w-24 h-24 object-cover rounded-md border"
+                >
+              <% }) %>
+            </div>
+          <% } %>
+          <input
+            type="file"
+            name="portfolioImages"
+            accept="image/*"
+            multiple
+            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+          <small class="text-gray-500">Vous pouvez sélectionner plusieurs fichiers</small>
+        </div>
+
+        <!-- Marque Logos (multiple) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Logos de vos marques (optionnel)</label>
+          <% if (createur.marqueLogo && createur.marqueLogo.length > 0) { %>
+            <div class="mt-2 grid grid-cols-3 gap-2">
+              <% createur.marqueLogo.forEach(logo => { %>
+                <img
+                  src="<%= logo %>"
+                  alt="Marque Logo"
+                  class="w-24 h-24 object-cover rounded-md border"
+                >
+              <% }) %>
+            </div>
+          <% } %>
+          <input
+            type="file"
+            name="marqueLogo"
+            accept="image/*"
+            multiple
+            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+        </div>
+
+        <!-- Videos (multiple) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Vidéos (optionnel)</label>
+          <% if (createur.videos && createur.videos.length > 0) { %>
+            <!-- Display existing video links or thumbnails -->
+            <ul class="mt-2 list-disc list-inside">
+              <% createur.videos.forEach(video => { %>
+                <li>
+                  <a href="<%= video %>" target="_blank" class="text-blue-600 hover:underline">
+                    <%= video %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
+          <input
+            type="file"
+            name="videos"
+            accept="video/*"
+            multiple
+            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+          >
+          <small class="text-gray-500">Vous pouvez sélectionner plusieurs vidéos</small>
+        </div>
+
+        <!-- Show phone / show email booleans -->
+        <div class="flex items-center space-x-4">
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              name="shownum"
+              class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              <%= createur.shownum ? 'checked' : '' %>
+            >
+            <span class="ml-2 text-sm text-gray-700">Afficher mon numéro publiquement</span>
+          </label>
+          
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              name="showemail"
+              class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              <%= createur.showemail ? 'checked' : '' %>
+            >
+            <span class="ml-2 text-sm text-gray-700">Afficher mon email publiquement</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full text-lg font-semibold flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-950 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+          >
+            Enregistrer les modifications
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

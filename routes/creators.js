@@ -3,6 +3,8 @@ const express = require('express');
 const creatorController = require('../controllers/creatorController');
 const { ensureAuthenticated } = require('../middlewares/auth');
 const { isAdmin } = require('../middlewares/auth');
+const upload = require('../middlewares/upload');
+const handleFileUpload = require('../middlewares/handleFileUpload');
 const router = express.Router();
 
 // Creators Page
@@ -21,7 +23,19 @@ router.post('/creators/edit', creatorController.postEditCreator);
 router.get('/creators', creatorController.getCreators);
 router.get('/', creatorController.getCreators);
 
-
+router.get('/profile-createur', ensureAuthenticated, creatorController.showProfile);
+router.post(
+    '/profile-createur',
+    ensureAuthenticated,
+    // Use Multer for multiple fields
+    handleFileUpload([
+      { name: 'profileImage', maxCount: 1 },
+      { name: 'portfolioImages', maxCount: 10 },
+      { name: 'marqueLogo', maxCount: 10 },
+      { name: 'videos', maxCount: 10 }
+    ]),
+    creatorController.updateProfile
+  );
 
 router.get('/creators/:id', creatorController.getCreatorsById);
 

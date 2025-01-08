@@ -27,53 +27,47 @@
         <!-- Logo -->
         <a href="/">
           <img
-            src="/images/leboncreateur.png"
+            src="/images/leboncreateur2.png"
             alt="Company Logo"
-            class="h-12 w-auto mx-auto transform hover:scale-105 hover:rotate-1 px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
-            <% if (currentUrl === '/') { %>
-              bg-white text-black ring-2 ring-orange-300
-            <% } else { %>
-              text-black bg-white hover:ring-2 hover:ring-orange-500
-            <% } %>"
+            class="h-14 w-auto mx-auto"
           />
         </a>
-        <!-- Subtitle -->
-        <img
-          src="/images/prixunique2.png"
-          alt="Sous-titre"
-          class="mt-4 h-10 w-auto mx-auto"
-        />
       </div>
     
       <!-- Desktop Navigation in top-right corner -->
-      <nav class="hidden md:flex space-x-4 absolute top-2 right-8">
-        <a href="/creators" class="flex transform hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
-        <% if (currentUrl === '/creators') { %>
+      <nav class="hidden md:flex space-x-8 mt-6 absolute top-2 right-8">
+        <a href="/signup-createur" class="flex transform shadow-[0_0_5px_rgba(0,0,0,0.3)] hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200
+        <% if (currentUrl === '/login') { %>
           bg-white text-black ring-2 ring-orange-500
         <% } else { %>
           text-black bg-white hover:ring-2 hover:ring-orange-500
         <% } %>">
-          <img src="/images/plus.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
-          Ajouter son profil
+          
+          Ajouter votre profil
+          <span 
+      class="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 inline-flex w-4 h-4 bg-orange-400 border-2 border-white rounded-full">
+    </span>
         </a>
-        <a href="/creators" class="flex transform hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
+        <a href="/login" class="flex transform shadow-[0_0_10px_rgba(0,0,0,0.3)] hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 
         <% if (currentUrl === '/favoris') { %>
           bg-white text-black ring-2 ring-orange-500
         <% } else { %>
           text-black bg-white hover:ring-2 hover:ring-orange-500
         <% } %>">
-          <img src="/images/coeurvide.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
+          <img src="/images/12.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
           
         </a>
-        <a href="/account" class="flex items-center transform hover:scale-105 hover:rotate-1 px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
+        <a href="/login" class="flex items-center shadow-[0_0_5px_rgba(0,0,0,0.3)] transform hover:scale-105 hover:rotate-1 px-4 py-2 text-sm font-medium rounded-lg transition duration-200
         <% if (currentUrl === '/account') { %>
           bg-white text-black ring-2 ring-orange-500
         <% } else { %>
           text-black bg-white hover:ring-2 hover:ring-orange-500
         <% } %>">
           <img src="/images/11.png" alt="Mon compte" class="w-6 h-6">
-          
         </a>
+        <a href="/logout" class="flex items-center transform hover:scale-105 hover:rotate-3 px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-[0_0_5px_rgba(0,0,0,0.3)] text-blue-950 bg-white hover:ring-2 hover:ring-orange-500">
+          <img src="/images/10.png" alt="Déconnexion" class="w-6 h-6">
+      </a>
       </nav>
     
       <!-- Mobile Menu Button (also in top-right) -->
