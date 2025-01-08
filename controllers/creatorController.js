@@ -61,65 +61,7 @@ exports.getCreators = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
-exports.getKreators = async (req, res) => {
-    try {
-        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts, genres } = req.query;
 
-        // Build query object
-        let query = {};
-
-        if (categories) {
-            query.category = { $in: categories.split(',') };
-        }
-
-        if (videoTypes) {
-            query.videoTypes = { $in: videoTypes.split(',') };
-        }
-
-        if (ageMin || ageMax) {
-            query.age = {};
-            if (ageMin) query.age.$gte = parseInt(ageMin);
-            if (ageMax) query.age.$lte = parseInt(ageMax);
-        }
-
-        if (countries) {
-            query.country = { $in: countries.split(',') };
-        }
-        if (langues) {
-            query.langue = { $in: langues.split(',') };
-        }
-        if (atouts) {
-            query.atout = { $in: atouts.split(',') };
-        }
-        if (genres) {
-            query.genre = { $in: genres.split(',') };
-        }
-
-        // Fetch creators based on query
-        const creators = await Creator.find(query);
-
-        // Fetch categories and videoTypes for filters
-        const categoriesList = await Creator.distinct('category');
-        const videoTypesList = await Creator.distinct('videoTypes');
-        const countriesList = await Creator.distinct('country');
-        const languesList = await Creator.distinct('langue');
-        const atoutsList = await Creator.distinct('atout');
-        const genresList = await Creator.distinct('genre');
-
-        res.render('kreators', {
-            creators,
-            categories: categoriesList,
-            videoTypes: videoTypesList,
-            countries: countriesList,
-            langues: languesList,
-            atouts: atoutsList,
-            genres: genresList,
-        });
-    } catch (err) {
-        console.error('Error fetching creators:', err.message);
-        res.status(500).send('Server Error');
-    }
-};
 
 exports.getCreatorsById = async (req, res) => {
     try {
@@ -131,21 +73,6 @@ exports.getCreatorsById = async (req, res) => {
         }
 
         res.render('creator', { creator });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server Error');
-    }
-};
-exports.getKreatorsById = async (req, res) => {
-    try {
-        const creatorId = req.params.id;
-        const creator = await Creator.findById(creatorId);
-
-        if (!creator) {
-            return res.status(404).send('Creator not found');
-        }
-
-        res.render('kreator', { creator });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');

@@ -18,13 +18,14 @@ router.get('/creators/edit', creatorController.getEditCreator);
 
 router.post('/creators/edit', creatorController.postEditCreator);
 
-router.get('/creators', ensureAuthenticated, creatorController.getCreators);
+router.get('/creators', creatorController.getCreators);
+router.get('/', creatorController.getCreators);
 
-router.get('/kreators', creatorController.getKreators);
 
-router.get('/creators/:id', ensureAuthenticated, creatorController.getCreatorsById);
 
-router.get('/kreators/:id', creatorController.getKreatorsById);
+router.get('/creators/:id', creatorController.getCreatorsById);
+
+
 
 
 
