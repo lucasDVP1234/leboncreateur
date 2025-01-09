@@ -32,6 +32,10 @@ const createurSchema = new mongoose.Schema({
     },
     shownum :Boolean,
     showemail :Boolean,
+    isCardActive: {
+        type: Boolean,
+        default: false,
+      },
 
 });
 
