@@ -75,7 +75,7 @@ exports.getCreatorByPseudo = async (req, res) => {
     }
 
     // Render the same 'creator' page you used for getCreatorsById
-    res.render('creator', { createur });
+    res.render('creator', { createur,user: req.user || null  });
   } catch (error) {
     console.error('Error fetching creator by pseudo:', error);
     res.status(500).send('Server Error');

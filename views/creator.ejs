@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title><%= createur.name %> - Profil</title>
+    <title><%= createur.pseudo %> - Profil</title>
     <!-- Include Montserrat Font and Tailwind CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -89,6 +89,55 @@
                 </div>
             </div>
         </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 mt-6">
+            <div class="text-center space-y-2">
+              <!-- Apply blur style if no user is authenticated -->
+              <% const blurClass = (!user) ? 'blur-sm' : ''; %>
+              <% if (!user) { %>
+                <p class="text-red-600 font-semibold mb-2">
+                  <a href="/signup" class="underline hover:text-red-800">
+                    Créer un compte gratuit pour voir ses coordonnées
+                  </a>
+                </p>
+              <% } %>
+          
+              <!-- Display Email -->
+              <% if (createur.email && createur.showemail) { %>
+                
+                  <strong>Email:</strong><p class="text-gray-800 <%= blurClass %>"><%= createur.email %>
+                </p>
+              <% } %>
+              <!-- Display Phone Number -->
+              <% if (createur.number && createur.shownum) { %>
+                
+                  <strong>Téléphone:</strong><p class="text-gray-800 <%= blurClass %>"><%= createur.number %>
+                </p>
+              <% } %>
+              <% if ((!createur.email || !createur.showemail) && (!createur.number || !createur.shownum)) { %>
+                <p class="text-gray-500 italic">
+                  Ce créateur a choisi de ne pas afficher ses coordonnées.
+                </p>
+              <% } %>
+              <!-- Display Instagram -->
+              <% if (createur.insta) { %>
+                
+                  <strong>Instagram:</strong> <p class="text-gray-800 <%= blurClass %>"><%= createur.insta %>
+                </p>
+              <% } %>
+            </div>
+          
+            <div class="flex justify-center mt-6">
+                <!-- Bouton de redirection externe avec deux lignes de texte -->
+                <a href="https://calendly.com/scalevision/point-social-ads-avec-lucie" target="_blank"
+                   class="inline-flex flex-col items-center bg-gradient-to-r from-black to-orange-500 transform hover:scale-105 hover:rotate-1 hover:bg-orange-500 text-white font-semibold px-6 py-2 rounded-md shadow-md transition duration-300 text-center">
+                  
+                  <span>Pas envie de gérer votre créateur ?</span>
+                  <span class="text-xs italic mt-1">
+                    Notre agence partenaire et certifiée s'en charge !
+                  </span>
+                </a>
+              </div>
+          </div>
         <div class="rounded-2xl space-y-6 mt-6">
             <h2 class="relative text-center text-l text-black font-semibold">
                 <span class="relative inline-block px-2 py-1">

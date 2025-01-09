@@ -11,9 +11,9 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Render Signup Page
 exports.getSignup = (req, res) => {
   if (req.isAuthenticated()) {
-    return res.redirect('/signup');
+    return res.redirect('/account');
   }
-  res.render('creators');
+  res.render('signup');
 };
 exports.getSignupCreateur = (req, res) => {
   if (req.isAuthenticated()) {
