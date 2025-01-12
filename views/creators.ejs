@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="/css/tailwind.css">
 </head>
 <body class="bg-gradient-to-r from-white to-orange-50 font-montserrat">
-    <%- include('header-login') %>
+    <% if (!user) { %>
+        <!-- Visitor (not authenticated) -->
+        <%- include('header-nonlogin') %>
+      <% } else if (user.type === 'createur') { %>
+        <!-- Authenticated, but type = "createur" -->
+        <%- include('header-login') %>
+      <% } else { %>
+        <!-- Authenticated user, but not a creator -->
+        <%- include('header-login-marque') %>
+      <% } %>
 
     <!-- Main Container -->
     <div class="max-w-screen-xl mx-auto px-4 py-6">
@@ -204,7 +213,9 @@
             </h1>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                <% createurs.forEach(function(createur) { %>
+                <% createurs.forEach((createur) => {
+                    const isLiked = user && user.likedCreators && user.likedCreators.map(id => id.toString()).includes(createur._id.toString());
+                    %>
                     <div 
                     class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
                     data-creator-id="<%= createur._id %>"
@@ -241,21 +252,38 @@
                                 <h3 class="text-lg font-semibold text-black">
                                     <%= createur.pseudo %>
                                 </h3>
+
+                              
                             
-                                <!-- Add to Basket Button -->
-                                <form action="/add-to-campaign" method="POST">
-                                    <input type="hidden" name="creatorId" value="<%= createur._id %>">
-                                    <button 
+                                <% if (isLiked) { %>
+                                    <!-- If the creator is already liked, show the 'unlike' form + full heart -->
+                                    <form action="/unlike/<%= createur._id %>" method="POST">
+                                      <button 
                                         type="submit" 
                                         class="flex items-center text-sm px-2 py-1 font-medium transition duration-200 text-black focus:outline-none"
-                                    >
+                                      >
                                         <img 
-                                            src="/images/coeurvide.png" 
-                                            alt="Ajouter au panier" 
-                                            class="w-6 h-6"
+                                          src="/images/coeurfull.png"    
+                                          alt="Retirer des favoris" 
+                                          class="w-6 h-6"
                                         >
-                                    </button>
-                                </form>
+                                      </button>
+                                    </form>
+                                  <% } else { %>
+                                    <!-- If not liked, show the 'like' form + empty heart -->
+                                    <form action="/like/<%= createur._id %>" method="POST">
+                                      <button 
+                                        type="submit" 
+                                        class="flex items-center text-sm px-2 py-1 font-medium transition duration-200 text-black focus:outline-none"
+                                      >
+                                        <img 
+                                          src="/images/coeurvide.png"  
+                                          alt="Ajouter aux favoris" 
+                                          class="w-6 h-6"
+                                        >
+                                      </button>
+                                    </form>
+                                  <% } %>
                             </div>
                             
                             <!-- Creator Age -->
@@ -292,6 +320,37 @@
                                     </a>
                                 </div>
                             </div>
+                            <div class="flex items-center space-x-2 ml-28 mt-2">
+                                <!-- Show email icon if creator.email is defined and not empty -->
+                                <% if (createur.email && createur.showemail) { %>
+                                  <img 
+                                    src="/images/email.png"       
+                                    alt="Email disponible" 
+                                    class="w-5 h-5" 
+                                    title="Email disponible"
+                                  >
+                                <% } %>
+                              
+                                <!-- Show phone icon if creator.number is defined and not empty -->
+                                <% if (createur.number && createur.shownum) { %>
+                                  <img 
+                                    src="/images/phone.png"      
+                                    alt="Téléphone disponible" 
+                                    class="w-5 h-5" 
+                                    title="Téléphone disponible"
+                                  >
+                                <% } %>
+                              
+                                <!-- Show Instagram icon if creator.insta is defined and not empty -->
+                                <% if (createur.insta) { %>
+                                  <img 
+                                    src="/images/instagram.png"   
+                                    alt="Instagram disponible" 
+                                    class="w-5 h-5" 
+                                    title="Instagram disponible"
+                                  >
+                                <% } %>
+                              </div>
                         </div>
                     </div>
                 <% }); %>

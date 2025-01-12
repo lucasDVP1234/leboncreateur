@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mes Créateurs Favoris</title>
+  <!-- Include your Tailwind or other CSS here -->
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Conditionally include headers -->
+  <% if (!user) { %>
+    <%- include('header-nonlogin') %>
+  <% } else if (user.type === 'createur') { %>
+    <%- include('header-login') %>
+  <% } else { %>
+    <%- include('header-login-marque') %>
+  <% } %>
+
+  <!-- Page Title -->
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold mb-6">Mes Créateurs Favoris</h1>
+
+    <!-- Check if likedCreators is not empty -->
+    <% if (likedCreators && likedCreators.length > 0) { %>
+      <!-- Grid Layout for Creators -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        
+        <% likedCreators.forEach((creator) => { 
+             // Check if the user still has it liked (it should be, but let's keep the logic consistent)
+             const isLiked = user 
+               && user.likedCreators 
+               && user.likedCreators.map(id => id.toString()).includes(creator._id.toString());
+        %>
+
+        <div 
+          class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
+          data-creator-id="<%= creator._id %>"
+          style="background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%);"
+        >
+          <!-- Creator Image -->
+          <a href="/creators/<%= creator._id %>"> 
+            <img 
+              src="<%= creator.portfolioImages %>" 
+              alt="<%= creator.name %>" 
+              class="w-full h-48 object-cover"
+            >
+          </a>
+
+          <!-- Portfolio Bubbles -->
+          <div class="flex justify-center -mt-8">
+            <div class="bg-white p-1 rounded-full mx-1 shadow-lg">
+              <img
+                src="<%= creator.profileImage %>"
+                alt="Portfolio Image"
+                class="h-16 w-16 rounded-full object-cover portfolio-image"
+                data-image-url="<%= creator.profileImage %>"
+                tabindex="0"
+                loading="lazy"
+              >
+            </div>
+          </div>
+
+          <!-- Creator Info -->
+          <div class="p-2 -mt-8">
+            <!-- Creator Name & Like/Unlike Button -->
+            <div class="flex items-center justify-between mb-2">
+              <!-- Creator Name -->
+              <h3 class="text-lg font-semibold text-black">
+                <%= creator.pseudo %>
+              </h3>
+
+              <!-- Heart Button (Unlike if already liked, else Like) -->
+              <% if (isLiked) { %>
+                <!-- Already liked -> show 'unlike' form + full heart -->
+                <form action="/unlike/<%= creator._id %>" method="POST">
+                  <button 
+                    type="submit" 
+                    class="flex items-center text-sm px-2 py-1 font-medium transition duration-200 text-black focus:outline-none"
+                  >
+                    <img 
+                      src="/images/coeurfull.png"    
+                      alt="Retirer des favoris" 
+                      class="w-6 h-6"
+                    >
+                  </button>
+                </form>
+              <% } else { %>
+                <!-- Not liked -> show 'like' form + empty heart -->
+                <form action="/like/<%= creator._id %>" method="POST">
+                  <button 
+                    type="submit" 
+                    class="flex items-center text-sm px-2 py-1 font-medium transition duration-200 text-black focus:outline-none"
+                  >
+                    <img 
+                      src="/images/coeurvide.png"  
+                      alt="Ajouter aux favoris" 
+                      class="w-6 h-6"
+                    >
+                  </button>
+                </form>
+              <% } %>
+            </div>
+            
+            <!-- Creator Age -->
+            <p class="flex flex-wrap items-center mb-2 text-gray-600 text-sm">
+              <img src="/images/11.png" alt="Âge" class="w-5 h-5 mr-2">
+              <%= creator.age %> ans
+            </p>
+    
+            <!-- Creator Country -->
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <img src="/images/mondeblue.png" alt="Pays" class="w-5 h-5 mt-1">
+              <span class="px-2 py-1 bg-blue-100 text-blue-500 text-xs rounded-full">
+                <%= creator.country %>
+              </span>
+            </div>
+    
+            <!-- Creator 'atout' and 'Voir' button -->
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex flex-wrap gap-2">
+                <img src="/images/camvert.png" alt="Cam Icon" class="w-5 h-5 mt-1">
+                <% creator.atout.forEach(function(atout) { %>
+                  <span class="px-2 py-1 bg-orange-100 text-orange-500 text-xs rounded-full">
+                    <%= atout %>
+                  </span>
+                <% }); %>
+              </div>
+              
+              <div class="flex">
+                <a 
+                  href="/creators/<%= creator.pseudo %>" 
+                  class="flex-inline bg-white shadow-md hover:bg-orange-500 text-black hover:text-white font-bold py-1 px-4 rounded"
+                >
+                  Voir
+                </a>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2 ml-32 mt-2">
+              <!-- Show email icon if creator.email is defined and not empty -->
+              <% if (creator.email && creator.showemail) { %>
+                <img 
+                  src="/images/email.png"       
+                  alt="Email disponible" 
+                  class="w-5 h-5" 
+                  title="Email disponible"
+                >
+              <% } %>
+            
+              <!-- Show phone icon if creator.number is defined and not empty -->
+              <% if (creator.number && creator.shownum) { %>
+                <img 
+                  src="/images/phone.png"      
+                  alt="Téléphone disponible" 
+                  class="w-5 h-5" 
+                  title="Téléphone disponible"
+                >
+              <% } %>
+            
+              <!-- Show Instagram icon if creator.insta is defined and not empty -->
+              <% if (creator.insta) { %>
+                <img 
+                  src="/images/instagram.png"   
+                  alt="Instagram disponible" 
+                  class="w-5 h-5" 
+                  title="Instagram disponible"
+                >
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <% }) %><!-- end forEach -->
+      </div> <!-- end grid -->
+    <% } else { %>
+      <p>Vous n'avez aucun créateur dans vos favoris.</p>
+    <% } %>
+  </div> <!-- end container -->
+
+</body>
+</html>

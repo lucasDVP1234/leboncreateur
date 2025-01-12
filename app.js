@@ -101,7 +101,6 @@ app.use(async (req, res, next) => {
 // Routes
 app.use('/creators', creatorsRoutes); 
 app.use('/', indexRoutes);
-
 // app.js
 app.use((err, req, res, next) => {
     console.error(err.stack);

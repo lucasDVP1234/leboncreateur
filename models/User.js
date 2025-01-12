@@ -21,6 +21,11 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: { type: Date },
     job:String,
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    receivemarketing :Boolean,
+    likedCreators: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Createur'
+      }]
     
 });
 

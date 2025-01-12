@@ -163,7 +163,7 @@
 
         <!-- Profile Image Upload -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Photo de Profil</label>
+          <label class="block text-sm font-medium text-gray-700">Photo de Profil - 500x500</label>
           <% if (createur.profileImage) { %>
             <!-- Show current image if it exists -->
             <img
@@ -183,7 +183,7 @@
 
         <!-- Portfolio Images (multiple) -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Portfolio (images)</label>
+          <label class="block text-sm font-medium text-gray-700">Bannière (image) - 1000x500</label>
           <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
             <div class="mt-2 grid grid-cols-3 gap-2">
               <% createur.portfolioImages.forEach(img => { %>

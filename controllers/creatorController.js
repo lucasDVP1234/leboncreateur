@@ -52,6 +52,7 @@ exports.getCreators = async (req, res) => {
 
         res.render('creators', {
           createurs,
+          user: req.user || null,
             categories: categoriesList,
             videoTypes: videoTypesList,
             countries: countriesList,
@@ -82,115 +83,6 @@ exports.getCreatorByPseudo = async (req, res) => {
   }
 };
 
-// exports.getAddCreator = async (req, res) => {
-//     try {
-//         res.render('addCreator');
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Server Error');
-//     }
-// };
-
-  
-// exports.postAddCreator = async (req, res) => {
-// try {
-//     const {
-//     name,
-//     age,
-//     country,
-//     langue,
-//     profileImage,
-//     portfolioImages,
-//     videoTypes,
-//     category,
-//     genre,
-//     atout,
-//     videos,
-//     } = req.body;
-
-//     // Create a new Creator instance
-//     const newCreator = new Creator({
-//     name,
-//     age,
-//     country,
-//     langue,
-//     profileImage,
-//     genre,
-//     portfolioImages: portfolioImages.split(','), // Assuming comma-separated URLs
-//     videoTypes: videoTypes.split(','), // Assuming comma-separated types
-//     category: category.split(','), // Assuming comma-separated types
-//     atout: atout.split(','), // Assuming comma-separated types
-//     videos: videos.split(','), // Assuming comma-separated types
-//     });
-
-//     await newCreator.save();
-
-//     res.redirect('/creators'); // Redirect to creators list or wherever appropriate
-// } catch (err) {
-//     console.error('Error adding creator:', err.message);
-//     res.status(500).send('Error adding creator.');
-// }
-// };
-
-// exports.getEditCreator = async (req, res) => {
-//     try {
-//         const creators = await Creator.find({}, 'name _id');
-
-//         // If a creator ID is provided in the query, fetch that creator
-//         let creator = null;
-//         if (req.query.creatorId) {
-//             creator = await Creator.findById(req.query.creatorId);
-//         }
-
-//         res.render('editCreator', {
-//             creators,
-//             creator,
-//         });
-//     } catch (error) {
-//         console.error('Error fetching creator for edit:', error.message);
-//         res.status(500).send('Server Error');
-//     }
-// };
-
-// exports.postEditCreator = async (req, res) => {
-//     try {
-//         const creatorId = req.body.creatorId;
-//         const {
-//             name,
-//             age,
-//             country,
-//             langue,
-//             profileImage,
-//             portfolioImages,
-//             videoTypes,
-//             category,
-//             genre,
-//             atout,
-//             videos,
-//         } = req.body;
-
-//         const updatedData = {
-//             name,
-//             age,
-//             country,
-//             langue,
-//             profileImage,
-//             genre,
-//             portfolioImages: portfolioImages.split(',').filter(Boolean),
-//             videoTypes: videoTypes.split(',').filter(Boolean),
-//             category: category.split(',').filter(Boolean),
-//             atout: atout.split(',').filter(Boolean),
-//             videos: videos.split(',').filter(Boolean),
-//         };
-
-//         await Creator.findByIdAndUpdate(creatorId, updatedData);
-
-//         res.redirect('/creators'); // Redirect to creators list or wherever appropriate
-//     } catch (error) {
-//         console.error('Error updating creator:', error.message);
-//         res.status(500).send('Error updating creator.');
-//     }
-// };
 
 
 exports.showProfile = async (req, res) => {
@@ -200,7 +92,7 @@ exports.showProfile = async (req, res) => {
         req.flash('error', 'Créateur introuvable.');
         return res.redirect('/');
       }
-      res.render('profile-createur', { createur });
+      res.render('profile-createur', { createur,user: req.user || null });
     } catch (err) {
       console.error('Error fetching createur profile:', err);
       req.flash('error', 'Erreur lors de la récupération du profil.');

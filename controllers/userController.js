@@ -2,7 +2,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const crypto = require('crypto');
-const Campaign = require('../models/Campaign'); // Import Campaign
 const Creator = require('../models/Creator'); // Import Creator if needed
 const Createur = require('../models/Createur'); // Import Creator if needed
 const sgMail = require('@sendgrid/mail');
@@ -28,7 +27,12 @@ exports.postSignup = async (req, res) => {
     const email = req.body.email.toLowerCase().trim();
     const companyName = req.body.companyName;
     const password = req.body.password;
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const phoneNumber = req.body.number;
     // const confirmPassword = req.body.confirmPassword;
+
+    const receiveMarketing = req.body.receivemarketing === 'on';
 
     // Check if passwords match
     //if (password !== confirmPassword) {
@@ -51,6 +55,10 @@ exports.postSignup = async (req, res) => {
       email: email,
       companyName: companyName,
       password: hashedPassword,
+      name: name,          // <--- store first name
+      surname: surname,    // <--- store last name
+      number: phoneNumber,
+      receivemarketing: receiveMarketing,
     });
 
     const savedUser = await newUser.save();
@@ -253,7 +261,7 @@ exports.getAccount = async (req, res) => {
   
       // Render the account page with the campaigns and the user info
       //res.render('account', { campaigns: campaignsWithCreators, user: req.user });
-      res.render('account', {user: req.user });
+      res.render('account', {user: req.user || null });
     } catch (err) {
       console.error(err);
       res.status(500).send('Error fetching campaigns.');
@@ -309,7 +317,7 @@ exports.getAccountCreateur = async (req, res) => {
       
   
       // Render the account page with the campaigns and the user info
-      res.render('account-createur', { createur: req.createur });
+      res.render('account-createur', { createur: req.createur,user: req.user || null });
     } catch (err) {
       console.error(err);
       res.status(500).send('Error fetching campaigns.');
@@ -419,5 +427,76 @@ exports.postResetPassword = async (req, res) => {
     console.error('Erreur lors de la réinitialisation du mot de passe:', err);
     req.flash('error', 'Une erreur est survenue. Veuillez réessayer.');
     res.redirect('/forgot');
+  }
+};
+
+exports.likeCreators= async (req, res) => {
+  try {
+    const creatorId = req.params.creatorId;
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      req.flash('error', 'Utilisateur introuvable.');
+      return res.redirect('/creators');
+    }
+
+    // Check if the creatorId is already in the user's likedCreators
+    if (!user.likedCreators.includes(creatorId)) {
+      user.likedCreators.push(creatorId);
+      await user.save();
+      req.flash('success', 'Créateur ajouté à vos favoris.');
+    } else {
+      req.flash('info', 'Ce créateur est déjà dans vos favoris.');
+    }
+
+    res.redirect('/creators'); // or wherever you want to redirect
+  } catch (err) {
+    console.error('Error liking creator:', err);
+    req.flash('error', 'Impossible d\'ajouter le créateur à vos favoris.');
+    res.redirect('back');
+  }
+};
+
+exports.unlikeCreators= async (req, res) => {
+  try {
+    const creatorId = req.params.creatorId;
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      req.flash('error', 'Utilisateur introuvable.');
+      return res.redirect('/creators');
+    }
+
+    // remove the creator from the array if present
+    user.likedCreators = user.likedCreators.filter(
+      (id) => id.toString() !== creatorId
+    );
+    await user.save();
+
+    req.flash('success', 'Créateur retiré de vos favoris.');
+    res.redirect('/creators');
+  } catch (err) {
+    console.error('Error unliking creator:', err);
+    req.flash('error', 'Impossible de retirer ce créateur de vos favoris.');
+    res.redirect('back');
+  }
+};
+
+exports.getLikedCreators = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id)
+      .populate('likedCreators'); // populates the full Creator docs
+
+    if (!user) {
+      req.flash('error', 'Utilisateur introuvable.');
+      return res.redirect('/');
+    }
+
+    // user.likedCreators now contains an array of Creator documents
+    res.render('likedCreators', { likedCreators: user.likedCreators });
+  } catch (err) {
+    console.error('Error fetching liked creators:', err);
+    req.flash('error', 'Impossible de récupérer vos créateurs favoris.');
+    res.redirect('/');
   }
 };

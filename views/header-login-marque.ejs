@@ -67,28 +67,30 @@
           <img src="/images/15.png" alt="Mon compte" class="w-6 h-6">
         </a>
 
-      <a href="/signup-createur" class="flex transform shadow-[0_0_5px_rgba(0,0,0,0.3)] hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200
-      <% if (currentUrl === '/login') { %>
+      <a href="/liked-creators" class="flex transform shadow-[0_0_10px_rgba(0,0,0,0.3)] hover:scale-105 hover:rotate-1 items-center px-4 py-2 text-sm font-medium rounded-lg transition duration-200 
+      <% if (currentUrl === '/liked-creators') { %>
         bg-white text-black ring-2 ring-orange-500
       <% } else { %>
         text-black bg-white hover:ring-2 hover:ring-orange-500
       <% } %>">
         
-        Ajouter votre profil
-      <span 
-        class="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 inline-flex w-4 h-4 bg-orange-400 border-2 border-white rounded-full">
-      </span>
+        <img src="/images/12.png" alt="Créer une campagne" class="w-6 h-6 mr-1">
+        
       </a>
+    
       
-      <a href="/login" class="flex items-center shadow-[0_0_5px_rgba(0,0,0,0.3)] transform hover:scale-105 hover:rotate-1 px-4 py-2 text-sm font-medium rounded-lg transition duration-200
+      
+      <!-- <a href="/login" class="flex items-center shadow-[0_0_5px_rgba(0,0,0,0.3)] transform hover:scale-105 hover:rotate-1 px-4 py-2 text-sm font-medium rounded-lg transition duration-200
       <% if (currentUrl === '/account') { %>
         bg-white text-black ring-2 ring-orange-500
       <% } else { %>
         text-black bg-white hover:ring-2 hover:ring-orange-500
       <% } %>">
         <img src="/images/11.png" alt="Mon compte" class="w-6 h-6">
-      </a>
-      
+      </a> -->
+      <a href="/logout" class="flex items-center transform hover:scale-105 hover:rotate-3 px-4 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-[0_0_5px_rgba(0,0,0,0.3)] text-blue-950 bg-white hover:ring-2 hover:ring-orange-500">
+        <img src="/images/10.png" alt="Déconnexion" class="w-6 h-6">
+    </a>
     </nav>
   
     <!-- Mobile Menu Button (also in top-right) -->

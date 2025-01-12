@@ -12,4 +12,10 @@ router.post('/set-password', ensureAuthenticated,ensureMarque, userController.se
 router.get('/account', ensureAuthenticated,ensureMarque, userController.getAccount);
 router.get('/account-createur', ensureAuthenticated,ensureCreateur, userController.getAccountCreateur);
 
+router.post('/like/:creatorId', ensureAuthenticated, userController.likeCreators);
+
+router.post('/unlike/:creatorId', ensureAuthenticated,userController.unlikeCreators);
+
+router.get('/liked-creators', ensureAuthenticated, userController.getLikedCreators);
+
 module.exports = router;

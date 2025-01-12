@@ -23,24 +23,21 @@
     </style>
 </head>
 <body class="bg-gray-50 font-montserrat">
-    <%- include('header-login') %>
+    <%- include('header-login-marque') %>
     <div class="container mx-auto px-4 py-12">
         <div class="bg-gray-50 p-10 ">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-blue-600"><%= user.name %></span></h1>
-            <h2 class="text-lg text-gray-600 mb-4">Compte : <%= user.email %></h2>
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Bienvenue, <span class="text-orange-500"><%= user.name %></span></h1>
+            <h2 class="text-lg text-gray-600 mb-4"><%= user.email %></h2>
             
                 <h2 class="text-lg text-gray-600">Compte Marque</h2>
               
             
                 <div class="mb-4 mt-4">
-                  <a href="/creators/add" class="inline-flex items-center mr-2 px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
-                    bg-white text-blue-950"><img src="/images/plus.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-                    Ajouter un créateur
+                  <a href="/liked-creators" class="inline-flex items-center mr-2 px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
+                    bg-white text-blue-950"><img src="/images/12.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
+                    Mes créateurs favoris
                   </a>
-                  <a href="/creators/edit" class="inline-flex items-center px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-sm
-                    bg-white text-blue-950"><img src="/images/11.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-                    Modifier un créateur
-                  </a>
+                  
                 
                   
                 </div>
@@ -58,7 +55,7 @@
                     <div>
                         <input type="password" name="confirmPassword" placeholder="Confirmer le mot de passe" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
                         Ajouter un mot de passe
                     </button>
                 </form>
