@@ -24,6 +24,7 @@ const createurSchema = new mongoose.Schema({
     atout :[String],
     videos :[String],
     marqueLogo :[String],
+    videoPrice : Number,
     insta :String,
     pseudo: {
         type: String,
@@ -36,6 +37,10 @@ const createurSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
       },
+    createdAt: {
+        type: Date,
+        default: Date.now, // Automatically sets to current date/time on creation
+    },
 
 });
 

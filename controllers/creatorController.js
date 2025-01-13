@@ -119,14 +119,30 @@ exports.showProfile = async (req, res) => {
       createur.insta = req.body.insta;
       createur.shownum = !!req.body.shownum;
       createur.showemail = !!req.body.showemail;
+      createur.videoPrice = req.body.videoPrice;
+      
   
       // Convert comma-separated strings back to arrays if needed
-      if (req.body.langue) {
-        createur.langue = req.body.langue.split(',').map(l => l.trim());
+      const langueData = req.body.langue;
+      let langueArray = [];
+
+      if (Array.isArray(langueData)) {
+        langueArray = langueData;
+      } else if (typeof langueData === 'string') {
+        langueArray = [langueData];
       }
-      if (req.body.atout) {
-        createur.atout = req.body.atout.split(',').map(a => a.trim());
+
+      createur.langue = langueArray;
+
+
+      const atoutData = req.body.atout;
+      let atoutArray = [];
+      if (Array.isArray(atoutData)) {
+        atoutArray = atoutData;
+      } else if (typeof atoutData === 'string') {
+        atoutArray = [atoutData];
       }
+      createur.atout = atoutArray;
   
       // 2) Handle uploads with Multer => req.files
       // Example: uploading to S3 (pseudo-code)

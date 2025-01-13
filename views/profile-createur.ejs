@@ -108,58 +108,312 @@
           ><%= createur.description %></textarea>
         </div>
 
+        <div>
+          <label class="block text-sm font-medium text-gray-700">
+            Prix moyen par vidéo (en €)
+          </label>
+          <input
+            type="number"
+            name="videoPrice"
+            step="1"
+            value="<%= createur.videoPrice %>"
+            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
+            placeholder="Exemple: 50"
+          />
+        </div>
+
         <!-- Country -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Pays</label>
-          <input
-            type="text"
-            name="country"
-            value="<%= createur.country %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
+          <label class="block text-sm font-medium text-gray-700">
+            Pays de résidence
+          </label>
+          <div class="mt-1 space-y-2">
+            <!-- France -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="France"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "France" ? "checked" : "" %>
+              />
+              <span class="ml-2">France</span>
+            </label>
+            
+            <!-- Belgium -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Belgique"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Belgique" ? "checked" : "" %>
+              />
+              <span class="ml-2">Belgique</span>
+            </label>
+            
+            <!-- Switzerland -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Suisse"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Suisse" ? "checked" : "" %>
+              />
+              <span class="ml-2">Suisse</span>
+            </label>
+            <!-- Switzerland -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Allemagne"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Allemagne" ? "checked" : "" %>
+              />
+              <span class="ml-2">Allemagne</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Espagne"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Espagne" ? "checked" : "" %>
+              />
+              <span class="ml-2">Espagne</span>
+            </label>
+            
+            <!-- Canada -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Canada"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Canada" ? "checked" : "" %>
+              />
+              <span class="ml-2">Canada</span>
+            </label>
+        
+            <!-- USA -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="États-Unis"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "États-Unis" ? "checked" : "" %>
+              />
+              <span class="ml-2">États-Unis</span>
+            </label>
+        
+            <!-- United Kingdom -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Royaume-Uni"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Royaume-Uni" ? "checked" : "" %>
+              />
+              <span class="ml-2">Royaume-Uni</span>
+            </label>
+            <!-- United Kingdom -->
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="country"
+                value="Italie"
+                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                <%= createur.country === "Italie" ? "checked" : "" %>
+              />
+              <span class="ml-2">Italie</span>
+            </label>
+        
+            <!-- Etc. Add as many countries as you want here -->
+          </div>
         </div>
 
         <!-- Langues -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Langues parlées</label>
-          <!-- 
-            If you want multiple select:
-            <select multiple name="langue[]" class="..."> 
-              ...
-            </select> 
-          -->
-          <input
-            type="text"
-            name="langue"
-            value="<%= createur.langue ? createur.langue.join(', ') : '' %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            placeholder="Séparez par des virgules, ex: Français, Anglais, Espagnol"
-          >
+          <label class="block text-sm font-medium text-gray-700">
+            Langues parlées
+          </label>
+          <div class="mt-1 space-y-2">
+            <!-- English -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Anglais"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Anglais") ? "checked" : "" %>
+              />
+              <span class="ml-2">Anglais</span>
+            </label>
+        
+            <!-- French -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Français"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Français") ? "checked" : "" %>
+              />
+              <span class="ml-2">Français</span>
+            </label>
+        
+            <!-- Spanish -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Espagnol"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Espagnol") ? "checked" : "" %>
+              />
+              <span class="ml-2">Espagnol</span>
+            </label>
+        
+            <!-- Italian -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Italien"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Italien") ? "checked" : "" %>
+              />
+              <span class="ml-2">Italien</span>
+            </label>
+        
+            <!-- Portuguese -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Portugais"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Portugais") ? "checked" : "" %>
+              />
+              <span class="ml-2">Portugais</span>
+            </label>
+        
+            <!-- German -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Allemand"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Allemand") ? "checked" : "" %>
+              />
+              <span class="ml-2">Allemand</span>
+            </label>
+        
+            <!-- Russian -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Russe"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Russe") ? "checked" : "" %>
+              />
+              <span class="ml-2">Russe</span>
+            </label>
+        
+            <!-- Chinese -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Chinois"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Chinois") ? "checked" : "" %>
+              />
+              <span class="ml-2">Chinois</span>
+            </label>
+        
+            <!-- Japanese -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Japonais"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Japonais") ? "checked" : "" %>
+              />
+              <span class="ml-2">Japonais</span>
+            </label>
+        
+            <!-- Add more languages if desired, e.g. Korean, Arabic, etc. -->
+            <label class="inline-flex items-center">
+              <input type="checkbox" name="langue" value="Arabe"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
+                createur.langue.includes("Arabe") ? "checked" : "" %>
+              />
+              <span class="ml-2">Arabe</span>
+            </label>
+          </div>
         </div>
 
         <!-- Atouts (similarly could be multi-values) -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Atouts</label>
-          <input
-            type="text"
-            name="atout"
-            value="<%= createur.atout ? createur.atout.join(', ') : '' %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            placeholder="Séparez par des virgules, ex: Drôle, Créatif, ..."
-          >
+          <label class="block text-sm font-medium text-gray-700">
+            Type de vidéo
+          </label>
+          <div class="mt-1 space-y-2">
+            <!-- UGC -->
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="atout"
+                value="UGC"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
+                <%= createur.atout && createur.atout.includes("UGC") ? "checked" : "" %>
+              />
+              <span class="ml-2">UGC</span>
+            </label>
+        
+            <!-- Micro-trottoir -->
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="atout"
+                value="Micro-trottoir"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
+                <%= createur.atout && createur.atout.includes("Micro-trottoir") ? "checked" : "" %>
+              />
+              <span class="ml-2">Micro-trottoir</span>
+            </label>
+        
+            <!-- Scénario -->
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="atout"
+                value="Scénario"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
+                <%= createur.atout && createur.atout.includes("Scénario") ? "checked" : "" %>
+              />
+              <span class="ml-2">Scénario</span>
+            </label>
+        
+            <!-- Dehors -->
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="atout"
+                value="Dehors"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
+                <%= createur.atout && createur.atout.includes("Dehors") ? "checked" : "" %>
+              />
+              <span class="ml-2">Dehors</span>
+            </label>
+        
+            <!-- Photo -->
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="atout"
+                value="Photo"
+                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
+                <%= createur.atout && createur.atout.includes("Photo") ? "checked" : "" %>
+              />
+              <span class="ml-2">Photo</span>
+            </label>
+          </div>
         </div>
 
         <!-- Insta -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Instagram</label>
+          <label class="block text-sm font-medium text-gray-700">Url Instagram</label>
           <input
             type="text"
             name="insta"
             value="<%= createur.insta %>"
             class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            placeholder="@votrecompte"
+            placeholder="https://instagram.com/votrecompte"
           >
         </div>
+
 
         <!-- Profile Image Upload -->
         <div>

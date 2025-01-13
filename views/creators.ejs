@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-gradient-to-r from-white to-orange-50 font-montserrat">
+<body class="bg-gradient-to-r from-orange-50 to-white font-montserrat">
     <% if (!user) { %>
         <!-- Visitor (not authenticated) -->
         <%- include('header-nonlogin') %>
@@ -57,7 +57,7 @@
                                     data-filter-type="Genre"
                                 >
                                     <%= genre %>
-                                </button>
+                                
                             <% }); %>
                         </div>
                     </div>
@@ -212,21 +212,27 @@
                 Contacter vos créateurs préférés !
             </h1>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                 <% createurs.forEach((createur) => {
                     const isLiked = user && user.likedCreators && user.likedCreators.map(id => id.toString()).includes(createur._id.toString());
-                    %>
+                    
+                    const THREE_DAYS = 3 * 24 * 60 * 60 * 1000;
+                    const createdTime = createur.createdAt ? createur.createdAt.getTime() : 0;
+                    const isNew = (Date.now() - createdTime) < THREE_DAYS;
+                %>
+                <div class="relative">
                     <div 
                     class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
                     data-creator-id="<%= createur._id %>"
                     style="background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%);"
                   >
+                    
                         <!-- Creator Image -->
                         <a href="/creators/<%= createur._id %>"> 
                             <img 
                                 src="<%= createur.portfolioImages %>" 
                                 alt="<%= createur.name %>" 
-                                class="w-full h-48 object-cover"
+                                class="w-full h-32 object-cover"
                             >
                         </a>
                 
@@ -320,7 +326,10 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-2 ml-28 mt-2">
+                            <h1 class="relative text-xs text-black text-center font-semibold">
+                                Contact disponible
+                            </h1>
+                            <div class="flex items-center space-x-2 ml-28">
                                 <!-- Show email icon if creator.email is defined and not empty -->
                                 <% if (createur.email && createur.showemail) { %>
                                   <img 
@@ -353,7 +362,17 @@
                               </div>
                         </div>
                     </div>
-                <% }); %>
+                    <% if (isNew) { %>
+                        <div class="absolute -top-3 -right-3 px-3 py-3 w-10 h-10 bg-blue-300 text-white flex items-center justify-center 
+                         text-xs font-semibold rounded-full animate-pulse z-30">
+                        New
+                        </div>
+                    <% } %>
+                </div>
+                
+            <% }); %>
+            
+            
             </div>
         </main>
     </div>

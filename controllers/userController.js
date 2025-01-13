@@ -432,13 +432,12 @@ exports.postResetPassword = async (req, res) => {
 
 exports.likeCreators= async (req, res) => {
   try {
+    if (!req.user || !req.user._id) {
+      req.flash('error', 'Vous devez être connecté pour ajouter un créateur à vos favoris.');
+      return res.redirect('/login');  // Redirect to login
+    }
     const creatorId = req.params.creatorId;
     const user = await User.findById(req.user._id);
-
-    if (!user) {
-      req.flash('error', 'Utilisateur introuvable.');
-      return res.redirect('/creators');
-    }
 
     // Check if the creatorId is already in the user's likedCreators
     if (!user.likedCreators.includes(creatorId)) {
@@ -453,7 +452,7 @@ exports.likeCreators= async (req, res) => {
   } catch (err) {
     console.error('Error liking creator:', err);
     req.flash('error', 'Impossible d\'ajouter le créateur à vos favoris.');
-    res.redirect('back');
+    res.redirect('/creators');
   }
 };
 
@@ -478,7 +477,7 @@ exports.unlikeCreators= async (req, res) => {
   } catch (err) {
     console.error('Error unliking creator:', err);
     req.flash('error', 'Impossible de retirer ce créateur de vos favoris.');
-    res.redirect('back');
+    res.redirect('/creators');
   }
 };
 
