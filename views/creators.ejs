@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-gradient-to-r from-orange-50 to-white font-montserrat">
+<body class="bg-gradient-to-r from-black to-black font-montserrat">
     <% if (!user) { %>
         <!-- Visitor (not authenticated) -->
         <%- include('header-nonlogin') %>
@@ -43,18 +43,18 @@
                 
 
                 <!-- All Filters in a flexible row -->
-                <div id="filters" class="flex flex-wrap bg-orange-300 rounded-full px-2 py-3 gap-6 justify-center">
+                <div id="filters" class="flex flex-wrap rounded-md px-2 py-3 gap-6 justify-center">
                     
                     <!-- Genre Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Genre
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% genres.forEach(function(genre) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-blue-300 text-white rounded-full hover:text-black hover:bg-blue-500 text-sm focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow shadow-md px-3 py-1 bg-blue-500 text-white rounded-full hover:text-black hover:bg-blue-500 text-sm focus:outline-none"
                                     data-filter="<%= genre %>" 
                                     data-filter-type="Genre"
                                 >
@@ -66,14 +66,14 @@
 
                     <!-- Caméra Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Catégorie
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% categories.forEach(function(category) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-green-300 text-white rounded-full hover:text-black hover:bg-green-500 text-sm focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow shadow-md px-3 py-1 bg-green-500 text-white rounded-full hover:text-black hover:bg-green-500 text-sm focus:outline-none"
                                     data-filter="<%= category %>" 
                                     data-filter-type="Category"
                                 >
@@ -85,14 +85,14 @@
                     
                     <!-- Type de vidéo Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Type de vidéo
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% videoTypes.forEach(function(type) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-orange-300 text-white rounded-full text-sm hover:text-black hover:bg-orange-500 focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow px-3 py-1 bg-orange-500 text-white rounded-full text-sm hover:text-black hover:bg-orange-500 focus:outline-none"
                                     data-filter="<%= type %>" 
                                     data-filter-type="Type of Videos"
                                 >
@@ -104,7 +104,7 @@
 
                     <!-- Age Selector -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Âge
                           </h3>
                         <div class="flex items-center space-x-2 justify-center">
@@ -112,7 +112,7 @@
                                 type="number" 
                                 name="ageMin2" 
                                 id="age-min" 
-                                class="w-20 px-2 py-1 border rounded" 
+                                class="w-20 px-2 py-1 border rounded shadow-white-glow" 
                                 placeholder="Min" 
                                 min="0" 
                                 max="100" 
@@ -123,7 +123,7 @@
                                 type="number" 
                                 name="ageMax2" 
                                 id="age-max" 
-                                class="w-20 px-2 py-1 border rounded" 
+                                class="w-20 px-2 py-1 border rounded shadow-white-glow" 
                                 placeholder="Max" 
                                 min="0" 
                                 max="99" 
@@ -134,14 +134,14 @@
 
                     <!-- Pays Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Pays
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% countries.forEach(function(country) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-yellow-300 text-white rounded-full hover:text-black hover:bg-yellow-500 text-sm focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow px-3 py-1 bg-yellow-500 text-white rounded-full hover:text-black hover:bg-yellow-500 text-sm focus:outline-none"
                                     data-filter="<%= country %>" 
                                     data-filter-type="Country"
                                 >
@@ -153,14 +153,14 @@
 
                     <!-- Langue Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Langues
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% langues.forEach(function(langue) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-red-300 text-white rounded-full hover:text-black hover:bg-red-500 text-sm focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow px-3 py-1 bg-red-500 text-white rounded-full hover:text-black hover:bg-red-500 text-sm focus:outline-none"
                                     data-filter="<%= langue %>" 
                                     data-filter-type="Langue"
                                 >
@@ -173,14 +173,14 @@
 
                     <!-- Spécial Filter -->
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2 text-center">
+                        <h3 class="text-sm font-semibold text-gray-200 mb-2 text-center">
                             Type de vidéo
                           </h3>
                         <div class="flex flex-wrap gap-2 justify-center">
                             <% atouts.forEach(function(atout) { %>
                                 <button 
                                     type="button" 
-                                    class="filter-button font-semibold shadow-md px-3 py-1 bg-gray-300 text-white rounded-full hover:text-black hover:bg-gray-500 text-sm focus:outline-none"
+                                    class="filter-button font-semibold shadow-white-glow px-3 py-1 bg-gray-500 text-white rounded-full hover:text-black hover:bg-gray-500 text-sm focus:outline-none"
                                     data-filter="<%= atout %>" 
                                     data-filter-type="Atout"
                                 >
@@ -220,7 +220,7 @@
 
             
 
-            <h1 class="relative text-l text-black text-center font-semibold mb-8">
+            <h1 class="relative text-l text-white text-center font-semibold mb-8">
                 <span class="relative inline-block px-4 py-1 mr-2">
                     <span class="absolute inset-0 bg-orange-500 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
                     <span class="relative font-semibold text-l text-white z-10">
@@ -240,7 +240,7 @@
                 %>
                 <div class="relative">
                     <div 
-                    class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
+                    class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative shadow-white-glow"
                     data-creator-id="<%= createur._id %>"
                     style="background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%);"
                   >
@@ -381,7 +381,7 @@
                         </div>
                     </div>
                     <% if (isNew) { %>
-                        <div class="absolute -top-3 -right-3 px-3 py-3 w-10 h-10 bg-blue-300 text-white flex items-center justify-center 
+                        <div class="absolute -top-3 -right-3 px-3 py-3 w-10 h-10 bg-blue-500 text-white flex items-center justify-center 
                          text-xs font-semibold rounded-full animate-pulse z-30">
                         New
                         </div>

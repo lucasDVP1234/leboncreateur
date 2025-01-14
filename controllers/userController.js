@@ -432,7 +432,8 @@ exports.postResetPassword = async (req, res) => {
 
 exports.likeCreators= async (req, res) => {
   try {
-    if (!req.user || !req.user._id) {
+    
+    if (!req.user || !req.user._id || req.user.type !== 'user' ) {
       req.flash('error', 'Vous devez être connecté pour ajouter un créateur à vos favoris.');
       return res.redirect('/login');  // Redirect to login
     }

@@ -12,9 +12,9 @@ router.post('/set-password', ensureAuthenticated,ensureMarque, userController.se
 router.get('/account', ensureAuthenticated,ensureMarque, userController.getAccount);
 router.get('/account-createur', ensureAuthenticated,ensureCreateur, userController.getAccountCreateur);
 
-router.post('/like/:creatorId',ensureMarque, userController.likeCreators);
+router.post('/like/:creatorId', userController.likeCreators);
 
-router.post('/unlike/:creatorId',ensureMarque, userController.unlikeCreators);
+router.post('/unlike/:creatorId', userController.unlikeCreators);
 
 router.get('/liked-creators', ensureAuthenticated, userController.getLikedCreators);
 

@@ -5,7 +5,7 @@
   <title>Mes Créateurs Favoris</title>
   <!-- Include your Tailwind or other CSS here -->
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-black text-white">
 
   <!-- Conditionally include headers -->
   <% if (!user) { %>
@@ -33,7 +33,7 @@
         %>
 
         <div 
-          class="creator-card transform hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
+          class="creator-card transform shadow-white-glow hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
           data-creator-id="<%= creator._id %>"
           style="background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%);"
         >

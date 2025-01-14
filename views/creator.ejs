@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-gradient-to-r from-orange-50 to-white font-montserrat">
+<body class="bg-gradient-to-r from-black to-black font-montserrat">
     <% if (!user) { %>
         <!-- Visitor (not authenticated) -->
         <%- include('header-nonlogin') %>
@@ -28,7 +28,7 @@
             
         </a>
         <!-- Profile Card with Cover Image -->
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-white-glow shadow-md overflow-hidden">
             <!-- Cover Image Section -->
             <div class="relative">
                 <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-2xl shadow-md p-6 mt-6">
+        <div class="bg-white rounded-2xl shadow-white-glow shadow-md p-6 mt-6">
             <div class="text-center space-y-2">
               <!-- Apply blur style if no user is authenticated -->
               <% const blurClass = (!user) ? 'blur-sm' : ''; %>
@@ -174,7 +174,7 @@
               
               </h2>
         </div>
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden mt-6">
+        <div class="bg-white shadow-white-glow rounded-2xl shadow-md overflow-hidden mt-6">
             <!-- Section Title -->
             <div class="px-6 pt-6">
                 <h2 class="text-2xl font-semibold text-orange-500 mb-4">Portfolio Vidéos</h2>

@@ -24,6 +24,9 @@ module.exports = {
           600: '#059669',
         },
       },
+      boxShadow: {
+        'white-glow': '0 0 10px 5px rgba(255, 152, 0, 0.7)',
+      },
     },
   },
   plugins: [
