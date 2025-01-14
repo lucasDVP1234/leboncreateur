@@ -5,13 +5,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-black min-h-screen">
   <!-- Header -->
   <%- include('header-login') %>
 
   <!-- Main Container -->
   <div class="container flex flex-col items-center justify-center mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-8 text-black drop-shadow-lg text-center">Compléter votre Profil Createur</h1>
+    <h1 class="text-3xl font-bold mb-8 text-white drop-shadow-lg text-center">Compléter votre Profil Createur</h1>
     
     <!-- Display success or error messages -->
     <div class="container mx-auto px-4">
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Form container -->
-    <div class="w-full max-w-lg bg-white shadow-xl rounded-2xl p-8">
+    <div class="w-full max-w-lg bg-white shadow-white-glow rounded-2xl p-8">
       <!-- 
         1) Use the "multipart/form-data" enctype to handle file uploads.
         2) Route => POST /profile-createur (or wherever you handle your update logic).
