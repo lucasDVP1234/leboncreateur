@@ -120,21 +120,17 @@ exports.showProfile = async (req, res) => {
       createur.shownum = !!req.body.shownum;
       createur.showemail = !!req.body.showemail;
       createur.videoPrice = req.body.videoPrice;
-      
   
-      // Convert comma-separated strings back to arrays if needed
+      // 2) Convert multi-checkbox fields (langue, atout)
       const langueData = req.body.langue;
       let langueArray = [];
-
       if (Array.isArray(langueData)) {
         langueArray = langueData;
       } else if (typeof langueData === 'string') {
         langueArray = [langueData];
       }
-
       createur.langue = langueArray;
-
-
+  
       const atoutData = req.body.atout;
       let atoutArray = [];
       if (Array.isArray(atoutData)) {
@@ -144,8 +140,27 @@ exports.showProfile = async (req, res) => {
       }
       createur.atout = atoutArray;
   
-      // 2) Handle uploads with Multer => req.files
-      // Example: uploading to S3 (pseudo-code)
+      // 3) Remove selected videos
+      // (req.body.removeVideos could be an array of video URLs to remove)
+      const removeVideos = req.body.removeVideos; 
+      // If user didn’t check any remove box, removeVideos could be undefined
+      if (removeVideos) {
+        // Ensure it's an array
+        const removeArray = Array.isArray(removeVideos) ? removeVideos : [removeVideos];
+        createur.videos = createur.videos.filter(videoUrl => !removeArray.includes(videoUrl));
+      }
+      const removeLogos = req.body.removeLogos;
+      if (removeLogos) {
+        const removeArray = Array.isArray(removeLogos) ? removeLogos : [removeLogos];
+        if (createur.marqueLogo && createur.marqueLogo.length > 0) {
+          createur.marqueLogo = createur.marqueLogo.filter(
+            logoUrl => !removeArray.includes(logoUrl)
+          );
+        }
+      }
+  
+      // 4) Handle file uploads
+      // "profileImage", "portfolioImages", "marqueLogo", "videos" from multer
       if (req.files['profileImage']) {
         const profileImageFile = req.files['profileImage'][0];
         createur.profileImage = profileImageFile.location;
@@ -153,41 +168,36 @@ exports.showProfile = async (req, res) => {
   
       if (req.files['portfolioImages'] && req.files['portfolioImages'][0]) {
         const portfolioFile = req.files['portfolioImages'][0];
-        // Option A: Replace any existing portfolio image
         createur.portfolioImages = [portfolioFile.location];
-        // Option B (if you want to simply overwrite a single element if exists):
-      // createur.portfolioImages[0] = portfolioFile.location;
       }
   
-      // Marque Logo (multiple?)
+      // Marque Logo
       if (req.files['marqueLogo']) {
-        const logoFiles = req.files['marqueLogo'];
-        for (const file of logoFiles) {
+        if (!createur.marqueLogo) createur.marqueLogo = [];
+        req.files['marqueLogo'].forEach(file => {
           createur.marqueLogo.push(file.location);
-        }
+        });
       }
   
-      // Videos (multiple)
+      // New videos
       if (req.files['videos']) {
-        const videoFiles = req.files['videos'];
-        for (const file of videoFiles) {
+        if (!createur.videos) createur.videos = [];
+        req.files['videos'].forEach(file => {
           createur.videos.push(file.location);
-        }
+        });
       }
   
-  
-      // 3) Save
+      // 5) Save
       await createur.save();
-  
       req.flash('success', 'Profil mis à jour avec succès !');
-      res.redirect('/profile-createur');
+      res.redirect('/account-createur');
+  
     } catch (err) {
       console.error('Error updating createur profile:', err);
       req.flash('error', 'Erreur lors de la mise à jour du profil.');
-      res.redirect('/profile-createur');
+      res.redirect('/account-createur');
     }
   };
-
   // controllers/creatorController.js
 exports.activateCard = async (req, res) => {
   try {

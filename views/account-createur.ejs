@@ -58,7 +58,7 @@
                   <% if (user.isCardActive) { %>
                     <form action="/deactivate-card" method="POST">
                       <button type="submit"
-                              class="inline-flex items-center bg-gradient-to-r from-red-500 to-black transform hover:scale-105 hover:rotate-1 text-white font-semibold px-6 py-2 rounded-lg shadow-md">
+                              class="inline-flex mb-2 items-center bg-gradient-to-r from-red-500 to-black transform hover:scale-105 hover:rotate-1 text-white font-semibold px-6 py-2 rounded-lg shadow-md">
                         Désactiver ma carte
                       </button>
                     </form>
@@ -194,6 +194,40 @@
                             
                         </div>
                     </div>
+                    <div class="bg-white rounded-2xl shadow-white-glow shadow-md p-6 mt-6">
+                        <div class="text-center space-y-2">
+                          
+                          
+                          
+                      
+                          
+                          <% if (user.email && user.showemail) { %>
+                            
+                              <strong>Email:</strong><p class="text-gray-800"><%= user.email %>
+                            </p>
+                          <% } %>
+                          <!-- Display Phone Number -->
+                          <% if (user.number && user.shownum) { %>
+                            
+                              <strong>Téléphone:</strong><p class="text-gray-800"><%= user.number %>
+                            </p>
+                          <% } %>
+                          <% if ((!user.email || !user.showemail) && (!user.number || !user.shownum)) { %>
+                            <p class="text-gray-500 italic">
+                              Vous avez choisi de ne pas afficher vos coordonnées.
+                            </p>
+                          <% } %>
+                          <!-- Display Instagram -->
+                          <% if (user.insta) { %>
+                            
+                              <strong>Instagram:</strong> <p class="text-gray-800"><%= user.insta %>
+                            </p>
+                          <% } %>
+                        </div>
+                      
+                        
+                      </div>
+
                     <div class="rounded-2xl space-y-6 mt-6">
                         <h2 class="relative text-center text-l text-black font-semibold">
                             <span class="relative inline-block px-2 py-1">

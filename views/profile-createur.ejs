@@ -37,496 +37,415 @@
         1) Use the "multipart/form-data" enctype to handle file uploads.
         2) Route => POST /profile-createur (or wherever you handle your update logic).
       -->
-      <form action="/profile-createur" method="POST" enctype="multipart/form-data" class="space-y-6">
-        <!-- Pseudo -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Pseudo *</label>
-          <input
-            type="text"
-            name="pseudo"
-            value="<%= createur.pseudo %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            required
-          >
-        </div>
-        
-        <!-- Email (Read-only if you prefer) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value="<%= createur.email %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-100"
-            readonly
-          >
-        </div>
-
-        <!-- Numéro de Téléphone -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Numéro de Téléphone</label>
-          <input
-            type="tel"
-            name="number"
-            value="<%= createur.number %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-        </div>
-
-        <!-- Genre -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Genre</label>
-          <select
-            name="genre"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-            <option value="">Choisissez votre genre</option>
-            <option value="Homme" <%= createur.genre === 'Homme' ? 'selected' : '' %>>Homme</option>
-            <option value="Femme" <%= createur.genre === 'Femme' ? 'selected' : '' %>>Femme</option>
-            <option value="Autre" <%= createur.genre === 'Autre' ? 'selected' : '' %>>Autre</option>
-          </select>
-        </div>
-
-        <!-- Âge -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Âge</label>
-          <input
-            type="number"
-            name="age"
-            value="<%= createur.age %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-        </div>
-
-        <!-- Description -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            name="description"
-            rows="4"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          ><%= createur.description %></textarea>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">
-            Prix moyen par vidéo (en €)
-          </label>
-          <input
-            type="number"
-            name="videoPrice"
-            step="1"
-            value="<%= createur.videoPrice %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            placeholder="Exemple: 50"
-          />
-        </div>
-
-        <!-- Country -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">
-            Pays de résidence
-          </label>
-          <div class="mt-1 space-y-2">
-            <!-- France -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="France"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "France" ? "checked" : "" %>
-              />
-              <span class="ml-2">France</span>
-            </label>
-            
-            <!-- Belgium -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Belgique"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Belgique" ? "checked" : "" %>
-              />
-              <span class="ml-2">Belgique</span>
-            </label>
-            
-            <!-- Switzerland -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Suisse"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Suisse" ? "checked" : "" %>
-              />
-              <span class="ml-2">Suisse</span>
-            </label>
-            <!-- Switzerland -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Allemagne"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Allemagne" ? "checked" : "" %>
-              />
-              <span class="ml-2">Allemagne</span>
-            </label>
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Espagne"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Espagne" ? "checked" : "" %>
-              />
-              <span class="ml-2">Espagne</span>
-            </label>
-            
-            <!-- Canada -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Canada"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Canada" ? "checked" : "" %>
-              />
-              <span class="ml-2">Canada</span>
-            </label>
-        
-            <!-- USA -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="États-Unis"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "États-Unis" ? "checked" : "" %>
-              />
-              <span class="ml-2">États-Unis</span>
-            </label>
-        
-            <!-- United Kingdom -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Royaume-Uni"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Royaume-Uni" ? "checked" : "" %>
-              />
-              <span class="ml-2">Royaume-Uni</span>
-            </label>
-            <!-- United Kingdom -->
-            <label class="inline-flex items-center">
-              <input
-                type="radio"
-                name="country"
-                value="Italie"
-                class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
-                <%= createur.country === "Italie" ? "checked" : "" %>
-              />
-              <span class="ml-2">Italie</span>
-            </label>
-        
-            <!-- Etc. Add as many countries as you want here -->
-          </div>
-        </div>
-
-        <!-- Langues -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">
-            Langues parlées
-          </label>
-          <div class="mt-1 space-y-2">
-            <!-- English -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Anglais"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Anglais") ? "checked" : "" %>
-              />
-              <span class="ml-2">Anglais</span>
-            </label>
-        
-            <!-- French -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Français"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Français") ? "checked" : "" %>
-              />
-              <span class="ml-2">Français</span>
-            </label>
-        
-            <!-- Spanish -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Espagnol"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Espagnol") ? "checked" : "" %>
-              />
-              <span class="ml-2">Espagnol</span>
-            </label>
-        
-            <!-- Italian -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Italien"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Italien") ? "checked" : "" %>
-              />
-              <span class="ml-2">Italien</span>
-            </label>
-        
-            <!-- Portuguese -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Portugais"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Portugais") ? "checked" : "" %>
-              />
-              <span class="ml-2">Portugais</span>
-            </label>
-        
-            <!-- German -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Allemand"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Allemand") ? "checked" : "" %>
-              />
-              <span class="ml-2">Allemand</span>
-            </label>
-        
-            <!-- Russian -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Russe"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Russe") ? "checked" : "" %>
-              />
-              <span class="ml-2">Russe</span>
-            </label>
-        
-            <!-- Chinese -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Chinois"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Chinois") ? "checked" : "" %>
-              />
-              <span class="ml-2">Chinois</span>
-            </label>
-        
-            <!-- Japanese -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Japonais"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Japonais") ? "checked" : "" %>
-              />
-              <span class="ml-2">Japonais</span>
-            </label>
-        
-            <!-- Add more languages if desired, e.g. Korean, Arabic, etc. -->
-            <label class="inline-flex items-center">
-              <input type="checkbox" name="langue" value="Arabe"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500" <%=createur.langue &&
-                createur.langue.includes("Arabe") ? "checked" : "" %>
-              />
-              <span class="ml-2">Arabe</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Atouts (similarly could be multi-values) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">
-            Type de vidéo
-          </label>
-          <div class="mt-1 space-y-2">
-            <!-- UGC -->
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                name="atout"
-                value="UGC"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
-                <%= createur.atout && createur.atout.includes("UGC") ? "checked" : "" %>
-              />
-              <span class="ml-2">UGC</span>
-            </label>
-        
-            <!-- Micro-trottoir -->
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                name="atout"
-                value="Micro-trottoir"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
-                <%= createur.atout && createur.atout.includes("Micro-trottoir") ? "checked" : "" %>
-              />
-              <span class="ml-2">Micro-trottoir</span>
-            </label>
-        
-            <!-- Scénario -->
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                name="atout"
-                value="Scénario"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
-                <%= createur.atout && createur.atout.includes("Scénario") ? "checked" : "" %>
-              />
-              <span class="ml-2">Scénario</span>
-            </label>
-        
-            
-        
-            <!-- Photo -->
-            <label class="inline-flex items-center">
-              <input
-                type="checkbox"
-                name="atout"
-                value="Photo"
-                class="h-4 w-4 text-orange-600 border-gray-300 rounded-md focus:ring-orange-500"
-                <%= createur.atout && createur.atout.includes("Photo") ? "checked" : "" %>
-              />
-              <span class="ml-2">Photo</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Insta -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Url Instagram</label>
-          <input
-            type="text"
-            name="insta"
-            value="<%= createur.insta %>"
-            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-            placeholder="https://instagram.com/votrecompte"
-          >
-        </div>
-
-
-        <!-- Profile Image Upload -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Photo de Profil - 500x500 - MAX 5 MB</label>
-          <% if (createur.profileImage) { %>
-            <!-- Show current image if it exists -->
-            <img
-              src="<%= createur.profileImage %>"
-              alt="Profile Image"
-              class="mt-2 w-24 h-24 object-cover rounded-full border"
+      <form 
+          action="/profile-createur"
+          method="POST"
+          enctype="multipart/form-data"
+          class="space-y-6"
+        >
+          <!-- Pseudo -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Pseudo *</label>
+            <input
+              type="text"
+              name="pseudo"
+              value="<%= user.pseudo %>"
+              required
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
             >
-          <% } %>
-          <input
-            type="file"
-            name="profileImage"
-            accept="image/*"
-            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-          <small class="text-gray-500">Format: JPG, PNG, etc.</small>
-        </div>
+          </div>
 
-        <!-- Portfolio Images (multiple) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Bannière (image) - 1000x500 - MAX 5MB</label>
-          <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
-            <div class="mt-2">
+          <!-- Email (Read-only if you prefer) -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value="<%= user.email %>"
+              readonly
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-100"
+            >
+          </div>
+
+          <!-- Number, Genre, Age, Description, Video Price, etc. -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Numéro de Téléphone</label>
+            <input
+              type="tel"
+              name="number"
+              value="<%= user.number %>"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Genre</label>
+            <select
+              name="genre"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+            >
+              <option value="">Choisissez votre genre</option>
+              <option value="Homme" <%= user.genre === 'Homme' ? 'selected' : '' %>>Homme</option>
+              <option value="Femme" <%= user.genre === 'Femme' ? 'selected' : '' %>>Femme</option>
+              <option value="Autre" <%= user.genre === 'Autre' ? 'selected' : '' %>>Autre</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Âge</label>
+            <input
+              type="number"
+              name="age"
+              value="<%= user.age %>"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea
+              name="description"
+              rows="4"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+            ><%= user.description %></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Prix moyen par vidéo (en €)
+            </label>
+            <input
+              type="number"
+              name="videoPrice"
+              step="1"
+              value="<%= user.videoPrice %>"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+              placeholder="Ex: 50"
+            />
+          </div>
+
+          <!-- Country (radio), languages (checkboxes), atouts (checkboxes) -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Pays de résidence</label>
+            <div class="mt-1 space-y-2">
+              <% let countries = ["France","Belgique","Suisse","Allemagne","Espagne","Canada","États-Unis","Royaume-Uni","Italie"]; %>
+              <% countries.forEach((c) => { %>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="country"
+                    value="<%= c %>"
+                    class="h-4 w-4 text-orange-600 border-gray-300 focus:ring-orange-500"
+                    <%= user.country === c ? 'checked' : '' %>
+                  />
+                  <span class="ml-2"><%= c %></span>
+                </label>
+              <% }); %>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Langues parlées</label>
+            <div class="mt-1 space-y-2">
+              <% let allLangs = ["Anglais","Français","Espagnol","Italien","Portugais","Allemand","Russe","Chinois","Japonais","Arabe"]; %>
+              <% allLangs.forEach((lang) => { %>
+                <label class="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="langue"
+                    value="<%= lang %>"
+                    class="h-4 w-4 text-orange-600 rounded-md border-gray-300 focus:ring-orange-500"
+                    <%= user.langue && user.langue.includes(lang) ? "checked" : "" %>
+                  />
+                  <span class="ml-2"><%= lang %></span>
+                </label><br/>
+              <% }); %>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Types de vidéo</label>
+            <div class="mt-1 space-y-2">
+              <% let atouts = ["UGC","Micro-trottoir","Scénario","Photo"]; %>
+              <% atouts.forEach((a) => { %>
+                <label class="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="atout"
+                    value="<%= a %>"
+                    class="h-4 w-4 text-orange-600 rounded-md border-gray-300 focus:ring-orange-500"
+                    <%= user.atout && user.atout.includes(a) ? "checked" : "" %>
+                  />
+                  <span class="ml-2"><%= a %></span>
+                </label><br/>
+              <% }); %>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Url Instagram</label>
+            <input
+              type="text"
+              name="insta"
+              value="<%= user.insta %>"
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
+              placeholder="https://instagram.com/votrecompte"
+            >
+          </div>
+
+          <!-- Show phone / show email checkboxes -->
+          <div class="flex items-center space-x-4 mt-2">
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                name="shownum"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                <%= user.shownum ? 'checked' : '' %>
+              >
+              <span class="ml-2 text-sm text-gray-700">Afficher mon numéro publiquement</span>
+            </label>
+            
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                name="showemail"
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                <%= user.showemail ? 'checked' : '' %>
+              >
+              <span class="ml-2 text-sm text-gray-700">Afficher mon email publiquement</span>
+            </label>
+          </div>
+
+          <!-- Profile Image Upload -->
+          <div class="flex flex-col items-center">
+            <label class="block text-sm font-medium text-gray-700">
+              Photo de Profil (Max 5MB)
+            </label>
+            
+            <!-- Display current profile image if available -->
+            <% if (user.profileImage) { %>
               <img
-                src="<%= createur.portfolioImages[0] %>"
-                alt="Portfolio"
-                class="w-24 h-24 object-cover rounded-md border"
+                src="<%= user.profileImage %>"
+                alt="Profile Image"
+                class="mt-4 w-24 h-24 object-cover rounded-full border shadow-md"
+              >
+            <% } %>
+            
+            <div class="mt-4">
+              <!-- Custom styled button triggers file selection -->
+              <label for="profileImage" 
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                Choisir une image
+              </label>
+              <!-- Hidden native file input -->
+              <input
+                type="file"
+                id="profileImage"
+                name="profileImage"
+                accept="image/*"
+                class="hidden"
               >
             </div>
-          <% } %>
-          <input
-            type="file"
-            name="portfolioImages"
-            accept="image/*"
-            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-        </div>
-        <!-- Marque Logos (multiple) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Logos de vos marques (optionnel) - MAX 5MB</label>
-          <% if (createur.marqueLogo && createur.marqueLogo.length > 0) { %>
-            <div class="mt-2 grid grid-cols-3 gap-2">
-              <% createur.marqueLogo.forEach(logo => { %>
-                <img
-                  src="<%= logo %>"
-                  alt="Marque Logo"
-                  class="w-24 h-24 object-cover rounded-md border"
-                >
-              <% }) %>
+            <div id="profileImagePreview" class="mt-4"></div>
+          </div>
+
+          <!-- Banner/Portfolio Images (1 max in your example) -->
+          <div class="flex flex-col items-center">
+            <label class="block text-sm font-medium text-gray-700">
+              Bannière (image) - 1000x500 - MAX 5MB
+            </label>
+            <% if (user.portfolioImages && user.portfolioImages.length > 0) { %>
+              <img
+                src="<%= user.portfolioImages[0] %>"
+                alt="Portfolio"
+                class="mt-2 w-48 h-24 object-cover rounded-md border mx-auto"
+              >
+            <% } %>
+            <div class="mt-4 flex justify-center">
+              <label for="portfolioImages" 
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                Choisir une image
+              </label>
+              <input
+                type="file"
+                id="portfolioImages"
+                name="portfolioImages"
+                accept="image/*"
+                class="hidden"
+              >
             </div>
-          <% } %>
-          <input
-            type="file"
-            name="marqueLogo"
-            accept="image/*"
-            multiple
-            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-          <small class="text-gray-500">Vous pouvez sélectionner plusieurs fichiers</small>
-        </div>
+            <div id="portfolioImagesPreview" class="mt-4"></div>
+          </div>
 
-        <!-- Videos (multiple) -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Vidéos - MAX 100MB</label>
-          <% if (createur.videos && createur.videos.length > 0) { %>
-            <!-- Display existing video links or thumbnails -->
-            <ul class="mt-2 list-disc list-inside">
-              <% createur.videos.forEach(video => { %>
-                <li>
-                  <a href="<%= video %>" target="_blank" class="text-blue-600 hover:underline">
-                    <%= video %>
-                  </a>
-                </li>
-              <% }) %>
-            </ul>
-          <% } %>
-          <input
-            type="file"
-            name="videos"
-            accept="video/*"
-            multiple
-            class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
-          >
-          <small class="text-gray-500">Vous pouvez sélectionner plusieurs vidéos</small>
-        </div>
-
-        <!-- Show phone / show email booleans -->
-        <div class="flex items-center space-x-4">
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              name="shownum"
-              class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-              <%= createur.shownum ? 'checked' : '' %>
-            >
-            <span class="ml-2 text-sm text-gray-700">Afficher mon numéro publiquement</span>
-          </label>
+          <!-- Brand Logos (multiple) -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">
+              Logos (Marques) - MAX 5MB
+            </label>
           
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              name="showemail"
-              class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-              <%= createur.showemail ? 'checked' : '' %>
-            >
-            <span class="ml-2 text-sm text-gray-700">Afficher mon email publiquement</span>
-          </label>
-        </div>
+            <!-- Display existing logos with remove checkboxes -->
+            <% if (user.marqueLogo && user.marqueLogo.length > 0) { %>
+              <ul class="mt-2 space-y-2 mx-auto">
+                <% user.marqueLogo.forEach((logoUrl, idx) => { %>
+                  <li class="flex items-center space-x-4 mx-auto">
+                    <img
+                      src="<%= logoUrl %>"
+                      alt="Marque Logo <%= idx + 1 %>"
+                      class="w-16 h-16 object-cover rounded-md border"
+                    >
+                    <label class="inline-flex rounded-md items-center text-sm text-red-600">
+                      <input 
+                        type="checkbox" 
+                        name="removeLogos"
+                        value="<%= logoUrl %>"
+                        class="h-4 w-4 text-red-600 rounded-md border-gray-300"
+                      >
+                      <span class="ml-1">Supprimer</span>
+                    </label>
+                  </li>
+                <% }); %>
+              </ul>
+            <% } %>
+          
+            <!-- Upload new logos if desired -->
+            <div class="mt-4 flex flex-col items-center">
+              <label for="marqueLogo" 
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                Choisir des logos
+              </label>
+              <input
+                type="file"
+                id="marqueLogo"
+                name="marqueLogo"
+                accept="image/*"
+                multiple
+                class="hidden"
+              >
+              <small class="text-gray-500 mt-2">Vous pouvez sélectionner plusieurs fichiers</small>
+            </div>
+            <div id="marqueLogoPreview" class="mt-4 flex flex-wrap justify-center gap-4"></div>
+          </div>
 
-        <!-- Submit Button -->
-        <div>
-          <button
-            type="submit"
-            class="w-full text-lg font-semibold flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
-          >
-            Enregistrer les modifications
-          </button>
-        </div>
-      </form>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Vidéos - MAX 100MB</label>
+          
+            <!-- Existing videos with remove checkboxes -->
+            <% if (user.videos && user.videos.length > 0) { %>
+              <ul class="mt-2 list-disc list-inside space-y-1">
+                <% user.videos.forEach((video, idx) => { %>
+                  <li>
+                    <a 
+                      href="<%= video %>" 
+                      target="_blank" 
+                      class="text-blue-600 hover:underline">
+                      Vidéo #<%= idx+1 %>
+                    </a>
+                    <label class="ml-2 inline-flex rounded-md items-center text-sm text-red-600">
+                      <input 
+                        type="checkbox" 
+                        name="removeVideos" 
+                        value="<%= video %>" 
+                        class="h-4 w-4 text-red-600 rounded-md border-gray-300"
+                      >
+                      <span class="ml-1">Supprimer</span>
+                    </label>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } %>
+          
+            <!-- Upload new videos -->
+            <div class="mt-4 flex flex-col items-center">
+              <label for="videos" 
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                Choisir des vidéos
+              </label>
+              <input
+                type="file"
+                id="videos"
+                name="videos"
+                accept="video/*"
+                multiple
+                class="hidden"
+              >
+              <small class="text-gray-500 mt-2">Vous pouvez sélectionner plusieurs vidéos</small>
+            </div>
+            <div id="videosPreview" class="mt-4 flex flex-wrap justify-center gap-4"></div>
+          </div>
+
+          <!-- Submit -->
+          <div>
+            <button
+              type="submit"
+              class="w-full text-lg font-semibold flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700"
+            >
+              Enregistrer les modifications
+            </button>
+          </div>
+        </form>
     </div>
   </div>
 </body>
+<script>
+  // Preview function for images
+  function previewImages(inputElement, previewContainerId) {
+    const previewContainer = document.getElementById(previewContainerId);
+    previewContainer.innerHTML = ''; // Clear previous previews
+    
+    if (inputElement.files) {
+      Array.from(inputElement.files).forEach(file => {
+        if (!file.type.startsWith('image/')) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = "w-24 h-24 object-cover rounded-md border";
+          previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  // Preview function for videos
+  function previewVideos(inputElement, previewContainerId) {
+    const previewContainer = document.getElementById(previewContainerId);
+    previewContainer.innerHTML = ''; // Clear previous previews
+    
+    if (inputElement.files) {
+      Array.from(inputElement.files).forEach(file => {
+        if (!file.type.startsWith('video/')) return;
+        
+        const video = document.createElement('video');
+        video.controls = true;
+        video.className = "w-48 h-auto rounded-md border";
+        video.src = URL.createObjectURL(file);
+        previewContainer.appendChild(video);
+      });
+    }
+  }
+
+  // Attach change event listeners for each input
+  document.getElementById('profileImage').addEventListener('change', function() {
+    previewImages(this, 'profileImagePreview');
+  });
+
+  document.getElementById('portfolioImages').addEventListener('change', function() {
+    previewImages(this, 'portfolioImagesPreview');
+  });
+
+  document.getElementById('marqueLogo').addEventListener('change', function() {
+    previewImages(this, 'marqueLogoPreview');
+  });
+
+  document.getElementById('videos').addEventListener('change', function() {
+    previewVideos(this, 'videosPreview');
+  });
+</script>
+
 </html>
