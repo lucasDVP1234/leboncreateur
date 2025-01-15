@@ -407,7 +407,7 @@
 
         <!-- Profile Image Upload -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Photo de Profil - 500x500</label>
+          <label class="block text-sm font-medium text-gray-700">Photo de Profil - 500x500 - MAX 5 MB</label>
           <% if (createur.profileImage) { %>
             <!-- Show current image if it exists -->
             <img
@@ -427,31 +427,26 @@
 
         <!-- Portfolio Images (multiple) -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Bannière (image) - 1000x500</label>
+          <label class="block text-sm font-medium text-gray-700">Bannière (image) - 1000x500 - MAX 5MB</label>
           <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
-            <div class="mt-2 grid grid-cols-3 gap-2">
-              <% createur.portfolioImages.forEach(img => { %>
-                <img
-                  src="<%= img %>"
-                  alt="Portfolio"
-                  class="w-24 h-24 object-cover rounded-md border"
-                >
-              <% }) %>
+            <div class="mt-2">
+              <img
+                src="<%= createur.portfolioImages[0] %>"
+                alt="Portfolio"
+                class="w-24 h-24 object-cover rounded-md border"
+              >
             </div>
           <% } %>
           <input
             type="file"
             name="portfolioImages"
             accept="image/*"
-            multiple
             class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm"
           >
-          
         </div>
-
         <!-- Marque Logos (multiple) -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Logos de vos marques (optionnel)</label>
+          <label class="block text-sm font-medium text-gray-700">Logos de vos marques (optionnel) - MAX 5MB</label>
           <% if (createur.marqueLogo && createur.marqueLogo.length > 0) { %>
             <div class="mt-2 grid grid-cols-3 gap-2">
               <% createur.marqueLogo.forEach(logo => { %>
@@ -475,7 +470,7 @@
 
         <!-- Videos (multiple) -->
         <div>
-          <label class="block text-sm font-medium text-gray-700">Vidéos (optionnel)</label>
+          <label class="block text-sm font-medium text-gray-700">Vidéos - MAX 100MB</label>
           <% if (createur.videos && createur.videos.length > 0) { %>
             <!-- Display existing video links or thumbnails -->
             <ul class="mt-2 list-disc list-inside">

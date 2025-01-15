@@ -20,12 +20,13 @@ router.post(
     // Use Multer for multiple fields
     handleFileUpload([
       { name: 'profileImage', maxCount: 1 },
-      { name: 'portfolioImages', maxCount: 10 },
+      { name: 'portfolioImages', maxCount: 1 },
       { name: 'marqueLogo', maxCount: 10 },
       { name: 'videos', maxCount: 10 }
     ]),
     creatorController.updateProfile
   );
+
 
 router.get('/:pseudo', creatorController.getCreatorByPseudo);
 // POST route for activating the card

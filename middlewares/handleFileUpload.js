@@ -7,16 +7,27 @@ function handleFileUpload(fields, errorRedirectPath) {
 
     uploader(req, res, (err) => {
       if (err) {
-        // Check if file is too large
+        // 1) Check if file is too large
         if (err.code === 'LIMIT_FILE_SIZE') {
-          req.flash('error', 'Photo trop large. MAX 2MB.');
-          return res.redirect(errorRedirectPath);
+          // Distinguish by field if needed:
+          // If you used "profileImage", "portfolioImages", etc. in the fields array, 
+          // you can see if `req.files.profileImage` or others exist.
+
+          if (req.files && req.files.profileImage) {
+            req.flash('error', 'Photo trop large. Max 5MB pour les images.');
+          } else if (req.files && req.files.videos) {
+            req.flash('error', 'Vidéo trop volumineuse. Max 100MB pour les vidéos.');
+          } else {
+            // fallback, not sure which field caused it
+            req.flash('error', 'Fichier trop volumineux.');
+          }
+          return res.redirect('/profile-createur');
         }
 
-        // Otherwise, some other error
+        // 2) Otherwise, some other error
         console.error('File upload error:', err);
-        req.flash('error', 'Une erreur est survenue lors du téléchargement.');
-        return res.redirect(errorRedirectPath);
+        req.flash('error', err.message || 'Une erreur est survenue lors du téléchargement.');
+        return res.redirect('/profile-createur');
       }
 
       // No error, proceed to controller

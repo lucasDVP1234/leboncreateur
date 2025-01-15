@@ -92,7 +92,7 @@ exports.showProfile = async (req, res) => {
         req.flash('error', 'Créateur introuvable.');
         return res.redirect('/');
       }
-      res.render('profile-createur', { createur,user: req.user || null });
+      res.render('profile-createur', { createur, user: req.user || null });
     } catch (err) {
       console.error('Error fetching createur profile:', err);
       req.flash('error', 'Erreur lors de la récupération du profil.');
@@ -151,12 +151,12 @@ exports.showProfile = async (req, res) => {
         createur.profileImage = profileImageFile.location;
       }
   
-      if (req.files['portfolioImages']) {
-        const portfolioFiles = req.files['portfolioImages'];
-        // Overwrite or append? Let’s append for example
-        for (const file of portfolioFiles) {
-          createur.portfolioImages.push(file.location);
-        }
+      if (req.files['portfolioImages'] && req.files['portfolioImages'][0]) {
+        const portfolioFile = req.files['portfolioImages'][0];
+        // Option A: Replace any existing portfolio image
+        createur.portfolioImages = [portfolioFile.location];
+        // Option B (if you want to simply overwrite a single element if exists):
+      // createur.portfolioImages[0] = portfolioFile.location;
       }
   
       // Marque Logo (multiple?)
@@ -260,3 +260,4 @@ exports.deactivateCard = async (req, res) => {
     res.redirect('/profile-createur');
   }
 };
+
