@@ -5,7 +5,7 @@
   <title>Mes Créateurs Favoris</title>
   <!-- Include your Tailwind or other CSS here -->
 </head>
-<body class="bg-black text-white">
+<body class="bg-gradient-to-r from-white to-orange-50 text-white">
 
   <!-- Conditionally include headers -->
   <% if (!user) { %>
@@ -18,7 +18,7 @@
 
   <!-- Page Title -->
   <div class="container mx-auto px-4 py-6">
-    <h1 class="text-3xl font-bold mb-6">Mes Créateurs Favoris</h1>
+    <h1 class="text-3xl text-black font-bold mb-6">Mes Créateurs Favoris</h1>
 
     <!-- Check if likedCreators is not empty -->
     <% if (likedCreators && likedCreators.length > 0) { %>
@@ -33,7 +33,7 @@
         %>
 
         <div 
-          class="creator-card transform shadow-white-glow hover:scale-103 hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative"
+          class="creator-card transform shadow-white-glow hover:rotate-1 rounded-lg shadow-[0_0_5px_rgba(0,0,0,0.3)] overflow-hidden relative transition duration-200"
           data-creator-id="<%= creator._id %>"
           style="background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%);"
         >

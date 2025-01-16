@@ -5,13 +5,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/tailwind.css">
 </head>
-<body class="bg-black min-h-screen">
+<body class="bg-gradient-to-r from-white to-orange-50 min-h-screen">
   <!-- Header -->
   <%- include('header-login') %>
 
   <!-- Main Container -->
   <div class="container flex flex-col items-center justify-center mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-8 text-white drop-shadow-lg text-center">Compléter votre Profil Createur</h1>
+    <h1 class="text-3xl font-bold mb-8 text-black drop-shadow-lg text-center">Compléter votre Profil Createur</h1>
     
     <!-- Display success or error messages -->
     <div class="container mx-auto px-4">
@@ -234,8 +234,8 @@
             <div class="mt-4">
               <!-- Custom styled button triggers file selection -->
               <label for="profileImage" 
-                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
-                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-300 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-400 transition">
                 Choisir une image
               </label>
               <!-- Hidden native file input -->
@@ -264,8 +264,8 @@
             <% } %>
             <div class="mt-4 flex justify-center">
               <label for="portfolioImages" 
-                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
-                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-300 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-400 transition">
                 Choisir une image
               </label>
               <input
@@ -312,8 +312,8 @@
             <!-- Upload new logos if desired -->
             <div class="mt-4 flex flex-col items-center">
               <label for="marqueLogo" 
-                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
-                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-300 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-400 transition">
                 Choisir des logos
               </label>
               <input
@@ -360,8 +360,8 @@
             <!-- Upload new videos -->
             <div class="mt-4 flex flex-col items-center">
               <label for="videos" 
-                     class="cursor-pointer inline-block px-6 py-3 bg-orange-200 text-white 
-                            font-medium rounded-md shadow hover:bg-orange-300 transition">
+                     class="cursor-pointer inline-block px-6 py-3 bg-orange-300 text-white 
+                            font-medium rounded-md shadow hover:bg-orange-400 transition">
                 Choisir des vidéos
               </label>
               <input

@@ -25,7 +25,7 @@ module.exports = {
         },
       },
       boxShadow: {
-        'white-glow': '0 0 10px 5px rgba(255, 152, 0, 0.7)',
+        'white-glow': '0 0 10px 5px rgba(255, 152, 200, 0.7)',
       },
     },
   },
