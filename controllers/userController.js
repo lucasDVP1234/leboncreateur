@@ -168,7 +168,7 @@ exports.postSignupCreateur = async (req, res) => {
     // }
 
     // Authenticate the user after successful signup
-    req.logIn({savedCreateur}, function (err) {
+    req.logIn(savedCreateur, function (err) {
       if (err) {
         req.flash('error', 'Une erreur est survenue lors de la connexion.');
         return res.redirect('/');
