@@ -64,43 +64,7 @@
                         </div>
                     </div>
 
-                    <!-- Caméra Filter -->
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 mb-2 text-center">
-                            Catégorie
-                          </h3>
-                        <div class="flex flex-wrap gap-2 justify-center">
-                            <% categories.forEach(function(category) { %>
-                                <button 
-                                    type="button" 
-                                    class="filter-button font-semibold shadow-white-glow shadow-md px-3 py-1 bg-green-500 text-white rounded-full hover:text-white hover:bg-green-700 text-sm focus:outline-none"
-                                    data-filter="<%= category %>" 
-                                    data-filter-type="Category"
-                                >
-                                    <%= category %>
-                                </button>
-                            <% }); %>
-                        </div>
-                    </div>
                     
-                    <!-- Type de vidéo Filter -->
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 mb-2 text-center">
-                            Type de vidéo
-                          </h3>
-                        <div class="flex flex-wrap gap-2 justify-center">
-                            <% videoTypes.forEach(function(type) { %>
-                                <button 
-                                    type="button" 
-                                    class="filter-button font-semibold shadow-white-glow px-3 py-1 bg-orange-500 text-white rounded-full text-sm hover:text-white hover:bg-orange-700 focus:outline-none"
-                                    data-filter="<%= type %>" 
-                                    data-filter-type="Type of Videos"
-                                >
-                                    <%= type %>
-                                </button>
-                            <% }); %>
-                        </div>
-                    </div>
 
                     <!-- Age Selector -->
                     <div>
@@ -227,7 +191,7 @@
                         100% Gratuit
                     </span>
                 </span>
-                Contacter vos créateurs préférés !
+                Contactez vos créateurs préférés !
             </h1>
             
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -328,12 +292,12 @@
                             <div class="flex items-center justify-between mb-2">
                                 <div class="flex flex-wrap gap-2">
                                     <img src="/images/camvert.png" alt="Âge" class="w-5 h-5 mt-1">
-                                    <% createur.atout.forEach(function(atout) { %>
-                                        <span class="px-2 py-1 bg-orange-100 text-orange-500 text-xs rounded-full">
-                                            <%= atout %>
-                                        </span>
+                                    <% createur.atout.slice(0, 2).forEach(function(atout) { %>
+                                      <span class="px-2 py-1 bg-orange-100 text-orange-500 text-xs rounded-full">
+                                        <%= atout %>
+                                      </span>
                                     <% }); %>
-                                </div>
+                                  </div>
                             
                                 <div class="flex">
                                     <a 
