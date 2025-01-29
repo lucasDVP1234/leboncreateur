@@ -213,6 +213,7 @@ exports.activateCard = async (req, res) => {
       createur.email,
       createur.age,
       createur.description,
+      createur.atout,
       createur.country,
       createur.profileImage,
       // etc. add more if needed
