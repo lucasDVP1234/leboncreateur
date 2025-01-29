@@ -209,27 +209,38 @@ exports.activateCard = async (req, res) => {
 
     // 1) Check if profile is complete
     const requiredFields = [
-      createur.pseudo,
-      createur.email,
-      createur.number,
-      createur.age,
-      createur.description,
-      createur.atout,
-      createur.country,
-      createur.profileImage,
-      createur.portfolioImages,
-      createur.videos,
-      // etc. add more if needed
+      { value: createur.pseudo,         type: 'string' },
+      { value: createur.email,          type: 'string' },
+      { value: createur.number,         type: 'string' },
+      { value: createur.age,            type: 'number' },
+      { value: createur.description,    type: 'string' },
+      { value: createur.atout,          type: 'array' },   // expecting array
+      { value: createur.country,        type: 'string' },
+      { value: createur.profileImage,   type: 'string' },  // or could be 'stringOrNull'
+      { value: createur.portfolioImages,type: 'array' },   // expecting array
+      { value: createur.videos,         type: 'array' },   // expecting array
     ];
-    const isProfileComplete = requiredFields.every(field => {
-      if (typeof field === 'string') {
-        return field.trim().length > 0;
-      } else if (typeof field === 'number') {
-        // For example: must be > 0
-        return field > 0;
+    
+    const isProfileComplete = requiredFields.every(fieldObj => {
+      const { value, type } = fieldObj;
+    
+      // 1) If the field is truly required but empty or missing, fail immediately.
+      if (!value) return false;
+    
+      // 2) Handle different types
+      switch (type) {
+        case 'string':
+          // Must have at least 1 non-whitespace character
+          return value.trim().length > 0;
+        case 'number':
+          // e.g., age > 0
+          return value > 0;
+        case 'array':
+          // Must have at least 1 item
+          return Array.isArray(value) && value.length > 0;
+        default:
+          return false;
       }
-      // If we get here, it might be null/undefined or some unsupported type
-      return false;
     });
 
     // 2) If not complete, redirect them to /profile-createur
