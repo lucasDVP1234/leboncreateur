@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quelle plateforme UGC pour trouver un créateur UGC ? | Leboncreateur</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Trouvez le bon créateur UGC en comparant Youdji, Influee, Kreators.scalevision.fr et leboncreateur.com. Découvrez les avantages et inconvénients de chaque plateforme pour votre stratégie User Generated Content.">
+  <meta name="keywords" content="UGC, créateur UGC, Youdji, Influee, Kreators, scalevision, leboncreateur, marketing, contenu, User Generated Content">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Montserrat & Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tailwind.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-white to-orange-50 min-h-screen flex flex-col">
+
+  <!-- Header (nonlogin) -->
+  <%- include('header-nonlogin') %>
+
+  <!-- Flash Messages -->
+  <div class="container mx-auto px-4">
+    <% if (success_messages && success_messages.length > 0) { %>
+      <% success_messages.forEach(function(message){ %>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded my-2">
+          <span><%= message %></span>
+        </div>
+      <% }) %>
+    <% } %>
+    <% if (error_messages && error_messages.length > 0) { %>
+      <% error_messages.forEach(function(message){ %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2">
+          <span><%= message %></span>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <!-- Titre principal -->
+  <h1
+    data-aos="fade-up"
+    class="relative mt-10 text-3xl text-center font-bold mb-2 text-transparent bg-clip-text bg-black drop-shadow-lg"
+  >
+    Quelle plateforme pour trouver
+    <span class="relative inline-block px-4 py-2">
+      <span class="absolute inset-0 bg-orange-500 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+      <span class="relative font-semibold text-3xl text-white z-10">
+        un Créateur UGC ?
+      </span>
+    </span>
+  </h1>
+
+  <!-- Contenu principal / Article SEO -->
+  <div class="container mx-auto px-4 py-6 max-w-4xl bg-white shadow-white-glow rounded-2xl my-8">
+
+    <!-- Introduction -->
+    <p class="text-lg text-gray-800 leading-relaxed mb-6">
+      Trouver le créateur UGC (User Generated Content) parfait pour votre marque peut s’avérer complexe, 
+      surtout avec la diversité de plateformes disponibles. Dans cet article, nous passons en revue 
+      <strong>Youdji</strong>, <strong>Influee</strong>, <strong>Kreators.scalevision.fr</strong> 
+      et surtout <strong>leboncreateur.com</strong>. Vous découvrirez les avantages et inconvénients de chacune de ces solutions 
+      pour trouver un créateur UGC adapté à vos besoins.
+    </p>
+
+    <!-- Section 1 : Youdji -->
+    <h2 class="text-2xl font-bold text-black mb-4">1. Youdji</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      <strong>Youdji</strong> regroupe de nombreux créateurs UGC, ce qui peut sembler pratique pour dénicher différents profils. 
+      Toutefois, la plateforme impose une <strong>commission de 20%</strong> sur les transactions et les échanges peuvent être 
+      difficiles à gérer à cause d’outils de messagerie peu ergonomiques. De plus, il n’est pas possible de sortir de 
+      la plateforme pour des collaborations directes, ce qui peut parfois <em>limiter</em> votre liberté.
+    </p>
+
+    <!-- Section 2 : Influee -->
+    <h2 class="text-2xl font-bold text-black mb-4">2. Influee</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      <strong>Influee</strong> se démarque par des tarifs souvent compétitifs. Cependant, la <strong>qualité</strong> des prestations 
+      peut parfois laisser à désirer. Les créateurs peuvent manquer d'expérience, ce qui exige un suivi plus poussé 
+      de la part de la marque. Il est donc essentiel de bien vérifier les <em>références</em> et les <em>avis</em> 
+      pour s’assurer d’un niveau de qualité minimal.
+    </p>
+
+    <!-- Section 3 : Kreators.scalevision.fr -->
+    <h2 class="text-2xl font-bold text-black mb-4">3. Kreators by Scalevision</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      <strong>Kreators.scalevision.fr</strong> propose une approche hybride mi-digitale, mi-humaine. En effet, vous bénéficiez d’une 
+      <strong>assistance humaine</strong> comparable à une agence, qui vous accompagne dans la gestion de votre campagne. 
+      C’est un atout si vous souhaitez déléguer entièrement le suivi et la coordination, mais cet accompagnement 
+      a un coût plus élevé et peut freiner certains budgets serrés.
+    </p>
+
+    <!-- Section 4 : leboncreateur.com -->
+    <h2 class="text-2xl font-bold text-black mb-4">4. Leboncreateur.com</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      <strong>leboncreateur.com</strong> se présente comme un <strong>annuaire open source 100% gratuit</strong> permettant de 
+      contacter directement les créateurs UGC. Les coordonnées (numéro de téléphone et e-mail) sont apparentes, 
+      ce qui simplifie la prise de contact et vous évite les intermédiaires. Aucune commission n’est prélevée, 
+      et vous gardez une totale liberté de négociation avec le créateur. C’est donc une solution particulièrement 
+      flexible, adaptée aux marques qui recherchent un <em>mode de collaboration plus direct</em> et transparent.
+    </p>
+
+    <!-- Bouton d'appel à l'action (CTA) -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+      <a 
+        href="https://leboncreateur.com" 
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-orange-500 text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105 hover:bg-orange-600 hover:rotate-1"
+      >
+        Découvrir leboncreateur.com
+      </a>
+    </div>
+
+    <!-- Comparatif rapide -->
+    <h2 class="text-xl font-bold text-black mb-4">Comparatif rapide des plateformes</h2>
+    <div class="overflow-x-auto mb-6">
+      <table class="min-w-full border border-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 border text-left font-semibold">Plateforme</th>
+            <th class="px-4 py-2 border text-left font-semibold">Avantages</th>
+            <th class="px-4 py-2 border text-left font-semibold">Inconvénients</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2 border">Youdji</td>
+            <td class="px-4 py-2 border">Beaucoup de créateurs</td>
+            <td class="px-4 py-2 border">20% de commission, échanges limités</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">Influee</td>
+            <td class="px-4 py-2 border">Prix attractifs</td>
+            <td class="px-4 py-2 border">Qualité aléatoire</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">Kreators by Scalevision</td>
+            <td class="px-4 py-2 border">Assistance humaine, gestion déléguée</td>
+            <td class="px-4 py-2 border">Coûts plus élevés</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border">leboncreateur.com</td>
+            <td class="px-4 py-2 border">
+              Gratuit, open source, coordonnées directes, 
+              aucune commission
+            </td>
+            <td class="px-4 py-2 border">Pas d’assistance intégrée (selon les besoins)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Conclusion -->
+    <h2 class="text-xl font-bold text-black mb-4">Conclusion</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      Le choix de la plateforme pour trouver un créateur UGC dépend de vos attentes en matière de budget, 
+      de flexibilité et de niveau d’accompagnement. Pour les marques souhaitant un contact direct, sans commission 
+      et en toute transparence, 
+      <a href="https://leboncreateur.com" target="_blank" rel="noopener" class="text-orange-500 font-semibold hover:text-orange-600">
+        leboncreateur.com
+      </a> s’impose comme la solution la plus avantageuse. D’autres plateformes comme Youdji, Influee ou 
+      Kreators.scalevision.fr peuvent répondre à des besoins différents, qu’il s’agisse de budget serré, de 
+      grand volume de créateurs, ou encore d’accompagnement clé en main.
+    </p>
+
+    <!-- Dernier bouton d'appel à l'action -->
+    <div class="flex justify-center">
+      <a 
+        href="https://leboncreateur.com" 
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-orange-500 text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105 hover:bg-orange-600 hover:-rotate-1"
+      >
+        Visitez leboncreateur.com
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('footer') %>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Qu'est-ce que l'UGC (User Generated Content) ? | Leboncreateur</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Découvrez ce qu'est l'UGC, comment les contenus créés par les utilisateurs impactent la visibilité d'une marque, et pourquoi collaborer avec des créateurs UGC via leboncreateur.com peut dynamiser votre stratégie marketing.">
+  <meta name="keywords" content="UGC, User Generated Content, marketing, contenu généré par les utilisateurs, réseaux sociaux, créateurs UGC, Leboncreateur">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Font et Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tailwind.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-white to-orange-50 min-h-screen flex flex-col">
+
+  <!-- Header commun (non login) -->
+  <%- include('header-nonlogin') %>
+
+  <!-- Flash Messages (si nécessaire) -->
+  <div class="container mx-auto px-4">
+    <% if (success_messages && success_messages.length > 0) { %>
+      <% success_messages.forEach(function(message){ %>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded my-2">
+          <span><%= message %></span>
+        </div>
+      <% }) %>
+    <% } %>
+    <% if (error_messages && error_messages.length > 0) { %>
+      <% error_messages.forEach(function(message){ %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2">
+          <span><%= message %></span>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <!-- Titre principal avec effet stylé -->
+  <h1
+    data-aos="fade-up"
+    class="relative mt-10 text-3xl text-center font-bold mb-2 text-transparent bg-clip-text bg-black drop-shadow-lg"
+  >
+    Qu'est-ce que l'UGC ?
+    
+    <!-- Parent span avec positionnement relatif -->
+    <span class="relative inline-block px-4 py-2">
+      <!-- Fond coloré et arrondi -->
+      <span class="absolute inset-0 bg-orange-500 rounded-lg transform -rotate-2 z-0 drop-shadow-lg"></span>
+      <!-- Texte au-dessus du fond -->
+      <span class="relative font-semibold text-3xl text-white z-10">
+        (User Generated Content)
+      </span>
+    </span>
+  </h1>
+
+  <!-- Contenu principal / Article SEO -->
+  <div class="container mx-auto px-4 py-6 max-w-4xl bg-white shadow-white-glow rounded-2xl my-8">
+    <!-- Introduction -->
+    <p class="text-lg text-gray-800 leading-relaxed mb-6">
+      L’<strong>UGC (User Generated Content)</strong> désigne l’ensemble des contenus créés et publiés par les utilisateurs 
+      eux-mêmes. Il peut s’agir de photos, de vidéos, d’avis clients, de témoignages ou encore de publications sur 
+      les réseaux sociaux. Très apprécié pour son authenticité, l’UGC joue un rôle central dans le marketing moderne. 
+      En effet, il permet aux marques de <em>renforcer la confiance</em> et l’engagement de leur audience.
+    </p>
+
+    <!-- Sous-Titre 1 -->
+    <h2 class="text-2xl font-bold text-black mb-4">Pourquoi l’UGC est-il si important&nbsp;?</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-4">
+      L’UGC est une preuve sociale particulièrement forte. Lorsqu’un consommateur partage son expérience positive 
+      avec un produit ou un service, cela agit comme une recommandation authentique. Les marques qui intègrent 
+      du contenu généré par leurs utilisateurs dans leur communication bénéficient de :
+    </p>
+    <ul class="list-disc list-inside text-gray-800 mb-6">
+      <li><strong>Confiance accrue :</strong> Les avis et témoignages inspirent davantage confiance que la publicité traditionnelle.</li>
+      <li><strong>Engagement renforcé :</strong> Les utilisateurs se sentent valorisés et participent activement à la vie de la marque.</li>
+      <li><strong>Coût marketing réduit :</strong> Le contenu est généré directement par la communauté, ce qui limite les dépenses de production.</li>
+      <li><strong>Visibilité accrue :</strong> Les publications des utilisateurs touchent de nouvelles audiences sur les réseaux sociaux.</li>
+    </ul>
+
+    <!-- Sous-Titre 2 -->
+    <h2 class="text-2xl font-bold text-black mb-4">Comment collaborer avec des créateurs UGC&nbsp;?</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      Les <strong>créateurs UGC</strong> sont des individus talentueux qui savent mettre en valeur des produits ou services 
+      de manière naturelle. Ils maîtrisent les codes des réseaux sociaux et savent capter l’attention de leur 
+      communauté avec des visuels et des messages authentiques. Pour trouver rapidement les bons créateurs pour 
+      votre marque, vous pouvez consulter 
+      <a href="https://leboncreateur.com" class="text-orange-500 font-semibold hover:text-orange-600" target="_blank" rel="noopener">
+        leboncreateur.com
+      </a>, 
+      une plateforme spécialisée qui regroupe des profils variés et expérimentés.
+    </p>
+
+    <!-- Bouton d'appel à l'action (CTA) -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+      <a 
+        href="https://leboncreateur.com" 
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-orange-500 text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105 hover:bg-orange-600 hover:rotate-1"
+      >
+        Trouvez votre créateur UGC
+      </a>
+      <a 
+        href="https://leboncreateur.com" 
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-orange-100 text-orange-600 font-bold py-3 px-6 rounded-md border border-orange-500 transition transform hover:scale-105 hover:bg-orange-200"
+      >
+        Rejoignez la plateforme
+      </a>
+    </div>
+
+    <!-- Sous-Titre 3 -->
+    <h2 class="text-2xl font-bold text-black mb-4">L’impact de l’UGC sur votre stratégie digitale</h2>
+    <p class="text-base text-gray-800 leading-relaxed mb-6">
+      Intégrer l’UGC dans votre stratégie digitale vous permet de :
+    </p>
+    <ol class="list-decimal list-inside text-gray-800 mb-6">
+      <li><strong>Booster votre crédibilité :</strong> Les utilisateurs sont plus enclins à faire confiance aux retours d’autres clients.</li>
+      <li><strong>Multiplier les points de contact :</strong> Le partage de contenu sur plusieurs plateformes (Instagram, TikTok, YouTube…) augmente votre portée.</li>
+      <li><strong>Créer une communauté fédérée :</strong> En valorisant les utilisateurs, vous renforcez leur sentiment d’appartenance.</li>
+    </ol>
+    <p class="text-base text-gray-800 leading-relaxed">
+      L’UGC est donc un levier marketing incontournable pour les entreprises souhaitant développer leur e-réputation 
+      et leur relation client. 
+    </p>
+
+    <!-- Second bouton d'appel à l'action -->
+    <div class="flex justify-center mt-8">
+      <a 
+        href="https://leboncreateur.com" 
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-orange-500 text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105 hover:bg-orange-600 hover:-rotate-1"
+      >
+        Découvrir plus de créateurs
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer commun -->
+  <%- include('footer') %>
+</body>
+</html>
