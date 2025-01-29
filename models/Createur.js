@@ -31,8 +31,14 @@ const createurSchema = new mongoose.Schema({
         required: true,
         unique: true, // Enforce uniqueness
     },
-    shownum :Boolean,
-    showemail :Boolean,
+    shownum :{
+        type: Boolean,
+        default: true,
+      },
+    showemail :{
+        type: Boolean,
+        default: true,
+      },
     isCardActive: {
         type: Boolean,
         default: false,

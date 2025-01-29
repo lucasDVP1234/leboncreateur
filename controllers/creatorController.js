@@ -211,11 +211,14 @@ exports.activateCard = async (req, res) => {
     const requiredFields = [
       createur.pseudo,
       createur.email,
+      createur.number,
       createur.age,
       createur.description,
       createur.atout,
       createur.country,
       createur.profileImage,
+      createur.portfolioImages,
+      createur.videos,
       // etc. add more if needed
     ];
     const isProfileComplete = requiredFields.every(field => {
