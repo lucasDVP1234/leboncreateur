@@ -173,7 +173,7 @@ exports.postSignupCreateur = async (req, res) => {
         req.flash('error', 'Une erreur est survenue lors de la connexion.');
         return res.redirect('/');
       }
-      return res.redirect('/creators');
+      return res.redirect('/account-createur');
     });
   } catch (err) {
     console.error('Erreur lors de l\'inscription :', err);
