@@ -51,7 +51,25 @@
                 <!-- Creator Name -->
                 <h1 class="text-3xl font-bold text-gray-800 mb-2 text-center"><%= createur.pseudo %></h1>
                 <!-- Description -->
-                <p class="mt-2 text-gray-700 text-center leading-relaxed"><%= createur.description %></p>
+                <!-- Put an empty container for the description text -->
+                <!-- Your truncated description markup -->
+                <p id="description" class="mt-2 text-sm text-gray-700 text-center leading-relaxed"></p>
+                <% 
+                  const desc = createur.description || '';
+                  const isLong = desc.length > 40;
+                %>
+                <% if (isLong) { %>
+                  <!-- Center the toggle button -->
+                  <div class="flex justify-center mt-2">
+                    <button
+                      id="toggleDescriptionBtn"
+                      class="text-orange-600 underline text-sm cursor-pointer"
+                    >
+                      Voir plus
+                    </button>
+                  </div>
+                <% } %>
+
                 
                 <!-- Age and Country -->
                 
@@ -306,6 +324,53 @@
           const video = document.getElementById(videoId);
           video.play();
         }
+      </script>
+      
+      <script>
+        (function(){
+          // The full, original description from EJS
+          const fullDesc = <%- JSON.stringify(desc) %>;
+          const descElem = document.getElementById('description');
+          const toggleBtn = document.getElementById('toggleDescriptionBtn');
+          
+          // Number of characters to show when truncated
+          const maxChars = 40;
+          
+          // Track the current state (true = currently truncated)
+          let isTruncated = true;
+          
+          function showShort() {
+            descElem.textContent = fullDesc.slice(0, maxChars) + '...';
+          }
+          function showFull() {
+            descElem.textContent = fullDesc;
+          }
+          
+          if (fullDesc.length > maxChars) {
+            // If description is longer than maxChars:
+            // 1. Show truncated by default
+            // 2. Handle click toggling with a simple boolean flag
+            showShort();
+            
+            if (toggleBtn) {
+              toggleBtn.addEventListener('click', () => {
+                if (isTruncated) {
+                  showFull();
+                  toggleBtn.textContent = 'Voir moins';
+                } else {
+                  showShort();
+                  toggleBtn.textContent = 'Voir plus';
+                }
+                // Flip the state
+                isTruncated = !isTruncated;
+              });
+            }
+            
+          } else {
+            // If the description is short enough, just show it fully
+            showFull();
+          }
+        })();
       </script>
 </body>
 <%- include('footer') %>
