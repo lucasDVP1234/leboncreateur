@@ -66,7 +66,7 @@
                         <%= createur.country %>
                     </p>
                 </div>
-                <div class="flex items-center justify-center space-x-4 mt-2 mb-8">
+                <div class="flex items-center justify-center space-x-4 mt-2 mb-4">
                     <% createur.langue.forEach(function(force) { %>
                     <p class="px-3 py-1 bg-green-100 text-green-600 text-sm rounded-full flex items-center">
                         
@@ -74,16 +74,18 @@
                     </p>
                     <% }); %>
                 </div>
-                <div class="flex items-center justify-center space-x-4 mt-2">
-                    <% createur.atout.forEach(function(force) { %>
-                    <p class="px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-full flex items-center">
-                        
-                        <%= force %>
-                    </p>
-                    <% }); %>
+                
+                
+                <div 
+                class="<%= createur.atout.length > 4 ? 'text-xs' : 'text-sm' %> flex flex-wrap justify-center gap-2 mt-6"
+                >
+                <% createur.atout.forEach((type) => { %>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full">
+                    <%= type %>
+                    </span>
+                <% }); %>
                 </div>
-                
-                
+
                 
                 <!-- Video Types -->
                 <div class="flex flex-wrap justify-center gap-2 mt-6">
@@ -183,27 +185,43 @@
             <div class="px-6 pb-6">
                 <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                     <% 
-                        // Determine how many videos to show initially
-                        const initialVideos = 6;
-                        const totalVideos = createur.videos.length;
-                        const videosToShow = createur.videos.slice(0, initialVideos); // Assuming first image is cover
+                      // Determine how many videos to show initially
+                      const initialVideos = 6;
+                      const totalVideos = createur.videos.length;
+                      const videosToShow = createur.videos.slice(0, initialVideos);
                     %>
                     <% videosToShow.forEach(function(videoUrl, index) { %>
-                        <div class="bg-gray-100 rounded-lg overflow-hidden shadow">
-                            <div class="relative">
-                                <video id="video-<%= index %>" class="w-full h-auto" controls muted autoplay>
-                                    <source src="<%= videoUrl %>" type="video/mp4">
-                                    Votre navigateur ne supporte pas la lecture de vidéos.
-                                </video>
-                                <button 
-                                    class="inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-                                    onclick="startVideo('video-<%= index %>')">
-                                    
-                                </button>
-                            </div>
+                      <div class="bg-gray-100 rounded-lg overflow-hidden shadow">
+                        <div class="relative">
+                          <!-- Add playsinline (and webkit-playsinline for older iOS). -->
+                          <video
+                            id="video-<%= index %>"
+                            class="w-full h-auto"
+                            controls
+                            muted
+                            autoplay
+                            playsinline
+                            webkit-playsinline
+                          >
+                            <source src="<%= videoUrl %>" type="video/mp4">
+                            Votre navigateur ne supporte pas la lecture de vidéos.
+                          </video>
+                          
+                          <!-- Optional overlay button: if you want custom behavior, keep it; 
+                               otherwise, the native "Play" button is already in controls. -->
+                          <button 
+                            class="absolute inset-0 flex items-center justify-center 
+                                   bg-black bg-opacity-50 text-white opacity-0 
+                                   hover:opacity-100 transition-opacity duration-300"
+                            onclick="startVideo('video-<%= index %>')"
+                          >
+                            <!-- e.g., a 'Play' icon or text here -->
+                          </button>
                         </div>
+                      </div>
                     <% }); %>
-                </div>
+                  </div>
+                  
                 <!-- Show More Button -->
                 <% if (totalVideos > initialVideos) { %>
                     <div class="flex justify-center mt-6">
@@ -282,6 +300,13 @@
             }
         });
     </script>
+    <script>
+        // Simple function to play video if using the custom overlay button.
+        function startVideo(videoId) {
+          const video = document.getElementById(videoId);
+          video.play();
+        }
+      </script>
 </body>
 <%- include('footer') %>
 </html>
