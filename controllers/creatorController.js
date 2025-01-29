@@ -217,7 +217,7 @@ exports.activateCard = async (req, res) => {
       { value: createur.atout,          type: 'array' },   // expecting array
       { value: createur.country,        type: 'string' },
       { value: createur.profileImage,   type: 'string' },  // or could be 'stringOrNull'
-      { value: createur.portfolioImages,type: 'string' },   // expecting array
+      { value: createur.portfolioImages,type: 'array' },   // expecting array
       { value: createur.videos,         type: 'array' },   // expecting array
     ];
     
