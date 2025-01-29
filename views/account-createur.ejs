@@ -146,14 +146,14 @@
                                 <img src="<%= user.portfolioImages[0] %>" alt="Cover Image" class="w-full h-48 object-cover">
                             <% } else { %>
                                 <!-- Default Cover Image if none provided -->
-                                <img src="/images/default-cover.jpg" alt="Default Cover Image" class="w-full h-48 object-cover">
+                                <img src="/images/default-cover.png" alt="Default Cover Image" class="w-full h-48 object-cover">
                             <% } %>
                             <!-- Profile Image Positioned in the Center -->
                             <div class="absolute inset-x-0 bottom-0 transform translate-y-1/2 flex justify-center">
                                 <div class="w-32 h-32">
                                     <img src="<%= user.profileImage %>" alt="<%= user.name %>" class="w-full h-full rounded-full object-cover border-4 border-white shadow-md"
                                          loading="lazy"
-                                         onerror="this.onerror=null; this.src='/images/default-profile.png'">
+                                         onerror="this.onerror=null; this.src='/images/default-cover.png'">
                                 </div>
                             </div>
                         </div>
