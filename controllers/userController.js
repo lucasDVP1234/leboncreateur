@@ -333,7 +333,7 @@ exports.getForgotPassword = (req, res) => {
 exports.postForgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email: email });
+    const user = await Createur.findOne({ email: email });
     if (!user) {
       req.flash('error', 'Aucun compte trouvé avec cet e-mail.');
       return res.redirect('/forgot');
@@ -355,8 +355,8 @@ exports.postForgotPassword = async (req, res) => {
     // Send the email
     const msg = {
       to: user.email,
-      from: 'contact@scalevision.fr',
-      subject: '[Kreators] - Réinitialisation du mot de passe',
+      from: 'contact@leboncreateur.com',
+      subject: '[Leboncréateur] - Réinitialisation du mot de passe',
       text: `Vous recevez cet email parce que vous (ou quelqu'un d'autre) avez demandé la réinitialisation du mot de passe de votre compte.\n\n
       Veuillez cliquer sur le lien suivant, ou copiez-le dans votre navigateur pour compléter le processus dans l'heure qui suit:\n\n
       ${resetURL}\n\n
@@ -378,7 +378,7 @@ exports.postForgotPassword = async (req, res) => {
 exports.getResetPassword = async (req, res) => {
   try {
     const { token } = req.params;
-    const user = await User.findOne({ 
+    const user = await Createur.findOne({ 
       resetPasswordToken: token, 
       resetPasswordExpires: { $gt: Date.now() }
     });
@@ -404,7 +404,7 @@ exports.postResetPassword = async (req, res) => {
       return res.redirect('back');
     }
 
-    const user = await User.findOne({
+    const user = await Createur.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() }
     });
