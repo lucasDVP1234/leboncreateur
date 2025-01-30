@@ -84,13 +84,12 @@
                         <%= createur.country %>
                     </p>
                 </div>
-                <div class="flex items-center justify-center space-x-4 mt-2 mb-4">
-                    <% createur.langue.forEach(function(force) { %>
-                    <p class="px-3 py-1 bg-green-100 text-green-600 text-sm rounded-full flex items-center">
-                        
-                        <%= force %>
+                <div class="flex flex-wrap gap-4 justify-center items-center mt-2 mb-4">
+                  <% createur.langue.forEach(function(force) { %>
+                    <p class="px-3 py-1 bg-green-100 text-green-600 text-sm rounded-full break-all">
+                      <%= force %>
                     </p>
-                    <% }); %>
+                  <% }); %>
                 </div>
                 
                 
@@ -159,8 +158,10 @@
               <% } %>
               <!-- Display Instagram -->
               <% if (createur.insta) { %>
-                
-                  <strong>Instagram:</strong> <p class="text-gray-800 <%= blurClass %>"><%= createur.insta %>
+                <strong>Instagram:</strong>
+                <!-- Use break-all to keep the long URL from overflowing -->
+                <p class="text-gray-800 <%= blurClass %> break-all">
+                  <%= createur.insta %>
                 </p>
               <% } %>
             </div>

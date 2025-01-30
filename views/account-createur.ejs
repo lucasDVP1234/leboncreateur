@@ -25,11 +25,21 @@
 <body class="bg-gradient-to-r from-white to-orange-50 font-montserrat">
     <%- include('header-login') %>
     
-    <div class="container mx-auto px-4 py-12">
+    <div class="container mx-auto px-4">
       
         <div class="p-10">
-            <h1 class="text-4xl font-bold text-black mb-2">Bienvenue, <span class="text-orange-500"><%= user.pseudo %></span></h1>
-            <h2 class="text-lg text-black mb-4">Compte : <%= user.email %></h2>
+            <h1 
+            class="text-center 
+                  whitespace-nowrap
+                  text-2xl sm:text-3xl md:text-4xl
+                  font-bold text-black
+                  mb-2 leading-tight">
+            Bienvenue, 
+            <span class="text-orange-500">
+              <%= user.pseudo %>
+            </span>
+          </h1>
+            
             <% if (success_messages && success_messages.length > 0) { %>
               <% success_messages.forEach(function(message){ %>
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded my-2">
@@ -49,42 +59,67 @@
                 
             
                 
-                <div class="sm:inline-flex items-center mb-4 mt-4 max-w-4xl">
-                  <a href="/profile-createur" class="inline-flex shadow-white-glow  items-center mb-2 mr-2 px-6 transform hover:scale-105 hover:rotate-1 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-md
-                    bg-white text-black"><img src="/images/plus.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-                    Modifier ma carte
-                  </a>
-                  <a href="/creators/<%= user.pseudo %>" class="inline-flex shadow-white-glow  mb-2 items-center transform hover:scale-105 hover:rotate-1 mr-4 px-6 py-2 text-sm font-medium rounded-lg transition duration-200 shadow-md
-                    bg-white text-black"><img src="/images/11.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
-                    Afficher ma carte
-                  </a>
-                  <form action="/activate-card" method="POST">
-                    <% if (!user.isCardActive) { %>
-                      <!-- Activate Button -->
-                      <button type="submit"
-                              class="inline-flex shadow-white-glow mb-2 items-center bg-gradient-to-r from-black to-orange-500 transform hover:scale-105 hover:rotate-1 text-white font-semibold px-6 py-2 rounded-lg shadow-md">
-                        Activer ma carte
-                        <span 
-                          class="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 inline-flex w-4 h-4 bg-orange-400 border-2 border-white rounded-full">
-                        </span>
-                      </button>
-                    <% } %>
-                  </form>
-                  
-                  <!-- If the card is active, show DEACTIVATE button -->
-                  <% if (user.isCardActive) { %>
-                    <form action="/deactivate-card" method="POST">
-                      <button type="submit"
-                              class="inline-flex shadow-white-glow mb-2 items-center bg-gradient-to-r from-red-500 to-black transform hover:scale-105 hover:rotate-1 text-white font-semibold px-6 py-2 rounded-lg shadow-md">
-                        Désactiver ma carte
-                      </button>
-                    </form>
-                  <% } else { %>
-                    <!-- Or, if you prefer, show some message or badge... -->
-                    <!-- <span class="bg-red-500 text-white px-3 py-1 rounded-md">Carte désactivée</span> -->
-                  <% } %>
-                  
-                 </div>
+          <div class="flex flex-col sm:flex-row items-center 
+          sm:justify-start justify-center 
+          space-y-2 sm:space-y-0 sm:space-x-4 mb-4 max-w-4xl">
+
+          <!-- Button 1: Modifier ma carte -->
+          <a href="/profile-createur"
+            class="inline-flex shadow-white-glow items-center
+                    px-6 py-2 text-sm font-medium rounded-lg
+                    transition duration-200 shadow-md 
+                    bg-white text-black transform 
+                    hover:scale-105 hover:rotate-1">
+
+            <img src="/images/plus.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
+            Modifier ma carte
+          </a>
+
+          <!-- Button 2: Afficher ma carte -->
+          <a href="/creators/<%= user.pseudo %>"
+            class="inline-flex shadow-white-glow items-center
+                    px-6 py-2 text-sm font-medium rounded-lg
+                    transition duration-200 shadow-md 
+                    bg-white text-black transform 
+                    hover:scale-105 hover:rotate-1">
+
+            <img src="/images/11.png" alt="Mes créateurs favoris" class="w-6 h-6 mr-1">
+            Afficher ma carte
+          </a>
+
+          <!-- Activate/Deactivate Buttons (wrapped in logic) -->
+          <div>
+            <!-- If user’s card is not active, show Activate button -->
+            <% if (!user.isCardActive) { %>
+              <form action="/activate-card" method="POST">
+                <button type="submit"
+                        class="relative inline-flex items-center 
+                              px-6 py-2 text-sm font-semibold rounded-lg 
+                              shadow-md transform hover:scale-105 hover:rotate-1 
+                              bg-gradient-to-r from-black to-orange-500 text-white shadow-white-glow">
+
+                  Activer ma carte
+
+                  <!-- Example of the small notification circle -->
+                  <span class="absolute top-1 right-1 w-4 h-4 bg-orange-400 border-2 border-white 
+                              rounded-full transform translate-x-1/2 -translate-y-1/2">
+                  </span>
+                </button>
+              </form>
+            <% } else { %>
+              <!-- If card is active, show Deactivate button -->
+              <form action="/deactivate-card" method="POST">
+                <button type="submit"
+                        class="inline-flex items-center 
+                              px-6 py-2 text-sm font-semibold rounded-lg 
+                              shadow-md transform hover:scale-105 hover:rotate-1 
+                              bg-gradient-to-r from-red-500 to-black text-white shadow-white-glow">
+                  Désactiver ma carte
+                </button>
+              </form>
+            <% } %>
+          </div>
+          </div>
                  
                   
 
@@ -162,8 +197,22 @@
                             <!-- Creator Name -->
                             <h1 class="text-3xl font-bold text-gray-800 mb-2 text-center"><%= user.pseudo %></h1>
                             <!-- Description -->
-                            <p class="mt-2 text-gray-700 text-center leading-relaxed"><%= user.description %></p>
-                            
+                            <p id="description2" class="mt-2 text-sm text-gray-700 text-center leading-relaxed"></p>
+                            <% 
+                              const desc = user.description || '';
+                              const isLong = desc.length > 40;
+                            %>
+                            <% if (isLong) { %>
+                              <!-- Center the toggle button -->
+                              <div class="flex justify-center mt-2">
+                                <button
+                                  id="toggleDescriptionBtn2"
+                                  class="text-orange-600 underline text-sm cursor-pointer"
+                                >
+                                  Voir plus
+                                </button>
+                              </div>
+                            <% } %>
                             <!-- Age and Country -->
                             
                             <div class="flex items-center justify-center space-x-4 mt-2">
@@ -177,21 +226,21 @@
                                     <%= user.country %>
                                 </p>
                             </div>
-                            <div class="flex items-center justify-center space-x-4 mt-2 mb-8">
-                                <% user.langue.forEach(function(force) { %>
-                                <p class="px-3 py-1 bg-green-100 text-green-600 text-sm rounded-full flex items-center">
-                                    
-                                    <%= force %>
+                            <div class="flex flex-wrap gap-4 justify-center items-center mt-2 mb-4">
+                              <% user.langue.forEach(function(force) { %>
+                                <p class="px-3 py-1 bg-green-100 text-green-600 text-sm rounded-full break-all">
+                                  <%= force %>
                                 </p>
-                                <% }); %>
+                              <% }); %>
                             </div>
-                            <div class="flex items-center justify-center space-x-4 mt-2">
-                                <% user.atout.forEach(function(force) { %>
-                                <p class="px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-full flex items-center">
-                                    
-                                    <%= force %>
-                                </p>
-                                <% }); %>
+                            <div 
+                            class="<%= user.atout.length > 4 ? 'text-xs' : 'text-sm' %> flex flex-wrap justify-center gap-2 mt-6"
+                            >
+                            <% user.atout.forEach((type) => { %>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full">
+                                <%= type %>
+                                </span>
+                            <% }); %>
                             </div>
                             
                             
@@ -236,8 +285,10 @@
                           <% } %>
                           <!-- Display Instagram -->
                           <% if (user.insta) { %>
-                            
-                              <strong>Instagram:</strong> <p class="text-gray-800"><%= user.insta %>
+                            <strong>Instagram:</strong>
+                            <!-- Use break-all to keep the long URL from overflowing -->
+                            <p class="text-gray-800 break-all">
+                              <%= user.insta %>
                             </p>
                           <% } %>
                         </div>
@@ -338,5 +389,51 @@
       // (Optional) Provide user feedback
       alert('Lien copié dans le presse-papiers !');
     }
+  </script>
+  <script>
+    (function(){
+      // The full, original description from EJS
+      const fullDesc = <%- JSON.stringify(desc) %>;
+      const descElem = document.getElementById('description2');
+      const toggleBtn = document.getElementById('toggleDescriptionBtn2');
+      
+      // Number of characters to show when truncated
+      const maxChars = 40;
+      
+      // Track the current state (true = currently truncated)
+      let isTruncated = true;
+      
+      function showShort() {
+        descElem.textContent = fullDesc.slice(0, maxChars) + '...';
+      }
+      function showFull() {
+        descElem.textContent = fullDesc;
+      }
+      
+      if (fullDesc.length > maxChars) {
+        // If description is longer than maxChars:
+        // 1. Show truncated by default
+        // 2. Handle click toggling with a simple boolean flag
+        showShort();
+        
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', () => {
+            if (isTruncated) {
+              showFull();
+              toggleBtn.textContent = 'Voir moins';
+            } else {
+              showShort();
+              toggleBtn.textContent = 'Voir plus';
+            }
+            // Flip the state
+            isTruncated = !isTruncated;
+          });
+        }
+        
+      } else {
+        // If the description is short enough, just show it fully
+        showFull();
+      }
+    })();
   </script>
 </html>
