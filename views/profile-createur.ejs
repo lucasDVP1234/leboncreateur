@@ -38,6 +38,7 @@
         2) Route => POST /profile-createur (or wherever you handle your update logic).
       -->
       <form 
+          id="profileCreateurForm" 
           action="/profile-createur"
           method="POST"
           enctype="multipart/form-data"
@@ -372,7 +373,7 @@
                 multiple
                 class="hidden"
               >
-              <small class="text-gray-500 mt-2">Vous pouvez sélectionner plusieurs vidéos</small>
+              <small class="text-gray-500 mt-2">Vous pouvez sélectionner plusieurs vidéos, Astuce : enregistrez une vidéo par une vidéo pour un temps de chargement moins long</small>
             </div>
             <div id="videosPreview" class="mt-4 flex flex-wrap justify-center gap-4"></div>
           </div>
@@ -387,6 +388,30 @@
             </button>
           </div>
         </form>
+        <div id="spinner" class="hidden flex justify-center items-center mt-4">
+          <svg
+            class="animate-spin h-8 w-8 text-orange-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            ></path>
+          </svg>
+          <p class="ml-2 text-gray-700">Chargement en cours...</p>
+        </div>
+  
     </div>
   </div>
 </body>
@@ -447,5 +472,43 @@
     previewVideos(this, 'videosPreview');
   });
 </script>
+
+<script>
+  const form = document.getElementById('profileCreateurForm');
+    const spinner = document.getElementById('spinner');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Stop normal form submission
+      spinner.classList.remove('hidden'); // Show spinner
+
+      const formData = new FormData(form);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', form.action);
+
+      // On load
+      xhr.addEventListener('load', () => {
+        spinner.classList.add('hidden'); // Hide spinner
+
+        if (xhr.status === 200) {
+          // Upload success -> redirect or show a message
+          // Example: redirect or reload
+          window.location.href = '/account-createur';
+        } else {
+          alert('Une erreur s\'est produite lors de l\'envoi du formulaire.');
+        }
+      });
+
+      // On error
+      xhr.addEventListener('error', () => {
+        spinner.classList.add('hidden'); // Hide spinner
+        alert('Une erreur réseau s\'est produite.');
+      });
+
+      // Send
+      xhr.send(formData);
+    });
+  </script>
+
+
 
 </html>
