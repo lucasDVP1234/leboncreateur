@@ -5,7 +5,7 @@ const Createur = require('../models/Createur'); // Ensure this import is present
 
 exports.getCreators = async (req, res) => {
     try {
-        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts, genres } = req.query;
+        const { categories, videoTypes, ageMin, ageMax, countries, langues, atouts, genres, searchName } = req.query;
 
         // Build query object
         let query = {
@@ -38,6 +38,9 @@ exports.getCreators = async (req, res) => {
         if (genres) {
             query.genre = { $in: genres.split(',') };
         }
+        if (searchName) {
+          query.pseudo = { $regex: searchName, $options: 'i' };
+        }
 
         // Fetch creators based on query
         const createurs = await Createur.find(query);
@@ -59,6 +62,7 @@ exports.getCreators = async (req, res) => {
             langues: languesList,
             atouts: atoutsList,
             genres: genresList,
+            searchName
         });
     } catch (err) {
         console.error('Error fetching creators:', err.message);
@@ -218,7 +222,7 @@ exports.activateCard = async (req, res) => {
       { value: createur.country,        type: 'string' },
       { value: createur.profileImage,   type: 'string' },  // or could be 'stringOrNull'
       { value: createur.portfolioImages,type: 'array' },   // expecting array
-      { value: createur.videos,         type: 'array' },   // expecting array
+         // expecting array
     ];
     
     const isProfileComplete = requiredFields.every(fieldObj => {

@@ -29,6 +29,29 @@
         <div class="p-4 rounded mb-2">
             <!-- Form starts here -->
             <form action="/creators" method="GET">
+
+                 <!-- Add a search bar for name on top of the filters -->
+                <div class="flex flex-col md:flex-row justify-center items-center mb-4">
+                    
+
+                    <!-- The search input field -->
+                    <input 
+                    type="text" 
+                    name="searchName" 
+                    id="searchName" 
+                    placeholder="Tapez un nom de créateur..." 
+                    class="border border-gray-300 rounded-full px-4 py-2 w-full md:w-1/3 focus:outline-none" 
+                    value="<%= typeof searchName !== 'undefined' ? searchName : '' %>"
+                    />
+
+                    <!-- Submit button for searching -->
+                    <button 
+                    type="submit" 
+                    class="ml-2 px-4 py-2 mt-2 sm:mt-0 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none"
+                    >
+                    Rechercher
+                    </button>
+                </div>
                 <!-- Hidden fields to store selected filters -->
                 <input type="hidden" name="categories" id="selected-categories" />
                 <input type="hidden" name="videoTypes" id="selected-video-types" />
