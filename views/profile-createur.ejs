@@ -45,8 +45,9 @@
           class="space-y-6"
         >
           <!-- Pseudo -->
+          <small class="text-gray-500 mt-2">*Information nécessaire pour activer votre carte</small>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Pseudo *</label>
+            <label class="block text-sm font-medium text-orange-700">Pseudo *</label>
             <input
               type="text"
               name="pseudo"
@@ -58,7 +59,7 @@
 
           <!-- Email (Read-only if you prefer) -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <label class="block text-sm font-medium text-orange-700">Email *</label>
             <input
               type="email"
               name="email"
@@ -70,7 +71,7 @@
 
           <!-- Number, Genre, Age, Description, Video Price, etc. -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">Numéro de Téléphone</label>
+            <label class="block text-sm font-medium text-orange-700">Numéro de Téléphone *</label>
             <input
               type="tel"
               name="number"
@@ -80,12 +81,12 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Genre</label>
+            <label class="block text-sm font-medium text-orange-700">Genre *</label>
             <select
               name="genre"
               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md"
             >
-              <option value="">Choisissez votre genre</option>
+              <option value="">Choisissez votre genre *</option>
               <option value="Homme" <%= user.genre === 'Homme' ? 'selected' : '' %>>Homme</option>
               <option value="Femme" <%= user.genre === 'Femme' ? 'selected' : '' %>>Femme</option>
               <option value="Autre" <%= user.genre === 'Autre' ? 'selected' : '' %>>Autre</option>
@@ -93,7 +94,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Âge</label>
+            <label class="block text-sm font-medium text-orange-700">Âge *</label>
             <input
               type="number"
               name="age"
@@ -103,7 +104,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <label class="block text-sm font-medium text-orange-700">Description *</label>
             <textarea
               name="description"
               rows="4"
@@ -112,8 +113,8 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">
-              Prix moyen par vidéo (en €)
+            <label class="block text-sm font-medium text-orange-700">
+              Prix moyen par vidéo (en €) *
             </label>
             <input
               type="number"
@@ -127,7 +128,7 @@
 
           <!-- Country (radio), languages (checkboxes), atouts (checkboxes) -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">Pays de résidence</label>
+            <label class="block text-sm font-medium text-orange-700">Pays de résidence *</label>
             <div class="mt-1 space-y-2">
               <% let countries = ["France","Belgique","Suisse","Allemagne","Espagne","Canada","États-Unis","Royaume-Uni","Italie"]; %>
               <% countries.forEach((c) => { %>
@@ -146,7 +147,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Langues parlées</label>
+            <label class="block text-sm font-medium text-orange-700">Langues parlées *</label>
             <div class="mt-1 space-y-2">
               <% let allLangs = ["Anglais","Français","Espagnol","Italien","Portugais","Allemand","Russe","Chinois","Japonais","Arabe"]; %>
               <% allLangs.forEach((lang) => { %>
@@ -165,7 +166,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Types de vidéo</label>
+            <label class="block text-sm font-medium text-orange-700">Types de vidéo *</label>
             <div class="mt-1 space-y-2">
               <% let atouts = ["UGC","Micro-trottoir","Scénario","Photo"]; %>
               <% atouts.forEach((a) => { %>
@@ -184,7 +185,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Url Instagram</label>
+            <label class="block text-sm font-medium text-orange-700">Url Instagram</label>
             <input
               type="text"
               name="insta"
@@ -203,7 +204,7 @@
                 class="h-4 w-4 text-blue-600 border-gray-300 rounded"
                 <%= user.shownum ? 'checked' : '' %>
               >
-              <span class="ml-2 text-sm text-gray-700">Afficher mon numéro publiquement</span>
+              <span class="ml-2 text-sm text-orange-700">Afficher mon numéro publiquement</span>
             </label>
             
             <label class="flex items-center">
@@ -213,14 +214,14 @@
                 class="h-4 w-4 text-blue-600 border-gray-300 rounded"
                 <%= user.showemail ? 'checked' : '' %>
               >
-              <span class="ml-2 text-sm text-gray-700">Afficher mon email publiquement</span>
+              <span class="ml-2 text-sm text-orange-700">Afficher mon email publiquement</span>
             </label>
           </div>
 
           <!-- Profile Image Upload -->
           <div class="flex flex-col items-center">
-            <label class="block text-sm font-medium text-gray-700">
-              Photo de Profil (Max 5MB)
+            <label class="block text-sm font-medium text-orange-700">
+              Photo de Profil (Max 5MB) *
             </label>
             
             <!-- Display current profile image if available -->
@@ -253,8 +254,8 @@
 
           <!-- Banner/Portfolio Images (1 max in your example) -->
           <div class="flex flex-col items-center">
-            <label class="block text-sm font-medium text-gray-700">
-              Bannière (image) - 1000x500 - MAX 5MB
+            <label class="block text-sm font-medium text-orange-700">
+              Bannière (image) - 1000x500 - MAX 5MB *
             </label>
             <% if (user.portfolioImages && user.portfolioImages.length > 0) { %>
               <img
@@ -282,7 +283,7 @@
 
           <!-- Brand Logos (multiple) -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-orange-700">
               Logos (Marques) - MAX 5MB
             </label>
           
@@ -331,7 +332,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Vidéos - MAX 150MB</label>
+            <label class="block text-sm font-medium text-orange-700">Vidéos - MAX 150MB</label>
           
             <!-- Existing videos with remove checkboxes -->
             <% if (user.videos && user.videos.length > 0) { %>
@@ -373,10 +374,11 @@
                 multiple
                 class="hidden"
               >
-              <small class="text-gray-500 mt-2">Vous pouvez sélectionner plusieurs vidéos, Astuce : enregistrez une vidéo par une vidéo pour un temps de chargement moins long</small>
+              <small class="text-gray-500 mt-2">Astuce : enregistrez une vidéo par une vidéo pour un temps de chargement moins long</small>
             </div>
             <div id="videosPreview" class="mt-4 flex flex-wrap justify-center gap-4"></div>
           </div>
+          
 
           <!-- Submit -->
           <div>
@@ -387,6 +389,7 @@
               Enregistrer les modifications
             </button>
           </div>
+          <small class="text-blue-500 text-lg font-semibold items-center justify-center flex justify-center">Pensez à activer votre carte une fois enregistré !</small>
         </form>
         <div id="spinner" class="hidden flex justify-center items-center mt-4">
           <svg
@@ -409,7 +412,7 @@
               d="M4 12a8 8 0 018-8v8H4z"
             ></path>
           </svg>
-          <p class="ml-2 text-gray-700">Chargement en cours...</p>
+          <p class="ml-2 text-orange-700">Chargement en cours...</p>
         </div>
   
     </div>
