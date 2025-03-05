@@ -193,7 +193,42 @@ exports.showProfile = async (req, res) => {
   
       // 5) Save
       await createur.save();
+
+      // 6) Check profile completeness and activate card if valid
+    const requiredFields = [
+      { value: createur.pseudo,          type: 'string' },
+      { value: createur.email,           type: 'string' },
+      { value: createur.number,          type: 'string' },
+      { value: createur.age,             type: 'number' },
+      { value: createur.description,     type: 'string' },
+      { value: createur.atout,           type: 'array' },
+      { value: createur.country,         type: 'string' },
+      { value: createur.profileImage,    type: 'string' },
+      
+    ];
+
+    const isProfileComplete = requiredFields.every(fieldObj => {
+      const { value, type } = fieldObj;
+      if (!value) return false;
+      switch (type) {
+        case 'string':
+          return value.trim().length > 0;
+        case 'number':
+          return value > 0;
+        case 'array':
+          return Array.isArray(value) && value.length > 0;
+        default:
+          return false;
+      }
+    });
+
+    if (isProfileComplete) {
+      createur.isCardActive = true;
+      await createur.save();
+      req.flash('success', 'Profil mis à jour et carte activée avec succès !');
+    } else {
       req.flash('success', 'Profil mis à jour avec succès !');
+    }
       res.redirect('/account-createur');
   
     } catch (err) {
@@ -221,7 +256,7 @@ exports.activateCard = async (req, res) => {
       { value: createur.atout,          type: 'array' },   // expecting array
       { value: createur.country,        type: 'string' },
       { value: createur.profileImage,   type: 'string' },  // or could be 'stringOrNull'
-      { value: createur.portfolioImages,type: 'array' },   // expecting array
+        // expecting array
          // expecting array
     ];
     
