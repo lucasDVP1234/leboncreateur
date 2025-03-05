@@ -233,13 +233,13 @@
                   >
                     
                         <!-- Creator Image -->
-                        <a href="/creators/<%= createur.pseudo %>"> 
-                            <img 
-                                src="<%= createur.portfolioImages %>" 
-                                alt="<%= createur.name %>" 
-                                class="w-full h-32 object-cover"
-                            >
-                        </a>
+                        <a href="/creators/<%= createur.pseudo %>">
+                            <% if (createur.portfolioImages && createur.portfolioImages.length > 0) { %>
+                              <img src="<%= createur.portfolioImages[0] %>" alt="<%= createur.name %>" class="w-full h-32 object-cover">
+                            <% } else { %>
+                              <img src="/images/default-cover.jpeg" alt="Default Cover Image" class="w-full h-32 object-cover">
+                            <% } %>
+                          </a>
                 
                         <!-- Portfolio Bubbles -->
                         <div class="flex justify-center -mt-8">
